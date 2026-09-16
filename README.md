@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Angel Phommachan — portfolio site
 
-## Getting Started
+Next.js 16 · Tailwind 4 · MDX posts · Giscus comments · API routes for subscribe (Buttondown) and contact (Resend). Deploys to Vercel.
 
-First, run the development server:
+## Run it
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in what you have; everything works without keys in dev
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+|---|---|
+| Site name, email, socials, skill areas, colors | `lib/site.ts` |
+| Blog posts | `content/posts/*.mdx` — one file per post |
+| Images | `public/images/{me,photography,hope,recap,video}` |
+| Pages | `app/` — home, `about`, `blog`, `blog/[slug]`, `work/[area]`, `contact`, `photography` |
+| Forms | `app/api/subscribe`, `app/api/contact` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Writing a post
 
-## Learn More
+Create `content/posts/my-post.mdx`:
 
-To learn more about Next.js, take a look at the following resources:
+```mdx
+---
+title: "Post title"
+excerpt: "One or two sentences shown on cards and at the top of the post."
+date: "2026-09-14"
+type: list            # list · sectional · narrative · multimedia · case-study · work
+area: events          # social · campaigns · events — omit for personal stories
+cover: /images/…jpg   # optional
+draft: true           # drafts show in dev, hidden in production
+featured: true        # one post gets the "Featured breakdown" slot on the home page
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Body in Markdown. Components you can use:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<YouTube id="VIDEO_ID" title="…" />
+<Figure src="/images/…" alt="…" caption="…" ratio="4/5" />
+<Gallery cols={3} images={[{ src: "/images/…", alt: "…" }]} />
+<LinkCard href="https://…" label="LinkedIn" title="…" />
+<Todo>Notes to yourself — delete before publishing.</Todo>
+```
 
-## Deploy on Vercel
+## Going live
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Comments:** enable GitHub Discussions on this repo, set up [giscus.app](https://giscus.app), paste the four `NEXT_PUBLIC_GISCUS_*` values.
+2. **Subscribe:** create a free [Buttondown](https://buttondown.com) newsletter, paste `BUTTONDOWN_API_KEY`.
+3. **Contact:** create a [Resend](https://resend.com) key, set `RESEND_API_KEY`. Verify a domain to send from your own address.
+4. **Video:** upload the convocation video (compressed copy at `~/projects/portfolio/assets/angel-convocation-720p.m4v`) to YouTube, set `NEXT_PUBLIC_ABOUT_VIDEO_ID`.
+5. **Deploy:** push to GitHub, import at [vercel.com/new](https://vercel.com/new), add the env vars, done. Point a custom domain at it when you have one and update `NEXT_PUBLIC_SITE_URL`.

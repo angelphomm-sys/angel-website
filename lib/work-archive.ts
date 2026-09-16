@@ -1,0 +1,182 @@
+// Archived 2026-09-15 at Angel's request. Not rendered. Move an item back into lib/work.ts to restore it.
+import type { WorkItem } from "./work";
+
+export const workArchive: WorkItem[] = [
+  {
+    slug: "summer-recap",
+    type: "case-study",
+    title: "Summer Recap carousel",
+    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
+    metric: "reach: ___ · saves: ___",
+    channel: "Instagram",
+    lane: "nonprofit",
+    post: "/blog/summer-recap-carousel",
+    preview: { poster: "/images/recap/2.jpg" },
+    caseStudy: {
+      opener: "Nonprofit content has the hardest brief in marketing. No budget, two audiences who want opposite things from the same post, and a story that belongs to someone else.",
+      brief: {
+        ask: "Produce a piece of social content for the Hope Scholars program at UVU that shows what the scholarship does, works at donor events, and gives students a reason to share it.",
+        constraint: "No budget, no designer, and only the photos the program already had from the summer.",
+        audience: "Donors and program council members first. Prospective first-generation scholars second.",
+      },
+      work: {
+        text: [
+          "Chose a five-slide Instagram carousel over a single image so the story could build: hook, highlights, one real lesson, behind the camera, gratitude.",
+          "Designed a reusable scrapbook system in Canva (paper texture, one green accent, polaroid frames) so the next recap takes an afternoon.",
+          "Used only real program photos: the Italy study abroad, the convocation shoot, the back-to-school potluck.",
+          "Wrote every line in first person, one idea per slide.",
+        ],
+        visuals: [
+          { src: "/images/recap/1.jpg", alt: "Slide 1: cover" },
+          { src: "/images/recap/2.jpg", alt: "Slide 2: the highlights" },
+          { src: "/images/recap/3.jpg", alt: "Slide 3: pace over pressure" },
+          { src: "/images/recap/4.jpg", alt: "Slide 4: behind the camera" },
+          { src: "/images/recap/5.jpg", alt: "Slide 5: onward" },
+        ],
+        beforeAfter: {
+          before: { alt: "The program's previous recap post", placeholder: "[Screenshot: the previous recap, a single image with a long caption]" },
+          after: { src: "/images/recap/1.jpg", alt: "Slide one of the summer recap carousel" },
+          note: "From one image and a caption to five slides that build, with a lesson in the middle.",
+        },
+      },
+      decision: {
+        call: "Put a personal lesson on slide three instead of a list of program stats.",
+        why: "Donors already get the stats in reports. What they do not get is what the program feels like from the inside. A single honest lesson (a glassblower in Venice working at his own pace) does more for a donor than a number, and it is the slide students screenshot.",
+        tradeoff: "The carousel says less about the program's scale. We covered that in the caption and left the slides to the story.",
+      },
+      result: {
+        numbers: [
+          "Reach: ___ and saves: ___ in the first ___ days, against the account's median post of ___. Instagram insights export pending.",
+          "Reused as the opening slides at the fall donor council meeting.",
+          "Template adopted for the program's next two recaps.",
+        ],
+        measure: [
+          { metric: "Reach", hypothesis: "A carousel gets served more than a single image because people swipe.", window: "First 7 days", tool: "Instagram insights" },
+          { metric: "Saves and shares", hypothesis: "The lesson slide is the one students screenshot and share.", window: "First 7 days", tool: "Instagram insights" },
+          { metric: "Reuse", hypothesis: "Donor-facing staff pick it up for meetings if it works on a projector.", window: "Next donor council meeting", tool: "Program staff" },
+        ],
+        screenshots: [{ src: "/images/recap/2.jpg", alt: "Placeholder for the Instagram insights screenshot showing reach, saves, and shares", caption: "[Replace with the Instagram insights screenshot: reach, saves, shares]" }],
+        links: [{ label: "The post on Instagram", href: "[link to the live post]" }],
+      },
+      differently: [
+        "Add a slide with one number, the program's total scholars or dollars raised, for donors who skim.",
+        "Post the lesson slide on its own as a single image a week later. It was the strongest frame.",
+      ],
+      role: "Marketing and operations intern. Concept, design, copy, photography, posting.",
+      tools: ["Canva", "Instagram", "Lightroom"],
+    },
+  },
+  {
+    slug: "friday-market-roundup",
+    type: "case-study",
+    title: "Friday Market Roundup",
+    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
+    metric: "views: ___ · reactions: ___",
+    channel: "LinkedIn · video",
+    lane: "brand",
+    post: "/blog/shyft-linkedin-series",
+    preview: { video: "/videos/DSC_5499.mp4", poster: "/videos/DSC_5499-poster-v2.jpg" },
+    caseStudy: {
+      opener: "B2B content gets written off as boring, usually by people who have not tried to hold an operations lead's attention on a Friday afternoon.",
+      brief: {
+        ask: "Grow an engaged following on LinkedIn for Shyft, a product-development and supply-chain partner in Orem, Utah, and position the company as the partner that understands global trade.",
+        constraint: "One intern, one executive with limited time on camera, no paid budget, and a news cycle (tariffs, spring 2025) that changed every week.",
+        audience: "Operations leads, founders, and sourcing managers deciding who to trust with a product launch. People who are not on LinkedIn for fun.",
+      },
+      work: {
+        text: [
+          "Proposed a recurring format instead of one-off posts: a Friday Market Roundup with Ben Reynolds, VP of Revenue, explaining that week's tariff changes and what an agile supply chain does about it.",
+          "Wrote and produced every episode: script, shoot, edit to under two minutes, captions, and a consistent title card.",
+          "Built the posting calendar across LinkedIn, Instagram, and YouTube, and adapted each cut per platform.",
+          "Ran an employee-highlight series alongside it (industrial designer Evan Loomis and others) so the brand had a face between news cycles.",
+          "Met with the sales team weekly to pull the questions reps were hearing on calls into the next script.",
+        ],
+        visuals: [
+          { src: "/videos/DSC_5499-poster-v2.jpg", alt: "Placeholder for a still frame from the Friday Market Roundup video", caption: "[Replace with a still from the roundup]" },
+          { src: "/images/stock/laptop-data.jpg", alt: "Analytics on a laptop", caption: "[Replace with the LinkedIn analytics view]" },
+        ],
+        beforeAfter: {
+          before: { alt: "Shyft's LinkedIn feed before the series", placeholder: "[Screenshot: the feed before, logo posts and reshares]" },
+          after: { src: "/videos/DSC_5499-poster-v2.jpg", alt: "A Friday Market Roundup title card", caption: "[Replace with the episode title card]" },
+          note: "Same account, same audience. The difference is a face, a slot, and a topic people already cared about.",
+        },
+      },
+      decision: {
+        call: "A weekly series with one recurring host, instead of a stream of standalone posts.",
+        why: "A weekly slot trains an audience to expect you. The topic was already what customers were worried about, so the series only had to show up on time and be useful. One host made it recognizable in a feed of company logos.",
+        tradeoff: "Fewer topics covered. Some weeks the roundup crowded out other content, and a slow news week still had to ship. We accepted that for consistency.",
+      },
+      result: {
+        numbers: [
+          "Views: ___ and reactions: ___ across the series over ___ weeks, against the account's previous average post of ___. LinkedIn analytics export pending.",
+          "Follower growth during the run: ___.",
+          "Inbound comments and messages that referenced the roundup by name: ___.",
+          "The format kept running after the internship ended.",
+        ],
+        measure: [
+          { metric: "Views per episode", hypothesis: "A fixed Friday slot lifts the floor, not just the peak.", window: "Weekly, over the run", tool: "LinkedIn analytics" },
+          { metric: "Reactions and comments", hypothesis: "Opening with a number earns more comments than opening with context.", window: "48 hours after each post", tool: "LinkedIn analytics" },
+          { metric: "Follower growth", hypothesis: "A recurring host converts viewers into followers faster than logo posts.", window: "Monthly", tool: "LinkedIn analytics" },
+          { metric: "Inbound mentions", hypothesis: "Reps hear the roundup mentioned on sales calls.", window: "Weekly check-in with sales", tool: "Sales team notes" },
+        ],
+        screenshots: [{ src: "/images/stock/dashboard.jpg", alt: "Placeholder for the LinkedIn analytics screenshot showing reach and follower growth", caption: "[Replace with a LinkedIn analytics screenshot: reach and follower growth]" }],
+        links: [
+          { label: "Friday Market Roundup on LinkedIn", href: "https://www.linkedin.com/posts/shyft-global_supplychain-tariffs-globaltrade-activity-7306354271824883713-fiKO" },
+          { label: "Employee highlight: Evan Loomis", href: "https://www.linkedin.com/posts/shyft-global_evan-loomis-industrial-designer-activity-7344418875712684036-Yk02" },
+        ],
+      },
+      differently: [
+        "Lead with the number. Posts that opened with \"20%\" outperformed posts that opened with context.",
+        "Cut to 30 to 45 seconds. Two minutes is long for a B2B feed.",
+        "Turn the employee highlights into carousels so each teammate's process could be shown, not described.",
+      ],
+      role: "Marketing intern. Owned strategy, production, and posting. Ben Reynolds on camera; the sales team as the source of questions.",
+      tools: ["LinkedIn", "YouTube", "Instagram", "CapCut", "Canva", "Google Sheets"],
+    },
+  },
+  {
+    slug: "aspen-counseling",
+    type: "brand-web",
+    title: "Aspen Counseling Services: brand palette and site mockup",
+    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
+    metric: "Mockups · status: ___",
+    channel: "Brand · web",
+    lane: "brand",
+    status: "in-production",
+    preview: { poster: "/images/work/aspen-palette.jpg" },
+  },
+  {
+    slug: "rockborn-studio",
+    type: "brand-web",
+    title: "Rockborn Studio: brand and website",
+    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
+    metric: "site: ___ pages, pending",
+    channel: "Brand · web build",
+    lane: "brand",
+    status: "in-production",
+    preview: { poster: "/images/work/rockborn.jpg" },
+  },
+  {
+    slug: "ai-search-guide",
+    type: "writing",
+    title: "AI Search Visibility guide",
+    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
+    metric: "Writing sample · link: ___",
+    channel: "Long-form · search engine optimization (SEO) and generative engine optimization (GEO)",
+    lane: "brand",
+    status: "in-production",
+    // The Green House URL (greenhouseuvu.com/blog/how-to-show-up-in-ai-search/) returned 404 on Sept 8, 2026. Re-add `external` when it is live, or host the PDF.
+    preview: { poster: "/images/stock/google-phone.jpg" },
+  },
+  {
+    slug: "prime-collectives",
+    type: "photography",
+    title: "Prime Collectives",
+    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
+    metric: "followers: ___ · referrals",
+    channel: "Photography",
+    lane: "brand",
+    post: "/blog/prime-collectives",
+    preview: { poster: "/images/photography/proposal.jpg" },
+  },
+];

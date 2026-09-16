@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Palette built on color psychology: passion (red) and drive (ember), on warm neutrals so the red reads as confidence, not alarm. */
+  --color-paper: #fcfaf7;   /* warm white: approachable */
+  --color-ink: #1b1614;     /* warm charcoal: authority */
+  --color-grey: #b3aba4;    /* warm grey: quiet labels */
+  --color-mid: #6d655f;     /* warm mid: body-level secondary text */
+  --color-line: #e8e1da;    /* sand line */
+  --color-accent: #d3261a;  /* passion red: CTAs, active nav, metrics, the name */
+  --color-tang: #d3261a;    /* alias kept for older classes */
+  --color-ember: #f28c28;   /* drive: stamps, progress, small energetic touches */
+  --color-mist: #f6f1ec;    /* warm sand fill for cards and hover rows */
+  --font-sans: var(--font-manrope), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-serif), Georgia, "Times New Roman", serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+html { color-scheme: light; scroll-behavior: smooth; }
+body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); overflow-x: clip; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+.hand { font-family: var(--font-serif); font-style: italic; letter-spacing: -0.01em; }
+.serif { font-family: var(--font-serif); letter-spacing: -0.02em; }
+.num { font-size: 0.55em; vertical-align: super; color: var(--color-grey); margin-right: 2px; font-weight: 700; }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+.prose-post { font-size: 1.15rem; line-height: 1.7; color: #2a2421; }
+.prose-post > * + * { margin-top: 1.4rem; }
+.prose-post h2 { font-weight: 800; letter-spacing: -0.02em; font-size: 1.7rem; line-height: 1.1; color: var(--color-ink); margin-top: 2.6rem; }
+.prose-post h3 { font-weight: 700; font-size: 1.15rem; color: var(--color-ink); margin-top: 2rem; }
+.prose-post a { text-decoration: underline; text-underline-offset: 3px; }
+.prose-post a:hover { color: var(--color-tang); }
+.prose-post ul, .prose-post ol { padding-left: 1.6rem; }
+.prose-post ol { list-style: decimal; }
+.prose-post ul { list-style: disc; }
+.prose-post li + li { margin-top: 0.5rem; }
+.prose-post blockquote { border-left: 4px solid var(--color-tang); padding-left: 1.25rem; font-style: italic; font-size: 1.4rem; line-height: 1.4; }
+.prose-post img { border-radius: 16px; }
+.prose-post figure figcaption { font-size: 0.8rem; color: var(--color-mid); margin-top: 0.5rem; }
+.prose-post .todo { background: #fff6cc; border: 1px dashed #b08a00; border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.95rem; }
+
+/* Books: 3D covers that turn toward you and open on hover */
+.bookshelf { perspective: 1400px; }
+.book3d { position: relative; transform-style: preserve-3d; transform: rotateY(-20deg); transition: transform 500ms cubic-bezier(.2,.8,.2,1); }
+.book3d:hover, .book3d:focus-within { transform: rotateY(-6deg) translateY(-8px); }
+.book3d .back { position: absolute; inset: 0; transform: translateZ(calc(var(--depth) * -1)); border-radius: 2px 6px 6px 2px; }
+.book3d .spine { position: absolute; top: 0; bottom: 0; left: 0; width: calc(var(--depth) * 2); transform-origin: left center; transform: translateZ(var(--depth)) rotateY(-90deg); border-radius: 2px 0 0 2px; }
+.book3d .pages { position: absolute; top: 3px; bottom: 3px; right: 0; width: calc(var(--depth) * 2); transform-origin: right center; transform: translateZ(var(--depth)) rotateY(90deg); background: repeating-linear-gradient(to right, #f5f2ea 0 1px, #dedad0 1px 2px); }
+.book3d .inside { position: absolute; inset: 0; transform: translateZ(calc(var(--depth) - 1px)); background: #fbf9f4; border-radius: 0 4px 4px 0; padding: 12px; box-sizing: border-box; visibility: hidden; opacity: 0; transition: opacity 300ms ease 150ms, visibility 0s 150ms; }
+.book3d:hover .inside, .book3d:focus-within .inside { visibility: visible; opacity: 1; }
+.book3d .cover { position: absolute; inset: 0; transform: translateZ(var(--depth)); transform-origin: left center; border-radius: 2px 6px 6px 2px; overflow: hidden; box-shadow: 0 18px 30px rgba(0,0,0,0.18); background: #f3f3f3; transition: transform 500ms cubic-bezier(.2,.8,.2,1); backface-visibility: hidden; }
+.book3d:hover .cover, .book3d:focus-within .cover { transform: translateZ(var(--depth)) rotateY(-32deg); }
+.ribbon { transform-origin: 50% 0; animation: ribbon 2.8s ease-in-out infinite; }
+@keyframes ribbon { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(5deg); } }
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.floaty { animation: floaty 5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .book3d, .book3d .cover, .ribbon, .floaty { animation: none !important; transition: none !important; } }
+
+/* Photo through type */
+.knockout { background-position: center; background-size: cover; -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Motion: one reveal on load, quiet feedback everywhere else */
+@keyframes rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes clip-up { from { clip-path: inset(100% 0 0 0); opacity: 0.4; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes drift { 0% { background-position: 50% 40%; } 50% { background-position: 50% 60%; } 100% { background-position: 50% 40%; } }
+.hero-in > * { animation: rise-in 700ms cubic-bezier(.2,.8,.2,1) both; }
+.hero-in > *:nth-child(1) { animation-delay: 60ms; }
+.hero-in > *:nth-child(2) { animation-delay: 260ms; }
+.hero-in > *:nth-child(3) { animation-delay: 400ms; }
+.hero-in > *:nth-child(4) { animation-delay: 520ms; }
+.hero-photo { animation: clip-up 900ms cubic-bezier(.2,.8,.2,1) 200ms both; }
+.fade-in { animation: fade-in 320ms ease both; }
+.drift { animation: drift 28s ease-in-out infinite; }
+.navlink { position: relative; padding-bottom: 2px; }
+.navlink::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--color-ink); transform: scaleX(0); transform-origin: left; transition: transform 220ms cubic-bezier(.2,.8,.2,1); }
+.navlink:hover::after, .navlink.is-active::after { transform: scaleX(1); }
+.navlink:hover .num, .navlink.is-active .num { color: var(--color-accent); }
+.case-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--color-ember); width: 0; z-index: 50; transition: width 80ms linear; }
+@media (prefers-reduced-motion: reduce) { .hero-in > *, .hero-photo, .fade-in, .drift { animation: none !important; } .navlink::after { transition: none; } }
