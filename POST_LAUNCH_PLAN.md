@@ -31,9 +31,9 @@ Launch: Tuesday 2026-10-13 on Vercel. Final update planned about one month after
 6. New posts to reach the class count: one narrative post and two multimedia posts (60-second About Me video, a how-to video).
 
 ## Open items from Angel
-- Thai case: $200 budget vs about $241 spent (109 clicks at $2.21). Which is right?
 - Restaurant name: ask the owner before naming it.
 - Warroad population: 900 (your essay) vs about 1,700 (CBS 2017 / census). Pick one, or say "near Warroad."
+- Ghia: send the permission email to press@drinkghia.com (draft in chat), and shoot your own photos either way.
 - Ghia spec emails (Dry-ish January): six photos, listed in `.harness/reports/ghia-dryish-images.md`, then flip `ghiaImagesReady`.
 - Hope Scholars numbers (followers, reach, attendance, money raised) to bring it back as a real project.
 - Family OK to show the first-gen photos; names on the Hope Scholars event selfie.
