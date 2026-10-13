@@ -13,7 +13,7 @@ import { StatsDashboard, type Dash, type Row } from "@/components/StatsDashboard
 export const metadata: Metadata = { ...pageMeta({ title: "Stats", description: "Live analytics for this site: who visits, what they read, what they do, and progress against the plan.", path: "/stats" }), robots: { index: false, follow: true } };
 export const revalidate = 3600;
 
-const CTAS: [string, string][] = [["cta_hero_contact", "contact me (hero)"], ["cta_hero_story", "my story"], ["cta_header_sayhi", "say hi (header)"], ["cta_case_sayhi", "say hi (case study)"], ["cta_home_blog", "read the blog (home)"], ["cta_home_forgood", "say hi about your program"], ["cta_home_subscribe", "subscribe (home)"], ["cta_sticky_sayhi", "say hi (sticky bar)"], ["cta_photo_contact", "book a shoot (photography)"]];
+const CTAS: [string, string][] = [["cta_header_sayhi", "say hi (header)"], ["cta_case_sayhi", "say hi (case study)"], ["cta_sticky_sayhi", "say hi (sticky bar)"], ["cta_photo_contact", "say hi about a shoot (photography)"]];
 
 export default async function StatsPage() {
   let stats: SiteStats | null = null; let gaError: string | null = null;
