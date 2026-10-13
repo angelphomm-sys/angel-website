@@ -37,7 +37,7 @@ const stepIds: string[] = steps.map((x) => x.id);
 const lines: Record<StepId, string> = {
   brief: "The goal: drive online takeout orders.",
   menu: "",
-  built: "At noon people want speed, not ambiance, so I wrote every ad for noon.",
+  built: "",
   worked: "I watched which ads people clicked and which ones they skipped.",
   result: "The restaurant ran it live for one month, and here is the receipt.",
 };
