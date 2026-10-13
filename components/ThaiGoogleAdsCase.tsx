@@ -213,7 +213,7 @@ const dishes: Dish[] = [
   { kw: "pad thai noodles near me", clicks: 3, orders: 3, cost: "$8.96" },
 ];
 
-// The keywords that spent without a single order. $33.14 + $11.49 + $9.08 = $53.71 (the total is in the tips).
+// The keywords that spent without a single order: $33.14 + $11.49 + $9.08.
 const soldOut = [
   { kw: "takeout near me", clicks: 23, cost: "$33.14" },
   { kw: "thai cuisine", clicks: 13, cost: "$11.49" },
@@ -465,12 +465,13 @@ function Receipt({ tools }: { tools: string[] }) {
 }
 
 const tips = [
-  { head: "Give gluten-free its own ad.", body: "It drove the most orders from a 1.36% click rate." },
-  { head: "Cut what spent without orders:", body: "$53.71 on three keywords and $52.98 in three towns." },
-  { head: "Count only calls and orders.", body: "Page views made 29 real orders look like 661." },
+  { head: "Give gluten-free its own ad.", body: "It brought 7 of 29 orders, but only 1.36% of people who saw the ad clicked it." },
+  { head: "Tighten match types and add negatives.", body: "Broad match pulled in searches for other cuisines and other restaurants. Use phrase and exact for the core terms." },
+  { head: "Shrink the radius to takeout distance.", body: "27 of 29 orders came from the home town." },
+  { head: "Track completed orders, then scale.", body: "Orders cost $10.69 each. If an average order is worth more, raise the budget and run longer." },
 ];
 
-// Laid out like the tip screen after a delivery: three rows that look like choices.
+// Laid out like the tip screen after a delivery: rows that look like choices.
 function TipScreen() {
   return (
     <div className={`${card} px-4 sm:px-5 pt-4 pb-4`}>
