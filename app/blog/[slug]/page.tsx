@@ -82,7 +82,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="font-mono text-[12px] font-medium text-mid flex gap-2"><Link href="/blog" className="hit hover:text-accent-deep">blog</Link></div>
         <div className="flex flex-col gap-5">
           <div className="flex items-center gap-2 text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid"><time dateTime={post.date}>{formatDate(post.date)}</time>{post.updated && post.updated !== post.date && <><span>·</span><span>updated <time dateTime={post.updated}>{formatDate(post.updated)}</time></span></>}<span>·</span><span>{post.readingTime} min</span>{post.series && <><span>·</span><span className="text-accent-deep">{post.series}</span></>}{post.draft && <span className="bg-[#fff6cc] text-ink rounded-full px-2.5 py-1">draft</span>}</div>
-          <h1 className="text-title font-display font-normal tracking-[-0.01em] leading-[1.02] text-balance">{post.title}</h1>
+          <h1 className="text-title font-display font-normal tracking-[-0.01em] leading-[1.12] text-balance">{post.title}</h1>
           {post.excerpt && <p className="text-[19px] md:text-[21px] leading-snug text-mid">{post.excerpt}</p>}
           <div className="flex items-center gap-3"><div className="relative w-10 h-10 rounded-full overflow-hidden"><Image src="/images/me/avatar.jpg" alt="" fill sizes="40px" className="object-cover" /></div><div className="flex flex-col"><Link href="/about" rel="author" className="text-[13px] font-bold hover:text-accent-deep">Angel Phommachan</Link><span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{site.role.toLowerCase()}</span></div></div>
         </div>
