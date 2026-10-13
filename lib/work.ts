@@ -226,15 +226,15 @@ const allWork: WorkItem[] = [
     discipline: "email",
     provenance: "spec",
     brand: "Ghia",
-    proof: "1 email \u00b7 three acts",
+    proof: "3 emails, coded by hand",
     type: "email",
-    title: "Tonight, in Three Acts",
-    seoTitle: "Ghia Spec Email: Tonight, in Three Acts",
-    seoDescription: "A spec email I wrote and built for Ghia. It sells one evening in three acts, from happy hour to nightcap, and ends in one ask: the Apéritif Duo.",
+    title: "Dry-ish January",
+    seoTitle: "Ghia Email Campaign: Dry-ish January",
+    seoDescription: "A three-email Dry January series I wrote and built for Ghia as spec work. It never asks anyone to quit. It adds a ritual and shows up mid-month.",
     blurb:
-      "A spec email for Ghia that sells one evening in three acts, from happy hour to nightcap.",
-    metric: "spec · 1 email",
-    channel: "Email · campaign",
+      "A three-email January series for Ghia that never asks anyone to quit. It adds a 6 o\u2019clock ritual instead.",
+    metric: "spec \u00b7 3 emails",
+    channel: "Email \u00b7 campaign",
     lane: "brand",
     status: "concept",
     preview: { poster: "/images/work/ghia-email-poster.jpg", focus: "50% 0%" },
@@ -243,16 +243,16 @@ const allWork: WorkItem[] = [
     caseStudy: {
       concept: {
         disclaimer:
-          "Spec work. Not affiliated with or commissioned by Ghia, and never sent. The products, prices, and colors come from drinkghia.com. Every photo is my own or credited free-license stock, never Ghia's.",
+          "Spec work. Ghia didn't hire me for this, and the emails were never sent. The products, recipe, and colors come from drinkghia.com. Every photo is my own, never Ghia's.",
       },
       brief: {
-        ask: "Write a Ghia email that sells the whole evening, from happy hour to nightcap, and gets someone to buy the Apéritif Duo.",
-        constraint: "One email, one action, no discount, no health claim, and no fact I could not find on Ghia's own site.",
-        audience: "People who drink and host, and want a weeknight dinner to feel like an occasion.",
+        ask: "Write a January series for Ghia that keeps people pouring all month and ends in a Subscribe & Save start.",
+        constraint: "Most Ghia buyers still drink, so no email can ask anyone to quit. No prices, no health claims.",
+        audience: "People on Ghia's list who try Dry January, all in, a few nights a week, or just curious.",
       },
-      differently: ["[Differently, pending: one thing you would change on the email now]"],
-      role: "Spec email, self-initiated. Strategy, copy, art direction, email design, and HTML build.",
-      tools: ["HTML and CSS email"],
+      differently: ["[Differently, pending: one thing you would change on the series now]"],
+      role: "Spec email campaign, self-initiated. Strategy, copy, art direction, email design, and HTML build.",
+      tools: ["HTML and CSS email", "Klaviyo"],
     },
   },
   {
@@ -361,7 +361,7 @@ const allWork: WorkItem[] = [
     },
   },
 ];
-// The Ghia spec email waits on Angel's photos (the slots are listed in .harness/reports/ghia-email-images.md).
+// The Ghia spec emails (Dry-ish January) wait on Angel's photos (the slots are listed in .harness/reports/ghia-dryish-images.md).
 // Until this is true, the ghia-email card, its case page, and its sitemap entry exist in development only;
 // a production build leaves them out and /case/ghia-email answers 404. Flip it once every slot is filled.
 export const ghiaImagesReady = false;

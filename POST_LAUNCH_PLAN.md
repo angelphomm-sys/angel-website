@@ -34,7 +34,7 @@ Launch: Tuesday 2026-10-13 on Vercel. Final update planned about one month after
 - Thai case: $200 budget vs about $241 spent (109 clicks at $2.21). Which is right?
 - Restaurant name: ask the owner before naming it.
 - Warroad population: 900 (your essay) vs about 1,700 (CBS 2017 / census). Pick one, or say "near Warroad."
-- Ghia spec email: four photos (slot-1 to slot-4), then flip `ghiaImagesReady`.
+- Ghia spec emails (Dry-ish January): six photos, listed in `.harness/reports/ghia-dryish-images.md`, then flip `ghiaImagesReady`.
 - Hope Scholars numbers (followers, reach, attendance, money raised) to bring it back as a real project.
 - Family OK to show the first-gen photos; names on the Hope Scholars event selfie.
 - Figma: social spec frames are flat images (free-plan call limit); six own-post covers still show the old red there.
