@@ -134,6 +134,8 @@ export function EmbracingOurStoryCase() {
                 <div className={s.pfAv}><CrestOpen /></div>
                 <div className={s.pfStats}>
                   <div><div className={s.n}>9</div><div className={s.l}>posts</div></div>
+                  <div><div className={s.n}>—</div><div className={s.l}>followers</div></div>
+                  <div><div className={s.n}>—</div><div className={s.l}>following</div></div>
                 </div>
               </div>
               <div className={s.pfBio}>
