@@ -128,7 +128,7 @@ export function EmbracingOurStoryCase() {
               <div className={s.eyebrow}>In context</div>
               <h2>How it shows up in the feed</h2>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-8 md:mt-10">
             <div className={s.profile}>
               <div className={s.pfTop}>
                 <div className={s.pfAv}><CrestOpen /></div>
