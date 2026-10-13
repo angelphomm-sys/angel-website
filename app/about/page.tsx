@@ -10,7 +10,7 @@ import { Shelf } from "@/components/Shelf";
 import { shelf } from "@/lib/shelf";
 import { testimonials } from "@/lib/testimonials";
 
-export const metadata: Metadata = pageMeta({ title: "About Angel Phommachan · Integrated Marketer in Utah", absolute: true, description: "Angel Phommachan is a first-generation digital marketing specialist in Utah who works across search, email, social, and content. Off the clock, a portrait photographer.", path: "/about" });
+export const metadata: Metadata = pageMeta({ title: "About Angel Phommachan · Integrated Marketer in Utah", absolute: true, description: "Angel Phommachan is a first-generation digital marketing specialist in Utah who works across search, email, social, and content.", path: "/about" });
 
 // Mirrors the home page's local Section: tight top, heading sits right on its content.
 function Section({ title, aside, children, id }: { title: string; aside?: React.ReactNode; children: React.ReactNode; id?: string }) {
