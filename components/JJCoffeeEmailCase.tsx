@@ -46,7 +46,7 @@ export function JJCoffeeEmailCase() {
         {/* hero: title, by-line, one line on the idea, and the disclaimer; the emails follow right after */}
         <header className={s.hero}>
           <div className={s.wrap}>
-            <div className={s.lab}>Email campaign &middot; JJ Coffee Co</div>
+            <div className={s.lab}>Spec email campaign &middot; JJ Coffee Co</div>
             <h1 className={s.h1}>Slow <span>Mornings</span></h1>
             <p className={s.by}>By <b>Angel Phommachan</b> &middot; September 2026</p>
             <p className={s.idea}>Three fall emails for JJ Coffee Co, a coffee shop in Orem, Utah. One sells a fall syrup, one asks how you take your coffee, and one invites you and a friend in for a cup.</p>
