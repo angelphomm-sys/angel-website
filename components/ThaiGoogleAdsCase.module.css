@@ -1,5 +1,5 @@
 /* The takeout-app pieces this case study needs and Tailwind does not say cleanly:
-   the cover art dot grid, the receipt's torn edge, and the tracker's pulse. */
+   the store banner's dot grid and wash, the receipt's torn edge, the tracker's pulse, and the car on the map. */
 
 .cover {
   background-color: var(--color-ink);
@@ -7,10 +7,17 @@
   background-size: 22px 22px;
 }
 
+/* Over the banner photo: darker on the left and along the top, where the chip and order number sit. */
+.wash {
+  background:
+    linear-gradient(180deg, rgba(28, 19, 16, 0.5) 0%, rgba(28, 19, 16, 0) 40%),
+    linear-gradient(90deg, rgba(28, 19, 16, 0.45) 0%, rgba(28, 19, 16, 0) 55%);
+}
+
 /* The takeout-app pieces speak in an app's plain sans, the way a delivery app would; the page frame around them
    is in the site's faces (IvyOra, Benton Modern, Ballinger Mono). The kitchen ticket and receipt lines print in mono. */
 .app { font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
-.app.mono, .app .mono { font-family: var(--font-mono); }
+.mono, .app.mono, .app .mono { font-family: var(--font-mono); }
 
 /* A torn paper edge along the bottom of the receipt. */
 .receipt {
@@ -32,6 +39,24 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0.45; }
 }
+/* The car drives the route on the map: up, right, up, right, then waits near the pin and starts again.
+   Translate values are SVG user units along the path M41 130V86H170V46H250. */
+.car {
+  transform: translate(170px, 66px);
+  animation: drive 7s ease-in-out infinite;
+}
+@keyframes drive {
+  0% { transform: translate(41px, 130px); opacity: 0; }
+  4% { transform: translate(41px, 126px); opacity: 1; }
+  13% { transform: translate(41px, 86px); }
+  48% { transform: translate(170px, 86px); }
+  59% { transform: translate(170px, 46px); }
+  80% { transform: translate(250px, 46px); opacity: 1; }
+  94% { transform: translate(250px, 46px); opacity: 1; }
+  100% { transform: translate(250px, 46px); opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .live { animation: none; }
+  .car { animation: none; }
 }

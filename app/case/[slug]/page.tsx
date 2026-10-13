@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { notFound } from "next/navigation";
 import { caseStudies, getWork, type WorkItem } from "@/lib/work";
 import { site } from "@/lib/site";
@@ -40,7 +42,11 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
       <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Work", path: "/work" }, { name: w.title, path }])} />
     </>
   );
-  if (slug === "thai-google-ads") return <>{ld}<ThaiGoogleAdsCase /></>;
+  if (slug === "thai-google-ads") {
+    // The store banner is made in Canva and dropped into public/. Until the file is there, the dark dotted cover shows.
+    const banner = "/images/case/thai-google-ads/banner.jpg";
+    return <>{ld}<ThaiGoogleAdsCase banner={existsSync(join(process.cwd(), "public", banner)) ? banner : undefined} /></>;
+  }
   if (slug === "embracing-our-story") return <>{ld}<EmbracingOurStoryCase /></>;
   if (slug === "jj-coffee-email") return <>{ld}<JJCoffeeEmailCase /></>;
   if (slug === "ghia-email") return <>{ld}<GhiaEmailCase /></>;

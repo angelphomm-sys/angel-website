@@ -75,17 +75,17 @@ const allWork: WorkItem[] = [
     discipline: "paid-search",
     provenance: "class-client",
     brand: "Local Thai restaurant",
-    // From the receipt on the case page: total conversions, click-through rate, average cost per click.
-    proof: "73 conversions \u00b7 5.6% click rate \u00b7 $2.21 a click",
+    // From the receipt on the case page: calls and orders, click rate, average cost per click ($310.10 / 230 clicks).
+    proof: "29 calls and orders \u00b7 3.03% click rate \u00b7 $1.35 a click",
     type: "case-study",
     title: "Google Ads for a Local Thai Restaurant",
-    seoDescription: "I built a Google Search campaign for a local Thai restaurant in Utah. In one month it drove 73 conversions at a 5.6% click-through rate from 109 clicks.",
+    seoDescription: "I built a Google Search campaign for a family-owned Thai restaurant in Utah County. From Jan 27 to Mar 3, 2026 it drew 230 clicks and 29 calls and online orders.",
     blurb:
-      "I built a Google Search campaign for a local Thai restaurant in Utah. 73 conversions at a 5.6% click-through rate.",
-    metric: "73 conversions \u00b7 5.6% CTR",
+      "I built a Google Search campaign for a family-owned Thai restaurant in Utah County. 29 calls and online orders from 230 clicks.",
+    metric: "29 conversions \u00b7 3.03% CTR",
     channel: "Google Search \u00b7 paid",
     lane: "brand",
-    client: "A local Thai restaurant in Utah",
+    client: "A family-owned Thai restaurant in Utah County",
     goal: "Build a Google Search campaign to drive takeout orders and online ordering",
     role: "Strategy, campaign build, keyword research, ad copy, and post-campaign analysis",
     tools: [
@@ -95,16 +95,16 @@ const allWork: WorkItem[] = [
       "Google Keyword Planner",
     ],
     result:
-      "73 conversions at a 5.6% click-through rate from 109 clicks. A class project that the restaurant ran live.",
+      "29 calls and online orders from 230 clicks and 7,600 impressions. A class project that the restaurant ran live.",
     preview: { poster: "/images/work/thai-ads-poster.jpg", focus: "50% 100%" },
     // Rendered by components/ThaiGoogleAdsCase.tsx, not by CaseStudyTemplate. Kept minimal on purpose:
     // the page copy lives in that component, and this object only routes and gates the case study.
     caseStudy: {
-      opener: "I built a Google Search campaign for a local Thai restaurant in Utah.",
+      opener: "I built a Google Search campaign for a family-owned Thai restaurant in Utah County.",
       brief: {
         ask: "Pick a local business. Build a Google Search campaign. Run it on a real budget.",
         constraint:
-          "A small budget and a narrow geographic radius. Four weeks to build, present, and deliver a live campaign.",
+          "A small budget and a narrow geographic radius. A live campaign that ran 5 weeks, Jan 27 to Mar 3, 2026.",
         audience:
           "People in the area searching for Thai food, takeout, or the restaurant by name. Lunchtime intent. Mobile-first.",
       },
@@ -125,9 +125,9 @@ const allWork: WorkItem[] = [
       },
       result: {
         numbers: [
-          "73 conversions at a 5.6% click-through rate in one month.",
-          "109 clicks from 2,000+ impressions.",
-          "61% of traffic from mobile devices.",
+          "29 calls and online orders from 230 clicks, Jan 27 to Mar 3, 2026.",
+          "7,600 impressions at a 3.03% click rate.",
+          "$310.10 spent, an average of $1.35 a click. The budget was $250, raised with the owner\u2019s OK.",
         ],
       },
       differently: [
