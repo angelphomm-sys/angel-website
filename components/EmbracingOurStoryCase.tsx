@@ -125,7 +125,6 @@ export function EmbracingOurStoryCase() {
         <section id="social">
           <div className={s.wrap}>
             <div className={s.head}>
-              <div className={s.eyebrow}>In context</div>
               <h2>How it shows up in the feed</h2>
             </div>
             <div className="flex justify-center mt-8 md:mt-10">
