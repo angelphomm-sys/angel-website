@@ -35,7 +35,7 @@ const stepIds: string[] = steps.map((x) => x.id);
 
 // The one sentence each step gets. The first one is the goal.
 const lines: Record<StepId, string> = {
-  brief: "The goal: more takeout orders from people nearby.",
+  brief: "The goal: drive online takeout orders.",
   menu: "I bid on what someone nearby would actually type.",
   built: "At noon people want speed, not ambiance, so I wrote every ad for noon.",
   worked: "I watched which ads people clicked and which ones they skipped.",
@@ -104,9 +104,6 @@ function SectionHead({ id, chip = true }: { id: StepId; chip?: boolean }) {
   return (
     <div className="mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
       <div className="flex flex-col gap-1 min-w-0">
-        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-oxblood" data-copy="row">
-          <span className="tabular-nums">{i + 1} of 5</span> · {step.label}
-        </span>
         <h2 className="text-[30px] md:text-[38px] leading-tight">{step.title}</h2>
       </div>
       {chip && <Chip>{step.chip}</Chip>}
@@ -132,7 +129,7 @@ const showBlanks = showNotes;
 
 const orderRows: { k: string; v: string; blank?: boolean }[] = [
   { k: "Client", v: "Family-owned Thai restaurant, Utah" },
-  { k: "One action", v: "Get someone to the ordering page" },
+  { k: "One action", v: "Place an online takeout order" },
   { k: "Deliver to", v: "Nearby searchers at lunch, mostly on a phone" },
   { k: "Budget", v: "$200, narrow radius" },
   { k: "Order type", v: "Solo class project, run live" },
@@ -357,14 +354,13 @@ export function ThaiGoogleAdsCase() {
               <span className={`${s.app} text-[15px] md:text-[16px] font-bold text-mid`}>Utah · Google Search ads · a family-owned restaurant</span>
             </h1>
 
-            {/* The result up front, from the receipt below. */}
-            <p className="mt-3 text-[18px] md:text-[20px] font-extrabold tracking-[-0.02em] leading-snug">73 conversions at a 5.6% click rate, $2.21 a click, in one month.</p>
+            {/* A text link, not a button: it jumps to the receipt at the end. */}
             <a
-              href="#brief"
-              onClick={(e) => { e.preventDefault(); goToStep("brief"); }}
-              className="mt-5 flex items-center justify-center gap-2 w-full sm:w-auto sm:inline-flex rounded-full bg-accent hover:bg-accent-deep text-white text-[16px] font-extrabold px-7 h-12 transition-colors"
+              href="#result"
+              onClick={(e) => { e.preventDefault(); goToStep("result"); }}
+              className="hit mt-4 self-start inline-flex items-center gap-1.5 font-mono text-[13px] font-medium lowercase tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep"
             >
-              see how it went <span aria-hidden="true">→</span>
+              skip to the receipt <span aria-hidden="true">↓</span>
             </a>
           </div>
         </div>
