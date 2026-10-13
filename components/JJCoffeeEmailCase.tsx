@@ -49,7 +49,6 @@ export function JJCoffeeEmailCase() {
             <div className={s.lab}>Spec email campaign &middot; JJ Coffee Co</div>
             <h1 className={s.h1}>Slow <span>Mornings</span></h1>
             <p className={s.by}>By <b>Angel Phommachan</b> &middot; September 2026</p>
-            <p className={s.idea}>Three fall emails for JJ Coffee Co, a coffee shop in Orem, Utah. One sells a fall syrup, one asks how you take your coffee, and one invites you and a friend in for a cup.</p>
             <p className={s.disclaim}><b>Spec work.</b> JJ Coffee Co didn&apos;t hire me for this. Photos are JJ&apos;s product shots plus credited stock (<a className="hit underline underline-offset-2" href="/emails/jj-coffee/CREDITS.md">photo credits</a>).</p>
           </div>
         </header>
