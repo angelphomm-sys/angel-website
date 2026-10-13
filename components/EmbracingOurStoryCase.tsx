@@ -4,7 +4,7 @@ import { getWork } from "@/lib/work";
 import { TrackView } from "./Track";
 import { CaseProgress } from "./CaseProgress";
 import { CaseCtaRow } from "./CaseStudyTemplate";
-import { EmbracingFx, EmbracingCountdown } from "./EmbracingOurStoryFx";
+import { EmbracingFx } from "./EmbracingOurStoryFx";
 import s from "./EmbracingOurStoryCase.module.css";
 
 /* The campaign's own typefaces, used only inside the Instagram profile mock-up (a piece of the work,
@@ -94,14 +94,12 @@ export function EmbracingOurStoryCase() {
               <h1 className={s.heroTitle}>Embracing Our Story</h1>
               <p className={s.sub}>A Pi Mai Lao community celebration, branded for a full-city turnout.</p>
               <div className={s.cd}>
-                <span className={s.cdDot} /><span className={s.cdLbl}>Doors open in</span>
-                <EmbracingCountdown className={s.cdVal} />
+                <span className={s.cdDot} /><span className={s.cdLbl}>Sat, April 17 · Orem, Utah</span>
               </div>
-              {/* Said right beside the countdown, so nobody reads the date as real. */}
+              {/* Said right beside the date, so nobody reads the event as real. */}
               <p className={s.noteConcept}><b>Concept.</b> The event is invented.</p>
             </div>
             <div className={s.art}>
-              <Image className={s.artPeek} src={`${IMG}/story.jpg`} alt="Countdown story" width={1080} height={1920} sizes="132px" />
               <Image className={s.artMain} src={`${IMG}/poster.jpg`} alt="Embracing Our Story event poster" width={1000} height={1500} sizes="(max-width: 820px) 340px, 42vw" priority />
             </div>
           </div>
