@@ -98,3 +98,53 @@ export function Bars({
     </div>
   );
 }
+
+// A real HTML table for posts (MDX here has no markdown tables). Text stays readable by Google and
+// screen readers, unlike a table saved as an image. Cells can hold links: rows={[["A", <a href="…">B</a>]]}.
+export function Table({
+  caption,
+  head,
+  rows,
+  source,
+}: {
+  caption?: string;
+  head: string[];
+  rows: React.ReactNode[][];
+  source?: string;
+}) {
+  return (
+    <div className="border border-line rounded-2xl bg-card p-5 md:p-6">
+      {caption && (
+        <div className="text-[11px] font-bold uppercase tracking-[0.09em] text-mid mb-4">{caption}</div>
+      )}
+      {/* Phones get one stacked block per row instead of a squeezed grid. */}
+      <div className="md:overflow-x-auto">
+        <table aria-label={caption} className="block md:table w-full text-left border-collapse text-[15px] leading-snug">
+          <thead className="hidden md:table-header-group">
+            <tr>
+              {head.map((h, i) => (
+                <th key={i} scope="col" className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-mid pb-2 pr-4 border-b border-line">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="block md:table-row-group">
+            {rows.map((r, i) => (
+              <tr key={i} className="block md:table-row border-b border-line last:border-b-0 align-top py-3 md:py-0">
+                {r.map((c, j) =>
+                  j === 0 ? (
+                    <th key={j} scope="row" className="block md:table-cell font-semibold text-ink md:py-2.5 pr-4 md:whitespace-nowrap">{c}</th>
+                  ) : (
+                    <td key={j} className="block md:table-cell text-ink md:py-2.5 pr-4 mt-1 md:mt-0">{c}</td>
+                  ),
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {source && <div className="text-[11px] leading-snug text-mid mt-4">{source}</div>}
+    </div>
+  );
+}
