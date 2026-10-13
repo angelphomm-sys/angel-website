@@ -1,8 +1,9 @@
 import { showNotes } from "@/lib/notes";
 
-export type Book = { title: string; author?: string; kind: "book" | "film" | "show" | "album" | "campaign"; status?: string; why: string; color: string; ink?: string; reading?: boolean; cover?: string };
+export type Book = { title: string; author?: string; kind: "book" | "film" | "show" | "album" | "campaign"; status?: string; why: string; color: string; ink?: string; reading?: boolean; cover?: string; quote?: string };
 
-// Real covers as 3D books. Idle: a slight float. Hover: the book turns toward you and the cover opens to show what it taught her.
+// Real covers as 3D books. Idle: a slight float. Hover: the book turns toward you and the cover opens to her
+// favorite quote from it (`quote` in lib/shelf.ts), or what it taught her when there is no quote yet.
 // A [bracketed] title is a pending entry in lib/shelf.ts. It is never drawn as a book; while notes show
 // (lib/notes.ts), one bracket line under the shelf says how many picks are still to come.
 export function Shelf({ books: all, compact = false }: { books: Book[]; compact?: boolean }) {
@@ -14,13 +15,17 @@ export function Shelf({ books: all, compact = false }: { books: Book[]; compact?
       <div className={`grid grid-cols-2 ${books.length === 4 ? "md:grid-cols-4" : `min-[400px]:grid-cols-3 ${books.length > 3 ? "lg:grid-cols-6" : ""}`} items-end gap-x-4 gap-y-10 px-2 pt-6 pb-2`}>
         {books.map((b, i) => (
           <div key={b.title} className="floaty flex flex-col items-center gap-4 min-w-0" style={{ animationDelay: `${-i * 0.9}s` }}>
-            <div className="book3d" style={{ width: `min(${w}px, 100%)`, aspectRatio: "2 / 3", ["--depth" as string]: "14px" }} tabIndex={0} aria-label={`${b.title}${b.author ? ` by ${b.author}` : ""}. ${b.why}`}>
+            <div className="book3d" style={{ width: `min(${w}px, 100%)`, aspectRatio: "2 / 3", ["--depth" as string]: "14px" }} tabIndex={0} aria-label={`${b.title}${b.author ? ` by ${b.author}` : ""}. ${b.quote ? `Favorite quote: ${b.quote}` : b.why}`}>
               <div className="back" style={{ background: b.color }} />
               <div className="spine" style={{ background: b.color }} />
               <div className="pages" />
               <div className="inside">
                 <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{b.kind}{b.status ? ` · ${b.status}` : ""}</span>
-                {b.why && <span className="hand block text-[17px] leading-tight mt-1">taught me: {b.why}</span>}
+                {b.quote ? (
+                  <span className="hand block text-[16px] leading-tight mt-1">&ldquo;{b.quote}&rdquo;</span>
+                ) : (
+                  b.why && <span className="hand block text-[17px] leading-tight mt-1">taught me: {b.why}</span>
+                )}
               </div>
               <div className="cover" style={{ background: b.color, color: b.ink ?? "#fff" }}>
                 {b.cover ? (

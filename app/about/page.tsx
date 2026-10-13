@@ -8,6 +8,7 @@ import { ResumePreview } from "@/components/ResumePreview";
 import { TrackLink } from "@/components/Track";
 import { ContactForm } from "@/components/ContactForm";
 import { Shelf } from "@/components/Shelf";
+import { Screen } from "@/components/Screen";
 import { shelf } from "@/lib/shelf";
 import { testimonials } from "@/lib/testimonials";
 
@@ -81,7 +82,7 @@ export default function About() {
       </Section>
 
       <Section title="on my screen." id="screen">
-        <Shelf books={shelf.filter((b) => b.kind === "film" || b.kind === "show")} />
+        <Screen picks={shelf.filter((b) => b.kind === "film" || b.kind === "show")} />
       </Section>
 
       <Section title="say hi." id="contact">
