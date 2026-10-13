@@ -20,7 +20,7 @@ const BUILD = [
   ["Tracked", "Every link is tagged."],
 ];
 
-/* The strategy: one word, three jobs, in the order the emails send. */
+/* The strategy: three jobs, in the order the emails send. */
 const FLOW = [
   ["Sell", "Email 1 leads with one fall drink. SAVOR makes shipping free."],
   ["Learn", "Email 2 asks one question. The tap picks Thursday’s email."],
@@ -46,11 +46,11 @@ export function JJCoffeeEmailCase() {
         {/* hero: title, by-line, one line on the idea, and the disclaimer; the emails follow right after */}
         <header className={s.hero}>
           <div className={s.wrap}>
-            <div className={s.lab}>Email campaign &nbsp;&#10038;&nbsp; JJ Coffee Co</div>
+            <div className={s.lab}>Email campaign &middot; JJ Coffee Co</div>
             <h1 className={s.h1}>Slow <span>Mornings</span></h1>
             <p className={s.by}>By <b>Angel Phommachan</b> &middot; September 2026</p>
-            <p className={s.idea}>Three fall emails built on JJ&apos;s own word, savor. Every offer is a gift. The last one brings a friend to the bar.</p>
-            <p className={s.disclaim}><b>Spec work.</b> Not affiliated with or commissioned by JJ Coffee Co. The photos are JJ&apos;s product shots and credited stock (<a className="hit underline underline-offset-2" href="/emails/jj-coffee/CREDITS.md">photo credits</a>). The SAVOR code is my proposal.</p>
+            <p className={s.idea}>Three fall emails for JJ Coffee Co, a coffee shop in Orem, Utah. One sells a fall syrup, one asks how you take your coffee, and one invites you and a friend in for a cup.</p>
+            <p className={s.disclaim}><b>Spec work.</b> JJ Coffee Co didn&apos;t hire me for this. Photos are JJ&apos;s product shots plus credited stock (<a className="hit underline underline-offset-2" href="/emails/jj-coffee/CREDITS.md">photo credits</a>).</p>
           </div>
         </header>
 
