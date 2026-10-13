@@ -90,8 +90,8 @@ const allWork: WorkItem[] = [
     role: "Strategy, campaign build, keyword research, ad copy, and post-campaign analysis",
     tools: [
       "Google Ads",
-      "Google Analytics",
-      "Google Sheets",
+      "Looker Studio",
+      "Excel",
       "Google Keyword Planner",
     ],
     result:
@@ -138,8 +138,8 @@ const allWork: WorkItem[] = [
       role: "Strategy, campaign build, keyword research, ad copy, and post-campaign analysis. A solo class project that the restaurant ran live.",
       tools: [
         "Google Ads",
-        "Google Analytics",
-        "Google Sheets",
+        "Looker Studio",
+        "Excel",
         "Google Keyword Planner",
       ],
     },
