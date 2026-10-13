@@ -10,7 +10,7 @@ import { Shelf } from "@/components/Shelf";
 import { shelf } from "@/lib/shelf";
 import { testimonials } from "@/lib/testimonials";
 
-export const metadata: Metadata = pageMeta({ title: "About Angel Phommachan · Integrated Marketer in Utah", absolute: true, description: "Angel Phommachan is a first-generation digital marketing specialist in Utah who helps brands figure out who they're for and what makes them different.", path: "/about" });
+export const metadata: Metadata = pageMeta({ title: "About Angel Phommachan · Integrated Marketer in Utah", absolute: true, description: "Angel Phommachan is a first-generation digital marketing specialist in Utah who works across search, email, social, and content. Off the clock, a portrait photographer.", path: "/about" });
 
 // Mirrors the home page's local Section: tight top, heading sits right on its content.
 function Section({ title, aside, children, id }: { title: string; aside?: React.ReactNode; children: React.ReactNode; id?: string }) {
@@ -38,7 +38,7 @@ export default function About() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">
             <h1 className="text-hero font-display font-normal leading-[1.02] tracking-[-0.01em]"><span className="num" aria-hidden="true">5</span>about me.</h1>
-            <p className="text-[19px] md:text-[21px] leading-relaxed max-w-[560px]">I&rsquo;m Angel Phommachan, a first-generation digital marketing specialist who helps brands figure out who they&rsquo;re for and what makes them different. Off the clock, I&rsquo;m a portrait photographer.</p>
+            <p className="text-[19px] md:text-[21px] leading-relaxed max-w-[560px]">I&rsquo;m Angel Phommachan, a first-generation digital marketing specialist who works across search, email, social, and content. Off the clock, I&rsquo;m a portrait photographer.</p>
           </div>
           {/* The 60-second video, once it exists. Nothing shows until NEXT_PUBLIC_ABOUT_VIDEO_ID is set. */}
           {videoId && (
