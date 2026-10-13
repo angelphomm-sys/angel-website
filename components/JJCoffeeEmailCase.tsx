@@ -58,7 +58,6 @@ export function JJCoffeeEmailCase() {
           <div className={s.wrap}>
             <JJCoffeeEmailViewer
               emails={EMAILS}
-              codeHref="/emails/jj-coffee/01-slow-mornings.html"
               head={<>
                 <div className={s.lab}>The emails</div>
                 <h2 className={s.h2}>The three emails</h2>

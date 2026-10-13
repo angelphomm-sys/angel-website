@@ -23,7 +23,7 @@ const PACE = [
 /* The three emails shown whole, like a gallery wall: each full-length desktop render sits in a fixed-height
    window and drifts slowly down and back up. Hover or focus pauses it; reduced motion keeps each at its top.
    A short caption sits above each one. The coded files are one small link under the row. */
-export function JJCoffeeEmailViewer({ emails, head, codeHref }: { emails: ViewerEmail[]; head: ReactNode; codeHref: string }) {
+export function JJCoffeeEmailViewer({ emails, head }: { emails: ViewerEmail[]; head: ReactNode }) {
   return (
     <div className={s.gallery}>
       <div className={s.galleryHead}>{head}</div>
@@ -58,9 +58,6 @@ export function JJCoffeeEmailViewer({ emails, head, codeHref }: { emails: Viewer
         })}
       </ol>
 
-      <p className={s.codeLine}>
-        <a className={`hit ${s.codeLink}`} href={codeHref} target="_blank" rel="noopener noreferrer">see the coded emails&nbsp;&rarr;</a>
-      </p>
     </div>
   );
 }
