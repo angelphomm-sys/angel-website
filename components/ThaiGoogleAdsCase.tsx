@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { CaseProgress, useActiveSection, goToStep } from "./CaseProgress";
 import { TrackView } from "./Track";
 import { nextWork } from "./CaseStudyTemplate";
@@ -421,44 +422,287 @@ const receiptLines = [
   { label: "Calls and orders", value: "29" },
 ];
 
-function Receipt({ tools }: { tools: string[] }) {
+// The receipt prints out of a small thermal printer. At rest (no JS, before hydration, reduced motion, a screenshot
+// tool that never scrolls) the receipt is fully out and readable. A client effect tucks it into the slot only once
+// the printer is about to scroll into view, then feeds it out when the printer is on screen. The button replays it.
+type Feed = "rest" | "armed" | "printing" | "done";
+
+// The feed animation's length and its line count, from .printing and @keyframes feed in the module CSS.
+const FEED_SECONDS = 2.6;
+const FEED_LINES = 14;
+
+// A thermal receipt printer, synthesized with Web Audio: no audio file, nothing to license.
+// The sound of a POS printer is its stepper motor: a buzzy, pitched whine in short line bursts ("bzzt-bzzt-bzzzzt"),
+// then the auto-cutter's "chk". Each burst is a square wave chopped by a faster square (the motor's steps), through a
+// bandpass, with a little paper-friction noise under it. Bursts line up with the paper's line steps in @keyframes feed;
+// the line that brings TOTAL SPENT out runs a little longer. Browsers block sound without a user action, so this only
+// runs from the button (the automatic print on scroll stays silent).
+// sound:start and sound:end mark this block so it can be rendered offline (OfflineAudioContext) for a waveform check.
+function scheduleReceiptSound(ctx: BaseAudioContext, dest: AudioNode, t0: number, seconds: number, lines: number) {
+  const bus = ctx.createDynamicsCompressor();
+  bus.threshold.value = -16;
+  bus.knee.value = 6;
+  bus.ratio.value = 8;
+  bus.attack.value = 0.002;
+  bus.release.value = 0.06;
+  const master = ctx.createGain();
+  master.gain.value = 0.12;
+  bus.connect(master).connect(dest);
+
+  const noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+  const data = noise.getChannelData(0);
+  for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+
+  // A gain that clicks on and off in 5ms, holding in between.
+  const envelope = (at: number, len: number, level: number) => {
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, at);
+    g.gain.linearRampToValueAtTime(level, at + 0.005);
+    g.gain.setValueAtTime(level, at + len - 0.005);
+    g.gain.linearRampToValueAtTime(0, at + len);
+    return g;
+  };
+
+  // One printed line: the motor whine, chopped by its steps, plus paper friction.
+  const pitch = 820 + Math.random() * 160;
+  const stepRate = 200 + Math.random() * 40;
+  const line = (at: number, len: number) => {
+    const tone = ctx.createOscillator();
+    tone.type = "square";
+    tone.frequency.value = pitch * (0.95 + Math.random() * 0.1);
+    const chop = ctx.createGain();
+    chop.gain.value = 0.5;
+    const steps = ctx.createOscillator();
+    steps.type = "square";
+    steps.frequency.value = stepRate * (0.93 + Math.random() * 0.14);
+    const depth = ctx.createGain();
+    depth.gain.value = 0.5;
+    steps.connect(depth).connect(chop.gain);
+    const band = ctx.createBiquadFilter();
+    band.type = "bandpass";
+    band.frequency.value = 2200;
+    band.Q.value = 1.6;
+    tone.connect(chop).connect(band).connect(envelope(at, len, 0.9)).connect(bus);
+
+    const paper = ctx.createBufferSource();
+    paper.buffer = noise;
+    const hiss = ctx.createBiquadFilter();
+    hiss.type = "bandpass";
+    hiss.frequency.value = 4000;
+    hiss.Q.value = 0.8;
+    paper.connect(hiss).connect(envelope(at, len, 0.12)).connect(bus);
+
+    for (const src of [tone, steps]) { src.start(at); src.stop(at + len + 0.01); }
+    paper.start(at, Math.random() * 0.8, len + 0.01);
+  };
+
+  const per = (seconds * 0.94) / lines;
+  const totalLine = Math.round(lines * 0.45);
+  for (let i = 0; i < lines; i++) {
+    const at = t0 + i * per;
+    const gap = i === totalLine ? 0.012 : 0.03 + Math.random() * 0.04;
+    line(at, per - gap);
+  }
+
+  // The auto-cutter: a bright "ch" of noise, then a low "k" thunk.
+  const end = t0 + lines * per + 0.08;
+  const cut = ctx.createBufferSource();
+  cut.buffer = noise;
+  const high = ctx.createBiquadFilter();
+  high.type = "highpass";
+  high.frequency.value = 2000;
+  const cutGain = ctx.createGain();
+  cutGain.gain.setValueAtTime(0, end);
+  cutGain.gain.linearRampToValueAtTime(1, end + 0.002);
+  cutGain.gain.exponentialRampToValueAtTime(0.001, end + 0.03);
+  cut.connect(high).connect(cutGain).connect(bus);
+  cut.start(end, Math.random() * 0.8, 0.035);
+
+  const thunk = ctx.createOscillator();
+  thunk.type = "sine";
+  thunk.frequency.setValueAtTime(150, end + 0.028);
+  thunk.frequency.exponentialRampToValueAtTime(90, end + 0.05);
+  const thunkGain = ctx.createGain();
+  thunkGain.gain.setValueAtTime(0, end + 0.028);
+  thunkGain.gain.linearRampToValueAtTime(1, end + 0.03);
+  thunkGain.gain.exponentialRampToValueAtTime(0.001, end + 0.05);
+  thunk.connect(thunkGain).connect(bus);
+  thunk.start(end + 0.028);
+  thunk.stop(end + 0.06);
+  return end + 0.06;
+}
+// sound:end
+
+let audioCtx: AudioContext | null = null;
+function playPrinterSound() {
+  try {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!AC) return;
+    audioCtx ??= new AC();
+    const ctx = audioCtx;
+    if (ctx.state === "suspended") void ctx.resume().catch(() => {});
+    scheduleReceiptSound(ctx, ctx.destination, ctx.currentTime + 0.03, FEED_SECONDS, FEED_LINES);
+  } catch {
+    // No sound is fine; the paper still prints.
+  }
+}
+
+// A tiny speaker, so the button says it makes a sound.
+function SpeakerIcon() {
   return (
-    <div className="drop-shadow-[0_8px_18px_rgba(27,22,20,0.1)]">
-      <div className={`${s.receipt} ${s.app} bg-card rounded-t-2xl px-5 sm:px-7 pt-5`}>
-        <div className="text-center flex flex-col items-center gap-1" data-copy="receipt">
-          <span className="text-[20px] font-extrabold tracking-[-0.02em]">Thai takeout campaign</span>
-          <span className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[12px] text-mid">
-            Jan 27 to Mar 3, 2026 <Chip tone="khaki">delivered</Chip>
+    <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M2 6h3l4-3v10l-4-3H2Z" fill="currentColor" />
+      <path d="M11.5 5.5a3.5 3.5 0 0 1 0 5" />
+      <path d="M13.5 3.5a6.5 6.5 0 0 1 0 9" />
+    </svg>
+  );
+}
+
+function Receipt({ tools }: { tools: string[] }) {
+  const printerRef = useRef<HTMLDivElement>(null);
+  const paperRef = useRef<HTMLDivElement>(null);
+  const [feed, setFeed] = useState<Feed>("rest");
+  const [run, setRun] = useState(0);
+
+  useEffect(() => {
+    const el = printerRef.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let armed = false;
+    let printed = false;
+    // Arm while the printer is still just below the fold, so the reader never sees the paper vanish.
+    const arm = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting || armed) return;
+      armed = true;
+      arm.disconnect();
+      setFeed((f) => (f === "rest" ? "armed" : f));
+    }, { rootMargin: "0px 0px 35% 0px" });
+    // Print once most of the printer is on screen.
+    const go = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting || printed) return;
+      printed = armed = true;
+      arm.disconnect();
+      go.disconnect();
+      setRun((n) => n + 1);
+      setFeed("printing");
+    }, { threshold: 0.6 });
+    arm.observe(el);
+    go.observe(el);
+    return () => { arm.disconnect(); go.disconnect(); };
+  }, []);
+
+  const printAgain = () => { playPrinterSound(); setRun((n) => n + 1); setFeed("printing"); };
+
+  // A paper copy: clone the receipt onto the body, print only that clone, then remove it.
+  const printCopy = () => {
+    const paper = paperRef.current;
+    if (!paper) return;
+    const copy = paper.cloneNode(true) as HTMLElement;
+    copy.classList.add(s.printCopy);
+    copy.removeAttribute("id");
+    document.body.appendChild(copy);
+    const html = document.documentElement;
+    html.classList.add("receipt-only");
+    const done = () => { html.classList.remove("receipt-only"); copy.remove(); };
+    window.addEventListener("afterprint", done, { once: true });
+    window.print();
+  };
+
+  const busy = feed === "printing";
+  const label = busy ? "printing…" : feed === "done" ? "print again" : "print receipt";
+
+  return (
+    <div className="mx-auto w-full max-w-[412px]">
+      <div ref={printerRef} className={`${s.printer} ${busy ? s.busy : ""}`}>
+        <div className="flex items-center justify-between gap-3 px-4 pt-3.5 pb-3">
+          <span className="flex items-center gap-2 min-w-0 font-mono text-[11px] tracking-[0.06em] text-cream/85" data-copy="receipt">
+            <span className={`${s.lamp} ${busy ? s.blink : ""}`} aria-hidden="true" />
+            order #012726
           </span>
+          <button
+            type="button"
+            onClick={printAgain}
+            disabled={busy}
+            aria-controls="thai-receipt"
+            className={`${s.printBtn} hit shrink-0 inline-flex items-center gap-1.5 rounded-full border border-cream/35 px-3 py-1 font-mono text-[11px] lowercase tracking-[0.04em] text-cream hover:bg-cream hover:text-ink disabled:opacity-60 disabled:hover:bg-transparent disabled:hover:text-cream transition-colors`}
+          >
+            <SpeakerIcon />
+            {label}
+            <span className="sr-only"> (plays a short printer sound)</span>
+          </button>
         </div>
+        <div className={s.slot} aria-hidden="true" />
+      </div>
 
-        <dl className="mt-4 m-0 border-t border-dashed border-grey/70 pt-1.5 font-mono">
-          {receiptLines.map((l) => (
-            <div key={l.label} className="flex items-baseline justify-between gap-4 py-1.5" data-copy="receipt">
-              <dt className="text-[13px] text-mid">
-                {l.label}
-                {l.note && <span className="block text-[11px] opacity-70">{l.note}</span>}
-              </dt>
-              <dd className="m-0 text-[15px] font-bold tabular-nums">{l.value}</dd>
+      <div className={s.feed}>
+        <div
+          key={run}
+          className={`${s.mover} ${feed === "armed" ? s.armed : ""} ${busy ? s.printing : ""}`}
+          onAnimationEnd={(e) => { if (e.target === e.currentTarget) setFeed("done"); }}
+        >
+          <div ref={paperRef} id="thai-receipt" className={`${s.paper} font-mono text-ink px-5 sm:px-6 pt-6`}>
+            <div className="text-center flex flex-col items-center gap-0.5 text-[12px] leading-snug" data-copy="receipt">
+              <span className="text-[15px] font-bold tracking-[0.06em]">A LOCAL THAI RESTAURANT</span>
+              <span>Google Search campaign</span>
+              <span>Jan 27 to Mar 3, 2026</span>
+              <span>order #012726</span>
             </div>
-          ))}
-          <div className="mt-1.5 pt-2.5 border-t-2 border-ink" data-copy="receipt">
-            <div className="flex items-baseline justify-between gap-4">
-              <dt className={`${s.app} text-[15px] font-extrabold uppercase tracking-[0.04em]`}>Total spent</dt>
-              <dd className={`${s.app} m-0 text-[30px] font-extrabold tracking-[-0.03em] tabular-nums text-oxblood`}>$310.10</dd>
-            </div>
-            <p className="text-[11px] text-mid">Budget $250, raised with the owner’s OK</p>
-          </div>
-        </dl>
 
-        <div className="mt-4 border-t border-dashed border-grey/70 pt-3 flex flex-wrap items-center gap-x-3 gap-y-2" data-copy="receipt">
-          <h3 className="font-mono text-[11px] uppercase tracking-[0.1em] text-mid">prepared with</h3>
-          <div className="flex flex-wrap gap-1.5">
-            {tools.map((t) => <span key={t} className="text-[12px] font-bold border border-line rounded-full px-2.5 py-1">{t}</span>)}
+            <hr className={s.rule} />
+
+            <dl className="m-0 text-[13px] leading-snug">
+              {receiptLines.map((l) => (
+                <div key={l.label} className="py-[3px]" data-copy="receipt">
+                  <div className="flex items-baseline">
+                    <dt className="shrink-0">{l.label}</dt>
+                    <span className={s.leader} aria-hidden="true" />
+                    <dd className="m-0 shrink-0 font-bold tabular-nums">{l.value}</dd>
+                  </div>
+                  {l.note && <span className="block text-[11px] opacity-70">{l.note}</span>}
+                </div>
+              ))}
+            </dl>
+
+            <hr className={s.rule} />
+
+            <div data-copy="receipt">
+              <div className="flex items-baseline">
+                <span className="shrink-0 text-[14px] font-bold tracking-[0.06em]">TOTAL SPENT</span>
+                <span className={s.leader} aria-hidden="true" />
+                <span className="shrink-0 text-[28px] font-bold tracking-[-0.03em] tabular-nums text-oxblood">$310.10</span>
+              </div>
+              <p className="mt-0.5 text-[11px] leading-snug">Budget $250, raised with the owner’s OK</p>
+            </div>
+
+            <hr className={s.rule} />
+
+            <div className="text-[12px] leading-snug" data-copy="receipt">
+              <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.1em]">Prepared with</h3>
+              <ul className="mt-1">
+                {tools.map((t) => <li key={t}>{t}</li>)}
+              </ul>
+            </div>
+
+            <hr className={s.rule} />
+
+            <div className="flex flex-col items-center gap-2 pb-2 text-center" data-copy="receipt">
+              <span className="text-[12px] font-bold tracking-[0.12em]">THANK YOU FOR YOUR ORDER</span>
+              <span className={s.barcode} aria-hidden="true" />
+              <span className="text-[10px] tracking-[0.3em]">012726</span>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div className="h-4" />
+      <div className="mt-3 text-center">
+        <button
+          type="button"
+          onClick={printCopy}
+          className="hit font-mono text-[13px] font-medium lowercase tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep"
+        >
+          print a copy
+        </button>
       </div>
     </div>
   );

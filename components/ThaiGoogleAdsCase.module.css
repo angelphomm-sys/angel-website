@@ -1,5 +1,5 @@
 /* The takeout-app pieces this case study needs and Tailwind does not say cleanly:
-   the store banner's dot grid and wash, the receipt's torn edge, the tracker's pulse, and the car on the map. */
+   the store banner's dot grid and wash, the receipt printer and its paper, the tracker's pulse, and the car on the map. */
 
 .cover {
   background-color: var(--color-ink);
@@ -19,16 +19,156 @@
 .app { font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
 .mono, .app.mono, .app .mono { font-family: var(--font-mono); }
 
-/* A torn paper edge along the bottom of the receipt. */
-.receipt {
-  --tooth: 10px;
-  padding-bottom: calc(var(--tooth) + 8px);
+/* ── The receipt printer ──────────────────────────────
+   A small ink-black thermal printer with a paper slot along its bottom lip. The receipt hangs below it and,
+   when the printer first scrolls into view, feeds out of the slot in short jittery steps.
+   At rest (no JS, before hydration, reduced motion) the receipt is fully out; only .armed tucks it away. */
+
+.printer {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 10px;
+  border-radius: 18px 18px 12px 12px;
+  background-color: var(--color-ink);
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0) 45%),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.06) 1px, transparent 0);
+  background-size: 100% 100%, 6px 6px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 2px rgba(27, 22, 20, 0.12),
+    0 10px 24px rgba(27, 22, 20, 0.16);
+}
+
+/* The slot the paper comes out of: a dark slit with a lit lower edge. */
+.slot {
+  margin: 0 8px;
+  height: 9px;
+  border-radius: 5px;
+  background: #0a0605;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* The status light: an oxblood lamp that glows, and blinks while printing. */
+.lamp {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #c98a90 0, #7d3b43 45%, var(--color-oxblood) 80%);
+  box-shadow: 0 0 0 2px rgba(227, 224, 205, 0.12), 0 0 8px rgba(170, 72, 82, 0.7);
+}
+.blink { animation: live 0.45s ease-in-out infinite; }
+
+/* The printer hums while it prints. */
+.busy { animation: rattle 0.16s steps(2) infinite; }
+@keyframes rattle {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(0.6px); }
+}
+
+/* The paper's window: it starts under the slot, so anything above that line is hidden inside the printer.
+   Only the top is clipped; the sides and bottom leave room for the paper's shadow. */
+.feed {
+  position: relative;
+  z-index: 0;
+  margin: -9px 12px 0;
+  clip-path: inset(0 -32px -64px -32px);
+}
+
+.mover { filter: drop-shadow(0 1px 1px rgba(27, 22, 20, 0.08)) drop-shadow(0 8px 14px rgba(27, 22, 20, 0.12)); }
+.armed { transform: translateY(-100%); }
+.printing { animation: feed 2.6s ease-out both; }
+
+/* Line by line: a quick advance, a short hold, a hair of sideways jitter, the way a thermal head feeds paper. */
+@keyframes feed {
+  0% { transform: translate(0, -100%); }
+  3% { transform: translate(0.4px, -92.86%); }
+  6.7% { transform: translate(0, -92.86%); }
+  9.7% { transform: translate(-0.4px, -85.71%); }
+  13.4% { transform: translate(0, -85.71%); }
+  16.4% { transform: translate(0.6px, -78.57%); }
+  20.1% { transform: translate(0, -78.57%); }
+  23.2% { transform: translate(-0.6px, -71.43%); }
+  26.9% { transform: translate(0, -71.43%); }
+  29.9% { transform: translate(-0.6px, -64.29%); }
+  33.6% { transform: translate(0, -64.29%); }
+  36.6% { transform: translate(-0.6px, -57.14%); }
+  40.3% { transform: translate(0, -57.14%); }
+  43.3% { transform: translate(0.4px, -50%); }
+  47% { transform: translate(0, -50%); }
+  50% { transform: translate(-0.6px, -42.86%); }
+  53.7% { transform: translate(0, -42.86%); }
+  56.7% { transform: translate(-0.4px, -35.71%); }
+  60.4% { transform: translate(0, -35.71%); }
+  63.5% { transform: translate(-0.6px, -28.57%); }
+  67.1% { transform: translate(0, -28.57%); }
+  70.2% { transform: translate(-0.6px, -21.43%); }
+  73.9% { transform: translate(0, -21.43%); }
+  76.9% { transform: translate(0.6px, -14.29%); }
+  80.6% { transform: translate(0, -14.29%); }
+  83.6% { transform: translate(0.6px, -7.14%); }
+  87.3% { transform: translate(0, -7.14%); }
+  90.3% { transform: translate(-0.6px, 0); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Thermal paper: off-white, a faint shadow just under the slot, and a torn zigzag along the bottom. */
+.paper {
+  --tooth: 8px;
+  padding-bottom: calc(var(--tooth) + 12px);
+  background:
+    linear-gradient(180deg, rgba(28, 19, 16, 0.1), rgba(28, 19, 16, 0) 16px),
+    #fbfaf5;
   -webkit-mask:
     conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(var(--tooth) * 2) var(--tooth) repeat-x,
     linear-gradient(#000 0 0) top / 100% calc(100% - var(--tooth)) no-repeat;
   mask:
     conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(var(--tooth) * 2) var(--tooth) repeat-x,
     linear-gradient(#000 0 0) top / 100% calc(100% - var(--tooth)) no-repeat;
+}
+
+/* A dashed rule between blocks, as a thermal printer draws it. */
+.rule {
+  margin: 12px 0;
+  border: 0;
+  border-top: 1.5px dashed rgba(28, 19, 16, 0.5);
+}
+
+/* Dotted leaders between a label and its value: "Clicks ........ 230". */
+.leader {
+  flex: 1 1 auto;
+  min-width: 2ch;
+  margin: 0 0.6ch;
+  overflow: clip;
+  white-space: nowrap;
+  opacity: 0.45;
+}
+.leader::before { content: "........................................................................................................"; }
+
+/* A plain barcode: two offset bar patterns laid over each other so it does not repeat too obviously. */
+.barcode {
+  display: block;
+  width: min(220px, 80%);
+  height: 38px;
+  background:
+    repeating-linear-gradient(90deg, var(--color-ink) 0 2px, transparent 2px 4px, var(--color-ink) 4px 5px, transparent 5px 8px, var(--color-ink) 8px 11px, transparent 11px 13px, var(--color-ink) 13px 14px, transparent 14px 17px, var(--color-ink) 17px 19px, transparent 19px 23px),
+    repeating-linear-gradient(90deg, transparent 0 6px, var(--color-ink) 6px 7px, transparent 7px 20px, var(--color-ink) 20px 21px, transparent 21px 31px);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* "print a copy" clones the receipt onto the body; print shows only that clone. */
+.printCopy { display: none; }
+@media print {
+  :global(html.receipt-only) body > *:not(.printCopy) { display: none !important; }
+  :global(html.receipt-only) .printCopy {
+    display: block;
+    width: 76mm;
+    margin: 0 auto;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
 
 /* The current step on the tracker breathes, the way a live order does. */
@@ -59,4 +199,7 @@
 @media (prefers-reduced-motion: reduce) {
   .live { animation: none; }
   .car { animation: none; }
+  .blink, .busy, .printing { animation: none; }
+  .armed { transform: none; }
+  .printBtn { display: none; }
 }
