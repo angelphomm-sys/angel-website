@@ -1,10 +1,9 @@
 "use client";
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
-import * as amplitude from "@amplitude/unified";
 
-// Amplitude: autocapture (clicks, page views, form interactions) + session replay.
+// Amplitude: autocapture (clicks, page views, form interactions) + session replay on 10% of sessions.
 // Runs client-side only. Separate from components/Analytics.tsx, which is GA4.
+// The SDK is imported inside the effect, after the key check, so a build with no key never downloads it.
 const API_KEY = process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY ?? "";
 
 // Module scope, so initAll runs exactly once for the life of the app even though
@@ -12,22 +11,17 @@ const API_KEY = process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY ?? "";
 let started = false;
 
 export function Amplitude() {
-  const pathname = usePathname();
-
   useEffect(() => {
     if (!API_KEY) {
       console.warn("Amplitude API key missing, analytics disabled");
       return;
     }
-    if (!started) {
-      started = true;
-      amplitude.initAll(API_KEY, { analytics: { autocapture: true }, sessionReplay: { sampleRate: 1 } });
-    }
-    // The landing page. Events fired before init finishes are queued by the SDK.
-    if (pathname === "/") {
-      amplitude.track('Viewed Home Page', { prompt_version: 'BA400.4' }); // helps improve this setup flow. Safe to remove once you've verified the event lands
-    }
-  }, [pathname]);
+    if (started) return;
+    started = true;
+    import("@amplitude/unified").then((amplitude) => {
+      amplitude.initAll(API_KEY, { analytics: { autocapture: true }, sessionReplay: { sampleRate: 0.1 } });
+    });
+  }, []);
 
   return null;
 }

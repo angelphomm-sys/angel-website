@@ -1,0 +1,37 @@
+/* The takeout-app pieces this case study needs and Tailwind does not say cleanly:
+   the cover art dot grid, the receipt's torn edge, and the tracker's pulse. */
+
+.cover {
+  background-color: var(--color-ink);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.09) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* The takeout-app pieces speak in an app's plain sans, the way a delivery app would; the page frame around them
+   is in the site's faces (IvyOra, Benton Modern, Ballinger Mono). The kitchen ticket and receipt lines print in mono. */
+.app { font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
+.app.mono, .app .mono { font-family: var(--font-mono); }
+
+/* A torn paper edge along the bottom of the receipt. */
+.receipt {
+  --tooth: 10px;
+  padding-bottom: calc(var(--tooth) + 8px);
+  -webkit-mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(var(--tooth) * 2) var(--tooth) repeat-x,
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--tooth)) no-repeat;
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(var(--tooth) * 2) var(--tooth) repeat-x,
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--tooth)) no-repeat;
+}
+
+/* The current step on the tracker breathes, the way a live order does. */
+.live {
+  animation: live 1.8s ease-in-out infinite;
+}
+@keyframes live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live { animation: none; }
+}

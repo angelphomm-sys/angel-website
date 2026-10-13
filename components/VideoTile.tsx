@@ -13,11 +13,11 @@ export function VideoTile({ video, poster, alt, ratio = "4/5", className = "", l
       <Image src={poster} alt={alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className={`object-cover transition-opacity duration-300 ${playing ? "opacity-0" : "opacity-100"}`} />
       {video && <video ref={ref} src={video} muted loop playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />}
       {video && (
-        <span className="absolute top-3 left-3 inline-flex items-center gap-2 bg-ink/85 text-white rounded-full px-3 py-1.5 text-[11px] font-bold">
-          <span className={`w-2 h-2 rounded-full ${playing ? "bg-accent" : "bg-white/60"}`} />{playing ? "playing" : "hover to play"}
+        <span className="absolute top-3 left-3 inline-flex items-center gap-2 bg-ink/85 text-cream rounded-full px-3 py-1.5 text-[11px] font-bold">
+          <span className={`w-2 h-2 rounded-full ${playing ? "bg-accent" : "bg-card/60"}`} />{playing ? "playing" : "hover to play"}
         </span>
       )}
-      {label && <span className="absolute bottom-3 left-3 bg-white text-ink rounded-full px-3 py-1.5 text-[11px] font-bold">{label}</span>}
+      {label && <span className="absolute bottom-3 left-3 bg-cream text-ink rounded-full px-3 py-1.5 text-[11px] font-bold">{label}</span>}
     </div>
   );
 }

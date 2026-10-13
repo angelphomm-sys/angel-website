@@ -17,19 +17,19 @@ export function FixFirst({ options, verdict }: { options: Option[]; verdict?: st
     <div className="flex flex-col gap-5">
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {options.map((o) => (
-          <button key={o.id} type="button" onClick={() => choose(o.id)} className={`text-left rounded-3xl border-2 p-5 flex flex-col gap-2 transition-colors ${pick === o.id ? "bg-ink text-white border-ink" : "border-line hover:border-ink"}`}>
-            <span className="text-[18px] font-extrabold tracking-[-0.02em]">{o.label}</span>
-            <span className={`text-[13px] leading-snug ${pick === o.id ? "text-white/80" : "text-mid"}`}>{o.question}</span>
+          <button key={o.id} type="button" onClick={() => choose(o.id)} className={`text-left rounded-3xl border-2 p-5 flex flex-col gap-2 transition-colors ${pick === o.id ? "bg-accent text-cream border-ink" : "border-line hover:border-ink"}`}>
+            <span className="text-[18px] font-display font-normal tracking-[-0.01em]">{o.label}</span>
+            <span className={`text-[13px] leading-snug ${pick === o.id ? "text-cream/80" : "text-mid"}`}>{o.question}</span>
           </button>
         ))}
       </div>
       {chosen ? (
         <div className="bg-mist rounded-3xl p-6 flex flex-col gap-2 fade-in">
-          <span className="hand text-[24px] text-accent">you picked {chosen.label}.</span>
+          <span className="hand text-[17px] text-accent-deep">you picked {chosen.label}.</span>
           <p className="text-[15px] leading-relaxed">{verdict ?? "My pick lands here after the audit, with the reason. Your answer is counted, and the tally shows on the stats page. Come back in a few weeks and see if we agree."}</p>
         </div>
       ) : (
-        <p className="hand text-[22px] text-mid">pick one. it is remembered, and it is counted.</p>
+        <p className="hand text-[16px] text-mid">pick one. it is remembered, and it is counted.</p>
       )}
     </div>
   );

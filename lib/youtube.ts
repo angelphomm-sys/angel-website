@@ -16,5 +16,5 @@ export async function videoStats(ids: string[]): Promise<VideoStats[]> {
 
 // Videos shown on the stats page. Add IDs as work goes live.
 export const trackedVideos: { id: string; label: string; link: string }[] = [
-  { id: "ej_czc-ro38", label: "Throw the perfect party (Yoodlize)", link: "/case/yoodlize-party" },
+  { id: "ej_czc-ro38", label: "Throw the perfect party (Yoodlize)", link: "https://www.youtube.com/watch?v=ej_czc-ro38" },
 ];

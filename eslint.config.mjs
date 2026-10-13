@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Working files and scratch sources, not app code.
+    ".harness/**",
   ]),
 ]);
 

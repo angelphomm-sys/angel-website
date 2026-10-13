@@ -35,10 +35,10 @@ export type Sample = {
 
 export const samples: Sample[] = [
   {
-    slug: "jj-coffee-emails", title: "The three emails that follow a syrup order", brand: "JJ Coffee", origin: "concept", format: "email", lane: "brand",
-    shows: "A welcome flow written the way a barista talks: the recipe first, the second week, then the restock.",
-    frames: ["Email 1: the recipe card", "Email 2: the second week", "Email 3: the restock"],
-    tools: ["Canva", "Klaviyo"], related: { label: "the spec case study", href: "/case/jj-coffee-popup" },
+    slug: "jj-coffee-emails", title: "Savor Season: three fall emails", brand: "JJ Coffee", origin: "concept", format: "email", lane: "brand",
+    shows: "Morning, your way, together. A one-tap poll in the second email decides what the third one says.",
+    frames: ["Email 1: slow mornings are back", "Email 2: how do you take it?", "Email 3: bring your person"],
+    tools: ["HTML email", "Klaviyo"], related: { label: "the case study", href: "/case/jj-coffee-email" },
   },
   {
     slug: "jj-coffee-popup", title: "The Latte Bar: counter menu and take-home card", brand: "JJ Coffee", origin: "concept", format: "event", lane: "brand",
@@ -62,13 +62,13 @@ export const samples: Sample[] = [
     slug: "yoodlize-thumbnails", title: "Party-first vs app-first: the thumbnail pair", brand: "Yoodlize", origin: "internship", format: "ad", lane: "entertainment",
     shows: "The two variants from the split test, side by side, so the winning decision is visible in one glance.",
     frames: ["Variant A: app-first", "Variant B: party-first (winner)"],
-    tools: ["Canva", "YouTube Studio"], related: { label: "the case study", href: "/case/yoodlize-party" },
+    tools: ["Canva", "YouTube Studio"], related: { label: "the work page", href: "/work" },
   },
   {
     slug: "yoodlize-email", title: "Your weekend, rented", brand: "Yoodlize", origin: "concept", format: "email", lane: "entertainment",
     shows: "A browse-recovery email that sells the night, not the table, with a price and a distance.",
     frames: ["Browse-recovery email"],
-    tools: ["Canva", "Klaviyo"], related: { label: "the case study", href: "/case/yoodlize-party" },
+    tools: ["Canva", "Klaviyo"], related: { label: "the work page", href: "/work" },
   },
   {
     slug: "shyft-newsletter", title: "Friday Market Roundup, in the inbox", brand: "Shyft", origin: "concept", format: "email", lane: "brand",

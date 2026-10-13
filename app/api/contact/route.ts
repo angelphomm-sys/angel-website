@@ -15,6 +15,8 @@ export async function POST(req: Request) {
   const text = `Fit: ${fit}\nSource: ${source}\nName: ${name}\nEmail: ${email}\nCompany: ${company}\n\n${message}`;
   if (!key) {
     console.log(`[contact]\n${text}`);
+    // In production with no email key, never pretend the message was sent.
+    if (process.env.NODE_ENV === "production") return NextResponse.json({ error: `The form isn't connected yet. Email me at ${to} instead.` }, { status: 503 });
     return NextResponse.json({ message: "Got it. (Dev mode: message logged, not emailed.)" });
   }
   const r = await fetch("https://api.resend.com/emails", {

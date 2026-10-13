@@ -1,0 +1,162 @@
+/* Embracing Our Story. The page frame wears Angel's own look (app/globals.css): paper ground, near-black type, IvyOra Display heads, Benton Modern text, Ballinger Mono labels.
+   Only the work carries the campaign's identity: the posters, the posts, the phone shot, and the
+   Instagram profile mock-up. The profile is built in HTML, so its brand tokens and the campaign's
+   Archivo faces live on .profile alone and never reach the page text around it. */
+
+.root {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  overflow-x: clip;
+}
+.root img { display: block; max-width: 100%; height: auto; }
+.root a { color: inherit; }
+.root section { padding-block: 32px; position: relative; scroll-margin-top: 60px; }
+@media (min-width: 768px) { .root section { padding-block: 40px; } }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; position: relative; }
+/* The site's small label: Ballinger Mono, uppercase, tracked, near-black. */
+.eyebrow { font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink); }
+
+/* hero */
+.hero { position: relative; border-bottom: 1px solid var(--color-line); }
+.heroGrid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 44px; align-items: center; padding-block: 36px 48px; }
+.heroTitle { margin: 12px 0 0; font-size: var(--text-title, clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem)); line-height: 1.02; letter-spacing: -0.01em; font-family: var(--font-display); font-weight: 400; text-wrap: balance; }
+.sub { font-size: 20px; line-height: 1.35; max-width: 32ch; margin-top: 16px; }
+/* The countdown is one line of plain text, no pill. */
+.cd { margin-top: 22px; display: flex; align-items: center; gap: 10px; max-width: 100%; flex-wrap: wrap; }
+.cdDot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-oxblood); animation: blink 1.8s ease-in-out infinite; flex: none; }
+.cdLbl { font-size: 12px; font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+.cdVal { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+/* The poster scales to the screen height: 2:3 art, sized to what is left under the nav and the padding. */
+.art { position: relative; justify-self: center; width: min(100%, calc((100svh - 190px) * 2 / 3)); }
+.artMain { width: 100%; position: relative; z-index: 2; border-radius: 6px; box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18); transform: rotate(1.4deg); animation: floatEos 7s ease-in-out infinite; }
+.artPeek { position: absolute; z-index: 1; bottom: -26px; left: -40px; width: 132px; height: auto; border-radius: 5px; box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2); transform: rotate(-6deg); }
+@media (max-width: 820px) {
+  /* On a phone the nav above and the site's say-hi bar below both cover the screen, so the text
+     tightens and the poster takes the height that is left. */
+  .heroGrid { grid-template-columns: 1fr; gap: 18px; padding-block: 20px 28px; }
+  .sub { margin-top: 12px; font-size: 18px; }
+  .cd { margin-top: 14px; }
+  .cdLbl { font-size: 11px; }
+  .cdVal { font-size: 15px; }
+  .art { width: min(300px, calc((100svh - 520px) * 2 / 3)); min-width: 180px; }
+  .artPeek { display: none; }
+}
+
+/* marquee: a plain ticker in the site's type, ruled top and bottom */
+.marquee { overflow: hidden; white-space: nowrap; border-bottom: 1px solid var(--color-line); }
+.track { display: inline-block; padding: 12px 0; animation: scrollEos 30s linear infinite; }
+.track b { font-family: var(--font-display); font-weight: 400; font-size: 20px; letter-spacing: -0.01em; margin: 0 6px; }
+.track i { font-style: normal; margin: 0 18px; font-family: var(--font-mono); font-size: 13px; color: var(--color-oxblood); }
+.marquee:hover .track { animation-play-state: paused; }
+
+/* section heads, on the site's scale */
+.head { max-width: 62ch; }
+.head h2 { font-size: var(--text-h2, clamp(2rem, 1.6rem + 1.2vw, 2.5rem)); line-height: 1; letter-spacing: -0.01em; font-family: var(--font-display); font-weight: 400; margin: 10px 0 0; text-wrap: balance; }
+.head p { font-size: 17px; margin-top: 12px; max-width: 60ch; }
+
+/* tiles */
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 28px; }
+.tile { background: var(--color-card); border: 2px solid var(--color-line); border-radius: 24px; padding: 24px; }
+.tile .k { font-family: var(--font-mono); font-weight: 500; color: var(--color-oxblood); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+.tile h3 { font-family: var(--font-display); font-weight: 400; font-size: 26px; letter-spacing: -0.01em; line-height: 1.15; margin: 10px 0 8px; }
+.tile p { font-size: 16px; margin: 0; }
+.tile p i { font-style: normal; }
+.tileBig { font-family: var(--font-display); font-weight: 400; font-size: clamp(24px, 3vw, 30px); letter-spacing: -0.01em; line-height: 1.1; margin-top: 10px; }
+@media (max-width: 640px) { .tiles { grid-template-columns: 1fr; } }
+.tiles3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 820px) { .tiles3 { grid-template-columns: 1fr; } }
+.noteConcept { font-size: 14px; margin-top: 18px; }
+
+/* the day */
+.dayList { margin-top: 28px; border-top: 1px solid var(--color-line); }
+.dayRow { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 16px 8px; align-items: baseline; border-bottom: 1px solid var(--color-line); transition: background 0.3s; }
+.dayRow:hover { background: var(--color-mist); }
+.dayT { font-family: var(--font-display); font-weight: 400; font-size: 26px; letter-spacing: -0.01em; color: var(--color-oxblood); font-variant-numeric: tabular-nums; }
+.dayRow h3 { font-family: var(--font-display); font-weight: 400; font-size: 23px; letter-spacing: -0.01em; margin: 0 0 4px; }
+.dayRow p { margin: 0; font-size: 16px; }
+@media (max-width: 560px) { .dayRow { grid-template-columns: 1fr; gap: 4px; } }
+
+/* in context */
+/* The phone and the profile share one row on a wide screen, so the section fits one screen. */
+.ctx { display: flex; flex-wrap: wrap; gap: 28px 32px; justify-content: center; align-items: flex-start; }
+.ctxHead { flex: 1 1 100%; }
+.devices { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 360px; }
+.phoneImg { width: min(360px, 78vw); height: auto; filter: drop-shadow(0 24px 32px rgba(0, 0, 0, 0.18)); transition: transform 0.4s; }
+.phoneImg:hover { transform: translateY(-6px); }
+@media (min-width: 1100px) {
+  .ctx { flex-wrap: nowrap; justify-content: space-between; }
+  .ctxHead { flex: 1 1 0; min-width: 0; }
+}
+.devCap { width: 100%; text-align: center; font-size: 12px; font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* The Instagram profile mock-up: a piece of the work, so it keeps the campaign's own colors and type. */
+.profile {
+  --red: #f5300f;
+  --cream: #eadbc9;
+  --gold: #c79a44;
+  --ink: #241c18;
+  --brand: var(--font-eos-display), var(--font-eos-body), system-ui, sans-serif;
+  font-family: var(--font-eos-body), system-ui, -apple-system, sans-serif;
+  width: 270px; flex: none; max-width: 100%; margin: 0; background: #fff; color: #111; border-radius: 20px; overflow: hidden; border: 1px solid rgba(36, 28, 24, 0.14);
+}
+.pfTop { padding: 18px 18px 8px; display: flex; gap: 20px; align-items: center; }
+.pfAv { width: 78px; height: 78px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; flex: none; }
+.pfAv svg { width: 40px; color: var(--cream); }
+.pfStats { flex: 1; display: flex; justify-content: space-around; text-align: center; }
+.pfStats .n { font-weight: 800; font-size: 17px; }
+.pfStats .l { font-size: 12px; color: #555; }
+.pfBio { padding: 2px 18px 14px; font-size: 13px; line-height: 1.45; }
+.pfNm { font-weight: 700; }
+.pfLk { color: #2b4a86; }
+.pfGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.cell { position: relative; aspect-ratio: 1 / 1; overflow: hidden; container-type: inline-size; background: var(--red); color: var(--cream); }
+.cell img { width: 100%; height: 100%; object-fit: cover; }
+.tt { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8px; }
+.ttRed { background: var(--red); }
+.ttChar { background: #15110e; }
+.ttCream { background: var(--cream); color: var(--ink); }
+.ttB { font-family: var(--brand); font-size: min(20px, calc((100cqi - 16px) / 6)); line-height: 0.92; }
+.ttS { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 5px; }
+.ttRedInk { color: var(--red); }
+.ttInk { color: var(--ink); }
+.ttCr { width: 26px; color: var(--gold); }
+
+/* pieces */
+/* Phones: two columns. Wide screens: one row, scrolling inside itself, sized so the section fits one screen. */
+.gal { columns: 2; column-gap: 12px; margin-top: 24px; }
+.gal figure { break-inside: avoid; margin: 0 0 12px; border-radius: 12px; overflow: hidden; border: 1px solid var(--color-line); background: var(--color-paper); transition: transform 0.35s, box-shadow 0.35s; }
+.gal figure:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12); }
+.gal img { width: 100%; height: auto; }
+.gal figcaption { padding: 9px 12px; font-size: 11px; font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+@media (min-width: 821px) {
+  .gal { columns: auto; display: flex; gap: 12px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; padding-bottom: 10px; scrollbar-width: thin; }
+  .gal figure { flex: none; margin: 0; scroll-snap-align: start; }
+  .gal figure:hover { transform: none; box-shadow: none; }
+  .gal img { width: auto; height: clamp(260px, calc(100svh - 360px), 440px); }
+}
+
+/* closing */
+.close { border-top: 1px solid var(--color-line); }
+.close h2 { font-size: var(--text-h2, clamp(2rem, 1.6rem + 1.2vw, 2.5rem)); line-height: 1; letter-spacing: -0.01em; font-family: var(--font-display); font-weight: 400; margin: 10px 0 0; text-wrap: balance; }
+.close p { font-size: 18px; max-width: 52ch; margin-top: 14px; }
+.lao { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: 26px; color: var(--color-oxblood); letter-spacing: -0.01em; margin-top: 22px; }
+
+.foot { border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); padding-block: 24px; font-size: 14px; }
+.footIn { max-width: 1120px; margin: 0 auto; padding-inline: 20px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+.foot b { font-weight: 600; }
+
+/* reveal on scroll: only once the island has switched JS on */
+:global(html.eos-js) .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.3s ease, transform 0.3s ease; }
+:global(html.eos-js) .reveal[data-in] { opacity: 1; transform: none; }
+
+@keyframes floatEos { 0%, 100% { transform: rotate(1.4deg) translateY(0); } 50% { transform: rotate(1.4deg) translateY(-10px); } }
+@keyframes scrollEos { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .root *, .root *::before, .root *::after { animation: none !important; transition: none !important; }
+  :global(html.eos-js) .reveal { opacity: 1; transform: none; }
+}

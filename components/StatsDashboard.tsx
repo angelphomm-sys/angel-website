@@ -16,10 +16,10 @@ export type Dash = {
 
 const fmt = (n: number) => new Intl.NumberFormat("en-US").format(n);
 const fmtBy = (v: number, f: Objective["format"]) => (f === "pct" ? `${Math.round(v * 100)}%` : f === "s" ? `${Math.round(v)}s` : fmt(Math.round(v)));
-const PALETTE = ["#d3261a", "#f28c28", "#1b1614", "#b3aba4", "#e8c4bd", "#6d655f"];
+const PALETTE = ["#D9A441", "#1b1614", "#b3aba4", "#F2C9CC", "#6d655f"];
 
 function Pending({ children, live }: { children: React.ReactNode; live: boolean }) {
-  return <div className={`relative ${live ? "" : "opacity-60"}`}>{children}{!live && <span className="absolute top-0 right-0 text-[10px] font-bold uppercase tracking-[0.08em] text-mid bg-paper px-1">pending</span>}</div>;
+  return <div className={`relative ${live ? "" : "opacity-60"}`}>{children}{!live && <span className="absolute top-0 right-0 text-[10px] font-mono font-medium uppercase tracking-[0.08em] text-mid bg-paper px-1">pending</span>}</div>;
 }
 
 function Ring({ o, live }: { o: Objective; live: boolean }) {
@@ -72,22 +72,22 @@ function Bars({ rows, live, unit = "" }: { rows: Row[]; live: boolean; unit?: st
     <ul className="flex flex-col gap-2">
       {rows.map((r) => (
         <li key={r.label} className="grid grid-cols-[1fr_auto] gap-x-3 gap-y-0.5 items-baseline">
-          <span className="text-[13px] font-bold truncate">{r.href ? <Link href={r.href} className="hover:text-accent">{r.label}</Link> : r.label}{r.note && <span className="text-mid font-medium"> · {r.note}</span>}</span>
-          <span className="text-[12px] font-bold tabular-nums text-mid">{live ? `${fmt(r.value)}${unit}` : ""}</span>
+          <span className="text-[13px] font-bold truncate">{r.href ? <Link href={r.href} className="hover:text-accent-deep">{r.label}</Link> : r.label}{r.note && <span className="text-mid font-medium"> · {r.note}</span>}</span>
+          <span className="font-mono text-[12px] font-medium tabular-nums text-mid">{live ? `${fmt(r.value)}${unit}` : ""}</span>
           <div className="col-span-2 h-1.5 rounded-full bg-mist overflow-hidden">{live && <div className="h-full bg-accent rounded-full" style={{ width: `${Math.max(2, (r.value / top) * 100)}%` }} />}</div>
         </li>
       ))}
-      {rows.length === 0 && <li className="hand text-[20px] text-mid">nothing yet.</li>}
+      {rows.length === 0 && <li className="hand text-[15px] text-mid">nothing yet.</li>}
     </ul>
   );
 }
 
 function Big({ n, l, live }: { n: number | string; l: string; live: boolean }) {
-  return <div className="flex flex-col"><span className={`text-[40px] md:text-[48px] font-extrabold tracking-[-0.03em] leading-none ${live ? "text-accent" : "text-mid"}`}>{live ? (typeof n === "number" ? fmt(n) : n) : "·"}</span><span className="text-[12px] text-mid">{l}</span></div>;
+  return <div className="flex flex-col"><span className={`text-[40px] md:text-[48px] font-display font-normal tracking-[-0.01em] leading-none ${live ? "text-accent" : "text-mid"}`}>{live ? (typeof n === "number" ? fmt(n) : n) : "·"}</span><span className="text-[12px] text-mid">{l}</span></div>;
 }
 
 function Panel({ title, aside, children, className = "" }: { title: string; aside?: string; children: React.ReactNode; className?: string }) {
-  return <div className={`border-2 border-ink rounded-3xl p-5 md:p-6 flex flex-col gap-4 ${className}`}><div className="flex items-baseline justify-between gap-3"><h2 className="text-[13px] font-bold uppercase tracking-[0.1em] text-mid">{title}</h2>{aside && <span className="hand text-[18px] text-mid">{aside}</span>}</div>{children}</div>;
+  return <div className={`border-2 border-ink rounded-3xl p-5 md:p-6 flex flex-col gap-4 ${className}`}><div className="flex items-baseline justify-between gap-3"><h2 className="text-[13px] font-mono font-medium uppercase tracking-[0.1em] text-mid">{title}</h2>{aside && <span className="hand text-[13px] text-mid">{aside}</span>}</div>{children}</div>;
 }
 
 const TABS = [
@@ -104,10 +104,10 @@ export function StatsDashboard({ d }: { d: Dash }) {
   const avg = `${Math.floor(d.totals.avgSeconds / 60)}:${String(d.totals.avgSeconds % 60).padStart(2, "0")}`;
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex gap-1 overflow-x-auto border-y border-line py-3 [scrollbar-width:none]">
-        {TABS.map((t) => <button key={t.id} type="button" onClick={() => setTab(t.id)} className={`text-[13px] font-bold rounded-full px-4 py-2 whitespace-nowrap transition-colors ${tab === t.id ? "bg-ink text-white" : "text-mid hover:text-ink hover:bg-mist"}`}>{t.label}</button>)}
+      <div className="flex gap-1 overflow-x-auto border-y border-line py-2 [scrollbar-width:none]">
+        {TABS.map((t) => <button key={t.id} type="button" onClick={() => setTab(t.id)} className={`inline-flex items-center min-h-11 text-[13px] font-bold rounded-full px-4 py-2 whitespace-nowrap transition-colors ${tab === t.id ? "bg-accent text-cream" : "text-mid hover:text-ink hover:bg-mist"}`}>{t.label}</button>)}
       </div>
-      <p className="hand text-[24px] text-mid -mt-1">{TABS.find((t) => t.id === tab)?.line}</p>
+      <p className="hand text-[17px] text-mid -mt-1">{TABS.find((t) => t.id === tab)?.line}</p>
 
       {tab === "plan" && (
         <div className="grid gap-4 lg:grid-cols-3 fade-in">

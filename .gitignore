@@ -43,3 +43,9 @@ next-env.d.ts
 # Claude harness working state
 .harness*/
 !.env.example
+
+# Canva cover exports waiting for `npm run covers`. The README stays tracked.
+/covers-inbox/*.png
+/covers-inbox/*.jpg
+/covers-inbox/*.jpeg
+/covers-inbox/*.webp

@@ -1,10 +1,36 @@
 export const site = {
   name: "Angel Phommachan",
-  tagline: "Marketer · photographer · first-gen",
+  // The role, said the same way everywhere: header, home title, share cards, Person JSON-LD.
+  role: "Integrated marketer",
+  tagline: "Integrated marketer",
   description:
-    "Angel Phommachan is a brand strategist and content creator who designs moments people show up for: brand launches and pop-ups, release weeks, game days, and the community programs that make a city run. Experiential marketing, content strategy, and measurement. Utah Valley University, Woodbury School of Business.",
-  positioning: "A brand strategist who designs moments people show up for.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://angelphommachan.com",
+    "Angel Phommachan is an integrated marketer who writes, shoots, builds, and measures campaigns across paid search, email, social, and events. Utah Valley University, Woodbury School of Business.",
+  // Search-result length (140 to 155 characters). `description` above stays the long form for About and JSON-LD.
+  seoDescription:
+    "Angel Phommachan is an integrated marketer in Utah. I write it, shoot it, build it, and check the number, across paid search, email, social, and events.",
+  // The one-line positioning, shown under the role on home. Source: .harness/brand-platform.md. Provisional: Angel may swap it.
+  positioning: "I write it, shoot it, build it, and check the number. One person, the whole campaign.",
+  // The channels, under the hero. Every one has work behind it on the site.
+  skills: ["paid search", "email", "social", "events", "photography"],
+  // Why the work exists, and the four values that back it. Each value points at the piece that proves it.
+  mission: "Give people a clear reason to show up, and say it plainly enough that they do.",
+  values: [
+    { title: "Say it plainly.", line: "Short sentences, real nouns, no jargon. The blog is written the same way.", proof: { label: "read the blog →", href: "/blog" } },
+    { title: "One idea, every channel.", line: "Nine pieces, print and social, all pointing at one ask.", proof: { label: "see the campaign →", href: "/case/embracing-our-story" } },
+    { title: "Check the number.", line: "The menu sitelink on my Thai restaurant campaign drew a 24% click rate, the best of any ad piece.", proof: { label: "see the receipt →", href: "/case/thai-google-ads" } },
+    { title: "Build for the people in the room.", line: "I pitched the Hope Scholars marketing role, then built the Instagram, content pillars, and donor materials on my own.", proof: { label: "see Hope Scholars →", href: "/work#for-good" } },
+  ],
+  // How a campaign runs, start to finish. Four steps, one line each.
+  steps: [
+    { title: "Find the moment.", line: "When people already care." },
+    { title: "Build one idea.", line: "One line everything carries." },
+    { title: "Carry it through every channel.", line: "Search, email, social, print." },
+    { title: "Check the number.", line: "Set the target, then read it." },
+  ],
+  // What I am looking for, and when. Shown in the footer on every page.
+  goal: "Looking for social, content, and events work at CPG, entertainment, sports, and community brands. B.S. Digital Marketing, Utah Valley University, May 2027.",
+  // No trailing slash, so `${site.url}/path` never doubles it.
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://angelphommachan.com").replace(/\/+$/, ""),
   email: "angelphommachan@gmail.com",
   location: "Draper, Utah",
   socials: {
@@ -65,16 +91,50 @@ export type PostType = keyof typeof postTypes;
 export const nav = [
   { n: 1, label: "hello.", href: "/" },
   { n: 2, label: "work.", href: "/work" },
-  { n: 3, label: "blog.", href: "/blog" },
-  { n: 4, label: "about.", href: "/about" },
-  { n: 5, label: "say hi.", href: "/contact" },
+  { n: 3, label: "photography.", href: "/photography" },
+  { n: 4, label: "blog.", href: "/blog" },
+  { n: 5, label: "about.", href: "/about" },
 ] as const;
 
 export const workTypes = {
   "case-study": "case studies",
+  email: "email campaigns",
   content: "content",
   writing: "strategy & writing",
   "brand-web": "brand & web",
   photography: "photography",
 } as const;
 export type WorkType = keyof typeof workTypes;
+
+// /work is sorted by marketing discipline, in this order. Only disciplines with work show a group.
+export const disciplines = {
+  "paid-search": "paid search.",
+  email: "email.",
+  events: "events.",
+  "brand-campaign": "brand campaign.",
+  "landing-page": "landing page.",
+  photography: "photography.",
+  content: "content.",
+} as const;
+export type Discipline = keyof typeof disciplines;
+
+// A card's link, one verb per discipline, so a page of cards never repeats one line four times.
+export const workLinks: Record<Discipline, string> = {
+  "paid-search": "see the campaign →",
+  email: "see the emails →",
+  "brand-campaign": "see the campaign →",
+  "landing-page": "see the page →",
+  events: "see the event →",
+  photography: "see the photos →",
+  content: "see the posts →",
+};
+
+// Where a piece came from, shown on every card: paid client work, spec work, a self-initiated concept, or a class assignment.
+export const provenance = {
+  client: "client work",
+  spec: "spec work",
+  concept: "concept, self-initiated",
+  class: "school project",
+  "class-client": "class project, real client",
+} as const;
+export type Provenance = keyof typeof provenance;

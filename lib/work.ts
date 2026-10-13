@@ -1,4 +1,7 @@
-import type { Lane, WorkType } from "./site";
+import { disciplines, type Discipline, type Lane, type Provenance, type WorkType } from "./site";
+import { hasLiveSocial } from "./social";
+
+const disciplineOrder = Object.keys(disciplines) as Discipline[];
 
 // A visual slot. Give it a src, or a placeholder label to render a labelled empty frame until the real image exists.
 export type Visual = { src?: string; alt: string; caption?: string; placeholder?: string };
@@ -6,15 +9,39 @@ export type Visual = { src?: string; alt: string; caption?: string; placeholder?
 // One row of the measurement plan. For finished work: what was tracked. For concepts: what would be tracked, and the hypothesis.
 export type Measure = { metric: string; hypothesis: string; window: string; tool?: string };
 
+// A real image with its real pixel size, so it can be laid out without a crop.
+export type Shot = { src: string; alt: string; caption?: string; width: number; height: number };
+
 export type CaseStudy = {
   // Concept studies are unsolicited work. The disclaimer is shown at the top, always.
   concept?: { disclaimer: string };
+  // Client-confidential work. Shown at the top in the same place as a concept disclaimer.
+  disclosure?: string;
   // One plain sentence on why this kind of work is hard, before the brief starts.
   opener?: string;
-  brief: { ask: string; constraint: string; audience: string };
-  work: { text: string[]; visuals: Visual[]; beforeAfter?: { before: Visual; after: Visual; note?: string } };
-  decision: { call: string; why: string; tradeoff: string };
-  result: { numbers: string[]; measure?: Measure[]; screenshots?: Visual[]; links?: { label: string; href: string }[] };
+  // Optional. The finished page shown inline in a browser-style frame, so the work can be read on this
+  // page instead of behind a click out to the tool it was built in. With an embedUrl the frame holds the
+  // live page; without one it holds the screenshot at src. The link overrides the default open full size one.
+  // Videos play on the screenshot at their spots on the page, so it reads like the live site with no click.
+  // An overlay is a transparent cut of the screenshot (a headline, a product shot) that has to stay on top of a video.
+  // All video and overlay positions are percents of the screenshot's width and height.
+  pageFrame?: {
+    title?: string; src: string; alt: string; url: string; width: number; height: number; embedUrl?: string; link?: { label: string; href: string };
+    videos?: { src: string; poster: string; left: number; top: number; width: number; height: number }[];
+    overlays?: { src: string; left: number; top: number; width: number; height: number }[];
+  };
+  // Three sentences. Given images turn the part into what I was given: the starting material, shown side by side.
+  brief: { title?: string; ask: string; constraint: string; audience: string; given?: Shot[] };
+  // Optional. Leave it off when the parts after it already show the work.
+  work?: { text: string[]; visuals: Visual[]; beforeAfter?: { before: Visual; after: Visual; note?: string } };
+  // Optional. Leave it off when the call is already made inside the analysis.
+  decision?: { call: string; why: string; tradeoff: string };
+  // Optional. A read of the work itself, folded in from what would otherwise be a separate post.
+  // Renders as its own numbered part; body strings are paragraphs, and a [bracketed] one is a pending note.
+  // A section with an image renders as a two-column row: the text on the left, the image on the right.
+  analysis?: { title: string; intro?: string; sections: { heading: string; body: string[]; image?: Shot }[] };
+  // Optional. Leave it off when there are no numbers to report.
+  result?: { numbers: string[]; measure?: Measure[]; screenshots?: Visual[]; links?: { label: string; href: string }[] };
   differently: string[];
   role: string;
   tools: string[];
@@ -22,173 +49,333 @@ export type CaseStudy = {
 
 export type WorkItem = {
   slug: string; title: string; blurb: string; metric: string; channel: string; lane: Lane; type: WorkType;
+  // Search-only overrides for the case page's <title>, Open Graph title, and meta description (140 to 155 characters).
+  // The visible h1 and the card blurb keep `title` and `blurb`.
+  seoTitle?: string; seoDescription?: string;
+  // What /work groups by, and where the piece came from. `type` stays for older readers.
+  discipline: Discipline; provenance: Provenance;
+  // The one number or artifact line a card leads with. Falls back to `metric` when that already says it.
+  // Only real numbers already on the case page. Never an estimate.
+  proof?: string;
+  // Who the work was for, shown on the card beside the provenance. Hidden when the title already names it.
+  brand?: string;
   status?: "live" | "in-production" | "concept"; external?: string; post?: string; page?: string;
   // Filled in for items without a case study. Items with one derive these from the case study instead.
   client?: string; goal?: string; role?: string; tools?: string[]; result?: string;
-  preview: { video?: string; poster: string }; caseStudy?: CaseStudy;
+  // `focus` is the CSS object-position for the card's fixed-ratio crop, so tall artwork shows its best part.
+  preview: { video?: string; poster: string; focus?: string }; caseStudy?: CaseStudy;
 };
 
 // [brackets] and ___ both mean pending: the real thing has not been gathered yet.
 // A bracket names the missing piece, a blank holds a number. Never put an estimate in either one.
-export const work: WorkItem[] = [
+// The social card only shows once at least one post has its clip or slides; until then it stays off the site.
+const allWork: WorkItem[] = [
   {
-    slug: "yoodlize-party",
+    slug: "thai-google-ads",
+    discipline: "paid-search",
+    provenance: "class-client",
+    brand: "Local Thai restaurant",
+    // From the receipt on the case page: total conversions, click-through rate, average cost per click.
+    proof: "73 conversions \u00b7 5.6% click rate \u00b7 $2.21 a click",
     type: "case-study",
-    title: "“Throw the perfect party”",
-    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
-    metric: "Click-through rate lift: ___ · split test",
-    channel: "YouTube · paid",
-    lane: "entertainment",
-    post: "/blog/yoodlize-youtube-campaign",
-    preview: { poster: "/images/work/yoodlize-spot.jpg" },
+    title: "Google Ads for a Local Thai Restaurant",
+    seoDescription: "I built a Google Search campaign for a local Thai restaurant in Utah. In one month it drove 73 conversions at a 5.6% click-through rate from 109 clicks.",
+    blurb:
+      "I built a Google Search campaign for a local Thai restaurant in Utah. 73 conversions at a 5.6% click-through rate.",
+    metric: "73 conversions \u00b7 5.6% CTR",
+    channel: "Google Search \u00b7 paid",
+    lane: "brand",
+    client: "A local Thai restaurant in Utah",
+    goal: "Build a Google Search campaign to drive takeout orders and online ordering",
+    role: "Strategy, campaign build, keyword research, ad copy, and post-campaign analysis",
+    tools: [
+      "Google Ads",
+      "Google Analytics",
+      "Google Sheets",
+      "Google Keyword Planner",
+    ],
+    result:
+      "73 conversions at a 5.6% click-through rate from 109 clicks. A class project that the restaurant ran live.",
+    preview: { poster: "/images/work/thai-ads-poster.jpg", focus: "50% 100%" },
+    // Rendered by components/ThaiGoogleAdsCase.tsx, not by CaseStudyTemplate. Kept minimal on purpose:
+    // the page copy lives in that component, and this object only routes and gates the case study.
     caseStudy: {
-      opener: "Paid video is where opinions go to die. You can argue about an opening cut for a week, or you can run both and read the number on Friday.",
+      opener: "I built a Google Search campaign for a local Thai restaurant in Utah.",
       brief: {
-        ask: "Improve click-through and watch time on Yoodlize's YouTube video creative and grow the brand's YouTube and Instagram presence during the fall 2025 campaign.",
-        constraint: "A small paid budget, creative that already existed, and a four-month internship window.",
-        audience: "People planning a party or a trip who would rather rent the bounce house, the speaker, or the tables from a neighbor than buy them.",
+        ask: "Pick a local business. Build a Google Search campaign. Run it on a real budget.",
+        constraint:
+          "A small budget and a narrow geographic radius. Four weeks to build, present, and deliver a live campaign.",
+        audience:
+          "People in the area searching for Thai food, takeout, or the restaurant by name. Lunchtime intent. Mobile-first.",
       },
       work: {
         text: [
-          "Set up A/B tests on the spot's opening three seconds: an app-first explainer against a party-first payoff.",
-          "Tested thumbnails and titles against each other, kept winners, cut losers weekly.",
-          "Managed the Instagram and YouTube calendar so organic posts echoed what the paid creative said.",
-          "Analyzed campaign data each week and fed what worked back into the next round.",
+          "Ran a single Search campaign focused on takeout and online ordering. One campaign, tight keyword targeting, everything built around one action: get someone to the ordering page.",
+          "Targeted what someone in this area would actually type. Thai near me. Thai food near me. The restaurant\u2019s own name.",
+          "Wrote over a dozen headlines and pinned the restaurant\u2019s name to the first position so it appeared in every ad. The rest tested four angles: benefit, location, action, and specificity.",
+          "Set up sitelinks: one for online takeout ordering, one for the full menu with a direct link to the ordering platform, and one for the contact page.",
         ],
-        visuals: [
-          { src: "https://i.ytimg.com/vi/ej_czc-ro38/hqdefault.jpg", alt: "Throw the perfect party with Yoodlize", caption: "The spot on YouTube" },
-          { src: "/images/stock/dashboard.jpg", alt: "Placeholder for the YouTube Studio view of click-through rate by variant", caption: "[Replace with the YouTube Studio view: click-through rate by variant]" },
-        ],
+        visuals: [],
       },
       decision: {
-        call: "Open on the party, not the app.",
-        why: "Nobody wants to rent a table. They want the night to go well. The variant that showed the outcome first earned the click; the variant that explained the mechanics first lost people before the product appeared.",
-        tradeoff: "Less time explaining how Yoodlize works, which meant the landing page had to do that job. We accepted a slightly higher bounce on the page for a much better click rate on the ad.",
+        call: "Specificity over warmth. Lunch over dinner. Action over atmosphere.",
+        why: "Takeout is a convenience purchase. The people searching at noon want speed, not ambiance. Every element of the campaign was built to match that intent.",
+        tradeoff:
+          "Narrowing the message to lunch and takeout meant leaving dinner intent on the table.",
       },
       result: {
         numbers: [
-          "The party-first variant beat the app-first variant on click-through by ___ and on average view duration by ___. YouTube Ads export pending.",
-          "Channel subscriber growth over the internship: ___.",
-          "Organic posts that crossed ___ views: ___.",
+          "73 conversions at a 5.6% click-through rate in one month.",
+          "109 clicks from 2,000+ impressions.",
+          "61% of traffic from mobile devices.",
         ],
-        measure: [
-          { metric: "Click-through rate by variant", hypothesis: "Outcome-first beats product-first in the opening three seconds.", window: "Weekly, per test", tool: "YouTube Ads" },
-          { metric: "Average view duration", hypothesis: "The party-first cut holds people past the point where the product appears.", window: "Weekly, per test", tool: "YouTube Studio" },
-          { metric: "Landing page bounce", hypothesis: "Less explanation in the ad means the page has to do more. Watch that it does.", window: "Weekly", tool: "Google Analytics" },
-          { metric: "Subscribers and organic views", hypothesis: "Organic posts that echo the paid creative compound its reach.", window: "Monthly", tool: "YouTube Studio, Instagram insights" },
-        ],
-        links: [{ label: "Watch the spot", href: "https://www.youtube.com/watch?v=ej_czc-ro38" }],
       },
       differently: [
-        "Cut a vertical version first. The audience discovering a party-rental app is on Shorts and Reels.",
-        "Hold the last shot two seconds longer. It is the emotional peak and it was rushed.",
-        "Add a specific: a price and a distance beat \"everything you need.\"",
+        "Expand negative keywords to block recipe, job, and delivery app queries.",
+        "Schedule ads around lunch hours when intent peaks.",
+        "Test a separate dinner ad group.",
       ],
-      role: "Marketing and operations intern. Testing, analysis, and channel management. Creative produced with the Yoodlize team.",
-      tools: ["YouTube Ads", "YouTube Studio", "Instagram", "Google Sheets", "Canva"],
+      role: "Strategy, campaign build, keyword research, ad copy, and post-campaign analysis. A solo class project that the restaurant ran live.",
+      tools: [
+        "Google Ads",
+        "Google Analytics",
+        "Google Sheets",
+        "Google Keyword Planner",
+      ],
     },
   },
   {
-    slug: "jj-coffee-popup",
+    slug: "embracing-our-story",
+    discipline: "events",
+    provenance: "concept",
+    brand: "Pi Mai Lao",
+    proof: "nine pieces, print and social",
     type: "case-study",
-    title: "JJ Coffee: the pop-up and the email that follows it",
-    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
-    metric: "spec · experiential + email",
-    channel: "Pop-up · email · Instagram",
+    title: "Embracing Our Story",
+    seoTitle: "Lao New Year Campaign: Embracing Our Story",
+    seoDescription: "A concept campaign I built for Pi Mai Lao, the Lao New Year: a brand identity, print, and social for one free community day, each piece ending in one ask.",
+    blurb:
+      "A campaign that brands Pi Mai Lao, the Lao New Year, as one free community celebration a whole city plans its weekend around.",
+    metric: "concept · print and social",
+    channel: "Event · print & social",
+    lane: "nonprofit",
+    status: "concept",
+    preview: { poster: "/images/work/embracing-frame.jpg", focus: "50% 50%" },
+    // The case study itself is the bespoke page in components/EmbracingOurStoryCase.tsx.
+    // What stays here is only what the cards and the router need.
+    caseStudy: {
+      concept: {
+        disclaimer:
+          "A self-initiated concept. The event, the venue, and the organizer are invented. No brand hired me for this. I built it to show event marketing end to end.",
+      },
+      brief: {
+        ask: "Take Pi Mai Lao public. Brand one free community celebration so it reads like a real event, not a flyer taped to a door.",
+        constraint: "One audience, one action, and a system that works on a phone first and still prints as a poster. Self-directed, with no client.",
+        audience: "The Lao and Southeast Asian community first, then curious locals who love food and something to do.",
+      },
+      differently: [
+        "Test the ask with a real landing page and sign-up.",
+        "Shoot original photos, so the faces belong to this event.",
+        "Set Lao beside English on the key pieces.",
+      ],
+      role: "Concept campaign, self-initiated. Strategy, brand identity, social, and event marketing.",
+      tools: ["Adobe Express", "Canva", "Photoshop"],
+    },
+  },
+  {
+    slug: "jj-coffee-email",
+    discipline: "email",
+    provenance: "spec",
+    brand: "JJ Coffee Co",
+    proof: "3 emails, 5 versions, coded by hand",
+    type: "email",
+    title: "Slow Mornings",
+    seoTitle: "JJ Coffee Email Campaign: Slow Mornings",
+    seoDescription: "A fall email campaign I wrote and built for JJ Coffee Co as spec work. It sells a slow morning, not a syrup, across three emails and five versions.",
+    blurb:
+      "A three-email fall campaign for JJ Coffee Co that sells a slow morning, not a syrup.",
+    metric: "spec · 3 emails, 5 versions",
+    channel: "Email · lifecycle",
     lane: "brand",
     status: "concept",
-    goal: "Give the people who buy the syrups from far away what the Salt Lake line gets, and turn the at-home latte into a habit.",
-    result: "Spec work, so no results yet. The measurement plan is in the case study.",
-    preview: { poster: "/images/work/jj-coffee-poster.jpg" },
+    preview: { poster: "/images/work/jj-coffee-spread.jpg", focus: "50% 0%" },
+    // The case study itself is the bespoke page in components/JJCoffeeEmailCase.tsx.
+    // What stays here is only what the cards and the router need.
     caseStudy: {
-      opener: "A pop-up is the only marketing where you find out immediately. People walk up or they walk past, and nobody has to fill in a survey to tell you which.",
-      concept: { disclaimer: "JJ Coffee did not commission this. It is spec work built from public information: their site, their two shops, and their social channels. The brand, the syrups, and the founders are theirs." },
+      concept: {
+        disclaimer:
+          "Spec work. JJ Coffee Co didn't hire me. Photography: JJ Coffee Co product shots and credited stock from Unsplash and Pexels, used in a spec mockup. Their products and reviews are real. The offer, the code, the poll, and the design are mine; JJ runs no promo codes today, so SAVOR is a proposal, framed as a gift.",
+      },
       brief: {
-        ask: "JJ Coffee is two Utah shops, Orem and a Salt Lake City location that opened in December 2025 to a line out the door, and a line of barista-grade syrups sold online and shipped nationwide. The brief I set: give the people who buy the syrups from far away the thing the line in Salt Lake gets, and use email to make the at-home latte a habit, not a one-time order.",
-        constraint: "A small team that runs two shops. No agency budget. A product that is easy to ship and hard to explain: a syrup is a means to a drink, and the drink is the reason people care.",
-        audience: "Two people. The syrup buyer who has never stood in the shop: found the brand on TikTok, bought a bottle, and is not sure what to do with it on a Tuesday. And the local regular who will drive to a pop-up and post about it.",
-      },
-      work: {
-        text: [
-          "Audited the brand's public channels: the online store, the two shop listings, Instagram and TikTok, and what the welcome email says today. [screenshots, pending]",
-          "Designed a two-day pop-up, the Latte Bar, built for the city that orders the most syrup and has no shop: a counter, three drinks, every drink made with a syrup you can buy at the table, and a card that goes home with the bottle.",
-          "Wrote a three-email flow to follow the pop-up and to welcome every new syrup order: the recipe card email, the second-week email, and the restock email. Each one written the way the baristas talk, not the way a store talks.",
-          "Planned the social layer: a countdown, a day-of Story sequence, and a rule that every post shows a drink being made, never a bottle on a shelf.",
-          "Mocked up the pieces in Canva: the counter menu, the take-home card, the three emails, and the Story set.",
-        ],
-        visuals: [
-          { alt: "Audit: JJ Coffee channels today", placeholder: "[Audit screenshots: online store, welcome email, Instagram grid]" },
-          { alt: "The Latte Bar counter menu", placeholder: "[Canva mockup: the counter menu, three drinks, three syrups]" },
-          { alt: "The take-home card", placeholder: "[Canva mockup: the card that goes home with the bottle]" },
-          { alt: "Email 1: the recipe card", placeholder: "[Canva mockup: email 1, the recipe card]" },
-          { alt: "Email 2: the second week", placeholder: "[Canva mockup: email 2, the second week]" },
-          { alt: "Email 3: the restock", placeholder: "[Canva mockup: email 3, the restock]" },
-        ],
-        beforeAfter: {
-          before: { alt: "The welcome email today", placeholder: "[Screenshot: the current welcome email after a syrup order]" },
-          after: { alt: "The recipe card email", placeholder: "[Canva mockup: email 1, the recipe card]" },
-          note: "Before: an order confirmation. After: the barista telling you how to make the drink you came for.",
-        },
-      },
-      decision: {
-        call: "Sell the drink, not the syrup.",
-        why: "The line outside the Salt Lake shop is not for a bottle. It is for a specific latte made by a specific person. Everything in this concept moves that experience closer to the person who cannot get to the shop: the pop-up puts the drink in her hand, and the first email puts the recipe in her inbox before the bottle arrives. The syrup is the souvenir of the drink, not the product.",
-        tradeoff: "Fewer bottles sold at the pop-up counter than a straight retail table would sell. Accepted, because a bottle sold with a recipe gets used, and a bottle that gets used gets reordered.",
-      },
-      result: {
-        numbers: ["This is spec work, so there are no results yet. The plan below is what I would agree on with the founders before the first weekend."],
-        measure: [
-          { metric: "Pop-up walk-ins and drinks served", hypothesis: "A counter that makes drinks draws a line that a table of bottles does not.", window: "Both days, counted at the counter", tool: "Tally, square reports" },
-          { metric: "Syrup orders with the pop-up code", hypothesis: "People buy the syrup after the drink, not before.", window: "The weekend plus 14 days", tool: "Shopify" },
-          { metric: "Email 1 open and click", hypothesis: "A recipe from the barista beats a discount from the store.", window: "First 30 days of the flow", tool: "Klaviyo" },
-          { metric: "Reorder rate at 45 days", hypothesis: "Buyers who open the recipe email reorder at a higher rate than buyers who do not.", window: "45 days per cohort", tool: "Shopify, Klaviyo" },
-          { metric: "Tagged posts and Story mentions", hypothesis: "Drinks being made get posted. Bottles on shelves get scrolled.", window: "The weekend plus 7 days", tool: "Instagram, TikTok search" },
-        ],
+        ask: "Write the fall campaign the JJ Coffee Co signup promises: first access, a reason to open the next email, and a reason to visit a shop.",
+        constraint: "JJ's sells syrup, but nobody wants syrup. And not everyone on a Utah list drinks coffee.",
+        audience: "20s and 30s in Utah County and Salt Lake with full days. Their treat is a good drink, coffee or not.",
       },
       differently: [
-        "Test the recipe email on the existing list before building the pop-up. If the open rate does not move, the pop-up is the wrong first bet.",
-        "Ask the baristas to write the first draft of every email. My job is to edit, not to invent their voice.",
+        "Shoot original fall photos instead of using JJ's product shots.",
+        "Let JJ's bar sales data choose the four drinks.",
+        "Put the poll in the welcome email, so it runs on day one.",
+        "Price the Fall Set, the shipping on us, and the pumps on us with JJ's.",
       ],
-      role: "Concept, audit, strategy, email copy, measurement plan, and mockups. Solo, for this portfolio.",
-      tools: ["Canva", "Klaviyo", "Shopify", "Instagram", "Google Sheets"],
+      role: "Spec campaign, self-initiated. Strategy, copy, art direction, email design, and HTML build.",
+      tools: ["HTML and CSS email", "Klaviyo"],
     },
   },
   {
-    slug: "other-side-snacks",
-    type: "case-study",
-    title: "The Other Side Snacks",
-    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
-    metric: "● live · started Sept 2026",
-    channel: "Audit · strategy · mockups",
-    lane: "nonprofit",
-    status: "in-production",
-    page: "/projects/other-side-snacks",
-    client: "The Other Side Village (their snack brand)",
-    goal: "Audit the brand's site, social, and email, then propose what to fix first",
-    role: "Audit, strategy, and mockups. A class project done in public.",
-    tools: ["Google Analytics", "Canva", "Google Sheets"],
-    result: "status: ___ (audit in progress)",
-    preview: { poster: "/images/otherside/before-mobile.jpg" },
+    slug: "ghia-email",
+    discipline: "email",
+    provenance: "spec",
+    brand: "Ghia",
+    proof: "1 email \u00b7 three acts",
+    type: "email",
+    title: "Tonight, in Three Acts",
+    seoTitle: "Ghia Spec Email: Tonight, in Three Acts",
+    seoDescription: "A spec email I wrote and built for Ghia. It sells one evening in three acts, from happy hour to nightcap, and ends in one ask: the Apéritif Duo.",
+    blurb:
+      "A spec email for Ghia that sells one evening in three acts, from happy hour to nightcap.",
+    metric: "spec · 1 email",
+    channel: "Email · campaign",
+    lane: "brand",
+    status: "concept",
+    preview: { poster: "/images/work/ghia-email-poster.jpg", focus: "50% 0%" },
+    // The case study itself is the bespoke page in components/GhiaEmailCase.tsx.
+    // What stays here is only what the cards and the router need.
+    caseStudy: {
+      concept: {
+        disclaimer:
+          "Spec work. Not affiliated with or commissioned by Ghia, and never sent. The products, prices, and colors come from drinkghia.com. Every photo is my own or credited free-license stock, never Ghia's.",
+      },
+      brief: {
+        ask: "Write a Ghia email that sells the whole evening, from happy hour to nightcap, and gets someone to buy the Apéritif Duo.",
+        constraint: "One email, one action, no discount, no health claim, and no fact I could not find on Ghia's own site.",
+        audience: "People who drink and host, and want a weeknight dinner to feel like an occasion.",
+      },
+      differently: ["[Differently, pending: one thing you would change on the email now]"],
+      role: "Spec email, self-initiated. Strategy, copy, art direction, email design, and HTML build.",
+      tools: ["HTML and CSS email"],
+    },
   },
   {
-    slug: "first-gen-stories",
+    slug: "social-reels",
+    discipline: "content",
+    provenance: "client",
+    proof: "the posts, on the phone",
     type: "content",
-    title: "First-Generation Stories",
-    blurb: "[Project card, pending: my role, one result with a number if I have it, and what it proves]",
-    metric: "● shooting now",
-    channel: "Series · film",
+    title: "Social posts",
+    blurb: "Short videos I shot, cut, and posted for Hope Scholars, UVU Athletics, and Prime Collectives.",
+    metric: "posts: ___",
+    channel: "Instagram · TikTok",
     lane: "nonprofit",
-    status: "in-production",
-    client: "Hope Scholars, Utah Valley University",
-    goal: "Record first-generation students' stories as an interview series and a short film",
-    role: "Producer, interviewer, camera, and edit.",
-    tools: ["Camera", "Premiere Pro", "Lightroom"],
-    result: "status: ___ (shooting now)",
-    preview: { poster: "/images/hope/potluck-3.jpg" },
+    client: "Hope Scholars, UVU Athletics, Prime Collectives",
+    page: "/work/social",
+    preview: { poster: "/images/work/social-poster.jpg", focus: "50% 50%" },
+  },
+  {
+    slug: "kents-camera-castle-landing-page",
+    discipline: "landing-page",
+    provenance: "class",
+    brand: "Kent's Camera Castle",
+    proof: "goal: 5 orders a day",
+    type: "case-study",
+    title: "Kent's Camera Castle",
+    seoTitle: "Kent's Camera Castle Landing Page",
+    blurb: "I built Kent's Camera Castle a landing page with one job: turn a click on the store's winter ad into a HERO12 Black order. The goal: 5 orders a day.",
+    metric: "goal: 5 orders a day",
+    channel: "Landing page · Canva",
+    lane: "brand",
+    client: "Kent's Camera Castle, a class assignment for Digital Marketing 3660",
+    preview: { poster: "/images/work/kents-laptop.jpg", focus: "50% 50%" },
+    caseStudy: {
+      disclosure:
+        "A school project for Digital Marketing 3660, so there is no sales data. The store, the product, and the ad were given. The page, the copy, and the reasoning are mine.",
+      brief: {
+        title: "What I was given",
+        ask: "Replace a landing page that was not converting, using the seven principles of conversion-centered design.",
+        constraint: "Sell the HERO12 Black at $369.99, built in Canva.",
+        audience: "Skiers and snowboarders who came from a winter sports ad.",
+        given: [
+          {
+            src: "/images/work/landing-page/before.jpg",
+            alt: "The store's existing GoPro Hero 4 landing page",
+            caption: "The old page: still selling the Hero 4, lorem ipsum in the feature columns, one button that said \u201cPAY FOR IT.\u201d",
+            width: 874,
+            height: 1196,
+          },
+          {
+            src: "/images/work/landing-page/display-ad.jpg",
+            alt: "The display ad that sends people to the page",
+            caption: "The ad the page had to match.",
+            width: 1200,
+            height: 1200,
+          },
+        ],
+      },
+      pageFrame: {
+        title: "What I made",
+        src: "/images/work/landing-page/mockup-full.jpg",
+        alt: "The HERO12 Black landing page for Kent's Camera Castle, with its videos playing",
+        url: "canva.com · the live page",
+        width: 1440,
+        height: 3462,
+        link: { label: "open in Canva", href: "https://canva.link/kccgoproangelphomm" },
+        // Measured on the 1440 x 3462 screenshot. Each video is cropped to Canva's framing, so it only needs object-fit: cover.
+        // The second one is the turning camera-and-grip shot beside the three feature columns.
+        videos: [
+          { src: "/video/kents-camera-castle/hero.mp4", poster: "/video/kents-camera-castle/hero-poster.jpg", left: 57.2917, top: 0, width: 42.7083, height: 21.7215 },
+          { src: "/video/kents-camera-castle/product.mp4", poster: "/video/kents-camera-castle/product-poster.jpg", left: 72.8604, top: 24.576, width: 27.1396, height: 11.7164 },
+        ],
+        // The camera shot overlaps the hero video's left edge, so it is laid back over the video.
+        overlays: [
+          { src: "/video/kents-camera-castle/camera-overlay.png", left: 57.2917, top: 4.1306, width: 5.625, height: 6.4125 },
+        ],
+      },
+      analysis: {
+        title: "Three of the seven principles",
+        sections: [
+          {
+            heading: "Attention",
+            body: [
+              "One goal, one button, no navigation, nothing else to click.",
+            ],
+            image: { src: "/images/work/landing-page/sec-hero.jpg", alt: "The split hero: a black panel with the headline, price, and Buy Now button beside the snowboarder photo", width: 1440, height: 752 },
+          },
+          {
+            heading: "Clarity",
+            body: [
+              "Each feature card leads with the outcome in bold, then the spec.",
+            ],
+            image: { src: "/images/work/landing-page/sec-performance.jpg", alt: "The \u201cBuilt for the mountain\u201d three-card feature grid with the Product Specs line underneath", width: 1440, height: 704 },
+          },
+          {
+            heading: "Credibility",
+            body: [
+              "200+ verified 5-star Google reviews, three named quotes, and the Authorized GoPro\u00ae Reseller mark.",
+            ],
+            image: { src: "/images/work/landing-page/sec-reviews.jpg", alt: "The 5-star review section beside the In stock and Authorized GoPro Reseller card with its Buy Now button", width: 1440, height: 524 },
+          },
+        ],
+      },
+      differently: ["[Differently, pending: one thing you would change on the page now]"],
+      role: "Class project, solo. Strategy, layout, copy, and the write-up.",
+      tools: ["Canva", "Google Analytics 4"],
+    },
   },
 ];
+// The Ghia spec email waits on Angel's photos (the slots are listed in .harness/reports/ghia-email-images.md).
+// Until this is true, the ghia-email card, its case page, and its sitemap entry exist in development only;
+// a production build leaves them out and /case/ghia-email answers 404. Flip it once every slot is filled.
+export const ghiaImagesReady = false;
+const showUnfinished = process.env.NODE_ENV !== "production";
+
+export const work: WorkItem[] = allWork.filter(
+  (w) => (w.slug !== "social-reels" || hasLiveSocial) && (w.slug !== "ghia-email" || ghiaImagesReady || showUnfinished),
+);
 
 export const workByLane = (lane: Lane) => work.filter((w) => w.lane === lane);
 export const getWork = (slug: string) => work.find((w) => w.slug === slug);
 export const caseStudies = work.filter((w) => w.caseStudy);
+export const proofFor = (w: WorkItem) => w.proof ?? w.metric;
+// Work in `disciplines` order, stable within a discipline.
+export const byDiscipline = (items: WorkItem[] = work) =>
+  [...items].sort((a, b) => disciplineOrder.indexOf(a.discipline) - disciplineOrder.indexOf(b.discipline));
 export const linkFor = (w: WorkItem) => (w.caseStudy ? `/case/${w.slug}` : w.page ?? w.post ?? w.external);

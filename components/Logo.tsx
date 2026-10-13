@@ -1,37 +1,46 @@
-// The mark: a moment spreading outward. One solid point, two rings that widen to the right.
-// It reads as "something people gather around" and as a signal going out, which is the work.
-export function Mark({ size = 28, color = "currentColor", className }: { size?: number; color?: string; className?: string }) {
+// Angel's marks, traced from her identity sheet (public/brand/*.svg). Each file is one shape filled with currentColor.
+// They are drawn here as a CSS mask over a currentColor fill, so the mark takes whatever text color its parent sets
+// (cream on oxblood, near-black on paper) and the path data loads once, cached, instead of riding inline in every page.
+// Height comes from the className (h-*); the width follows from the file's own aspect ratio.
+
+const marks = {
+  monogram: { src: "/brand/ap-monogram.svg", ratio: "665.2 / 607.9" },
+  horizontal: { src: "/brand/ap-wordmark-horizontal.svg", ratio: "1963.4 / 181.7" },
+  stacked: { src: "/brand/ap-wordmark-stacked.svg", ratio: "1969.7 / 467.2" },
+} as const;
+
+export type MarkVariant = keyof typeof marks;
+
+/** One mark. Pass `label` when it stands alone; leave it off when a link around it already names it. */
+export function BrandMark({ variant, className = "", label }: { variant: MarkVariant; className?: string; label?: string }) {
+  const m = marks[variant];
+  const mask = `url(${m.src}) center / contain no-repeat`;
+  const a11y = label ? { role: "img" as const, "aria-label": label } : { "aria-hidden": true as const };
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" className={className} aria-hidden="true">
-      <circle cx="11" cy="16" r="5" fill={color} />
-      <path d="M18 8.5a10 10 0 0 1 0 15" stroke={color} strokeWidth="3" strokeLinecap="round" />
-      <path d="M23.5 4.5a15.5 15.5 0 0 1 0 23" stroke={color} strokeWidth="3" strokeLinecap="round" />
-    </svg>
+    <span
+      {...a11y}
+      className={`inline-block shrink-0 bg-current [forced-color-adjust:none] ${className}`}
+      style={{ aspectRatio: m.ratio, WebkitMask: mask, mask }}
+    />
   );
 }
 
-export function Logo({ className }: { className?: string }) {
+/** The circle badge from the sheet: the monogram on a solid round ground. Colors, size, and display come from className
+ *  (bg-*, text-*, w-*, h-*, and flex or inline-flex, so a caller can also hide it with hidden lg:flex). */
+export function MarkBadge({ className = "inline-flex", markClassName = "h-[58%]", label }: { className?: string; markClassName?: string; label?: string }) {
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className ?? ""}`}>
-      <Mark size={28} />
-      <span className="text-[17px] font-extrabold tracking-[-0.02em] leading-none">angel phommachan</span>
+    <span className={`items-center justify-center rounded-full shrink-0 ${className}`} {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true })}>
+      <BrandMark variant="monogram" className={`${markClassName} translate-x-[2%]`} />
     </span>
   );
 }
 
-// The mark with a photo showing through, for About.
-export function LogoKnockout({ src, size = 120 }: { src: string; size?: number }) {
+/** Monogram plus horizontal wordmark: the header lockup. The wordmark drops out on the narrowest phones; the monogram stays. */
+export function Logo({ className = "" }: { className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
-      <defs>
-        <mask id="mark-mask">
-          <rect width="32" height="32" fill="black" />
-          <circle cx="11" cy="16" r="5" fill="white" />
-          <path d="M18 8.5a10 10 0 0 1 0 15" stroke="white" strokeWidth="3" strokeLinecap="round" fill="none" />
-          <path d="M23.5 4.5a15.5 15.5 0 0 1 0 23" stroke="white" strokeWidth="3" strokeLinecap="round" fill="none" />
-        </mask>
-      </defs>
-      <image href={src} width="32" height="32" preserveAspectRatio="xMidYMid slice" mask="url(#mark-mask)" />
-    </svg>
+    <span className={`inline-flex items-center gap-2.5 md:gap-3 ${className}`}>
+      <BrandMark variant="monogram" className="h-9 md:h-10" />
+      <BrandMark variant="horizontal" className="h-[13px] md:h-[15px] max-[359px]:hidden" />
+    </span>
   );
 }

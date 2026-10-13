@@ -1,72 +1,50 @@
 "use client";
 import { useState } from "react";
 import { track } from "@/lib/analytics";
-import { sources } from "@/lib/inbound";
 
-const fits = ["internship", "part-time", "full-time", "photography", "just saying hi"];
-
+// Three fields and a send button. The API also accepts the older fit, company, and source fields, so nothing breaks.
 export function ContactForm() {
-  const [fit, setFit] = useState(fits[0]);
-  const [source, setSource] = useState("");
   const [state, setState] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [msg, setMsg] = useState("");
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setState("loading");
-    const fd = new FormData(e.currentTarget);
-    const body = Object.fromEntries(fd.entries());
+    const body = Object.fromEntries(new FormData(e.currentTarget).entries());
     try {
-      const r = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...body, fit, source }) });
+      const r = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       const j = await r.json();
       if (!r.ok) throw new Error(j.error ?? "Something went wrong");
-      setState("ok"); setMsg(j.message); track(`inbound_${source || "unknown"}`);
+      setState("ok"); setMsg(j.message); track("inbound_contact_form");
     } catch (err) {
       setState("error"); setMsg(err instanceof Error ? err.message : "Something went wrong");
     }
   }
 
-  if (state === "ok") return <div className="hand text-[30px] text-accent">{msg}</div>;
+  if (state === "ok") return <p className="text-[19px] font-bold text-accent-deep">{msg}</p>;
 
+  const field = "border-2 border-ink rounded-2xl bg-card px-4 py-3 text-[16px]";
+  const label = "text-[11px] font-mono font-medium uppercase tracking-[0.08em]";
   return (
     <form onSubmit={submit} className="flex flex-col gap-5">
-      <div className="flex flex-col gap-2">
-        <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-mid">this is about</span>
-        <div className="flex flex-wrap gap-2">
-          {fits.map((f) => (
-            <button type="button" key={f} onClick={() => setFit(f)} className={`text-[13px] font-bold border-2 border-ink rounded-full px-4 py-2.5 transition-colors ${fit === f ? "bg-ink text-white" : "hover:bg-mist"}`}>
-              {f}
-            </button>
-          ))}
-        </div>
+      <div className="grid gap-5 sm:grid-cols-2">
+      <label className="flex flex-col gap-1.5">
+        <span className={label}>Name</span>
+        <input name="name" required autoComplete="name" className={field} />
+      </label>
+      <label className="flex flex-col gap-1.5">
+        <span className={label}>Email</span>
+        <input name="email" type="email" required autoComplete="email" className={field} />
+      </label>
       </div>
       <label className="flex flex-col gap-1.5">
-        <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-mid">Your name</span>
-        <input name="name" required className="border-2 border-ink rounded-2xl bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-accent" />
+        <span className={label}>Message</span>
+        <textarea name="message" required rows={5} className={field} />
       </label>
-      <label className="flex flex-col gap-1.5">
-        <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-mid">Email</span>
-        <input name="email" type="email" required className="border-2 border-ink rounded-2xl bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-accent" />
-      </label>
-      <label className="flex flex-col gap-1.5">
-        <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-mid">Company or brand</span>
-        <input name="company" className="border-2 border-ink rounded-2xl bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-accent" />
-      </label>
-      <label className="flex flex-col gap-1.5">
-        <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-mid">How did you find me?</span>
-        <select name="source" value={source} onChange={(e) => setSource(e.target.value)} required className="border-2 border-ink rounded-2xl bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-accent">
-          <option value="" disabled>pick one</option>
-          {sources.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
-        </select>
-      </label>
-      <label className="flex flex-col gap-1.5">
-        <span className="text-[11px] font-bold uppercase tracking-[0.08em] text-mid">What are you building?</span>
-        <textarea name="message" required rows={5} className="border-2 border-ink rounded-2xl bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-accent font-serif text-lg" />
-      </label>
-      <button type="submit" disabled={state === "loading"} className="bg-ink text-white rounded-full py-4 text-[15px] font-bold hover:bg-mid transition-colors disabled:opacity-60">
-        {state === "loading" ? "sending…" : "send it →"}
+      <button type="submit" disabled={state === "loading"} className="self-start bg-accent text-cream rounded-full px-6 py-3.5 font-mono text-[14px] font-medium lowercase tracking-[0.02em] hover:bg-accent-deep transition-colors disabled:opacity-60">
+        {state === "loading" ? "sending…" : "send →"}
       </button>
-      {state === "error" && <p className="text-sm text-red-700">{msg}</p>}
+      {state === "error" && <p role="alert" className="text-base text-accent-deep">{msg}</p>}
     </form>
   );
 }
