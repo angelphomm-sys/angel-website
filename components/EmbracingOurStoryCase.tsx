@@ -3,8 +3,6 @@ import { Archivo, Archivo_Black } from "next/font/google";
 import { TrackView } from "./Track";
 import { CaseProgress } from "./CaseProgress";
 import { CaseCtaRow } from "./CaseStudyTemplate";
-import { SocialSpecRow } from "./SocialSpecRow";
-import type { SocialSpecPost } from "@/lib/social-spec";
 import s from "./EmbracingOurStoryCase.module.css";
 
 /* The campaign's own typefaces, used only inside the Instagram profile mock-up (a piece of the work,
@@ -15,9 +13,27 @@ const eosDisplay = Archivo_Black({ subsets: ["latin"], weight: "400", display: "
 
 const IMG = "/images/case/embracing-our-story";
 
+/* ── The crest ──────────────────────────────────────── */
+
+const crestProps = { fill: "none", stroke: "currentColor", strokeWidth: 2.4, strokeLinejoin: "round" } as const;
+
+// The open seal, for avatars and the grid tile.
+function CrestOpen({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 60 78" {...crestProps} aria-hidden="true">
+      <path d="M30 3 L30 16" /><circle cx="30" cy="20" r="3" />
+      <path d="M30 26 L52 48 L30 70 L8 48 Z" /><path d="M30 36 L44 48 L30 60 L16 48 Z" />
+    </svg>
+  );
+}
+
 /* ── Content ────────────────────────────────────────── */
 
 const SLUG = "embracing-our-story";
+
+const GRID_IMGS = ["announce", "food", "dance"];
+const GRID_IMGS_2 = ["textiles", "water"];
+
 
 // One description per piece, shared by the phase thumbnails, the Instagram grid, and the gallery.
 const ALT: Record<string, string> = {
@@ -47,33 +63,6 @@ const GALLERY = [
 
 
 
-// The four "what to expect" posts, shown in phones like the social spec row on /work.
-const feedBase = {
-  brand: "Embracing Our Story" as const,
-  handle: "embracing.ourstory",
-  format: "single image",
-  ratio: "1 / 1",
-  credit: "",
-  note: "Concept campaign I made. The event is invented.",
-};
-const FEED: SocialSpecPost[] = [
-  { ...feedBase, slug: "eos-food", title: "The Lao kitchen", src: `${IMG}/food.jpg`, alt: ALT.food,
-    caption: ["Sabaidee Pi Mai. Ring in the Lao New Year with us, April 17. Free, all welcome.", "#EmbracingOurStory"],
-    why: "Food is the easiest yes. It opens the series.",
-    strategy: { pillar: "What to expect", audience: "Lao families and their friends", resonates: "It shows the table people grew up around, so the invite feels like home." } },
-  { ...feedBase, slug: "eos-dance", title: "Dance and music", src: `${IMG}/dance.jpg`, alt: ALT.dance,
-    caption: ["Classical dance and the khaen, live on April 17. Bring the whole family.", "#EmbracingOurStory"],
-    why: "Culture first, so the city sees why it matters.",
-    strategy: { pillar: "What to expect", audience: "Second-generation youth and the wider city", resonates: "It puts tradition on stage, where newcomers can watch and ask." } },
-  { ...feedBase, slug: "eos-market", title: "Market and makers", src: `${IMG}/textiles.jpg`, alt: ALT.textiles,
-    caption: ["Handwoven silk, silver, and sweets from Lao makers. April 17.", "#EmbracingOurStory"],
-    why: "A reason to come early and stay.",
-    strategy: { pillar: "What to expect", audience: "Shoppers and local makers", resonates: "It turns the event into a morning out, not just a show." } },
-  { ...feedBase, slug: "eos-water", title: "Water blessing", src: `${IMG}/water.jpg`, alt: ALT.water,
-    caption: ["Song Nam, the water blessing, at 1:30. Everyone is welcome to take part.", "#EmbracingOurStory"],
-    why: "The heart of Pi Mai, saved for last.",
-    strategy: { pillar: "What to expect", audience: "Everyone, from elders to first-timers", resonates: "It invites people in, not just to watch." } },
-];
 
 /* ── The page ───────────────────────────────────────── */
 
@@ -139,7 +128,34 @@ export function EmbracingOurStoryCase() {
               <div className={s.eyebrow}>In context</div>
               <h2>How it shows up in the feed</h2>
             </div>
-            <SocialSpecRow posts={FEED} intro={null} />
+            <div className="flex justify-center">
+            <div className={s.profile}>
+              <div className={s.pfTop}>
+                <div className={s.pfAv}><CrestOpen /></div>
+                <div className={s.pfStats}>
+                  <div><div className={s.n}>9</div><div className={s.l}>posts</div></div>
+                </div>
+              </div>
+              <div className={s.pfBio}>
+                <div className={s.pfNm}>Embracing Our Story</div>
+                <div>A Pi Mai Lao Celebration · Lao New Year</div>
+                <div>Sat April 17 · 11–8 · Carterlane Pavilion, Orem UT</div>
+                <div className={s.pfLk}>→ Reserve your free spot</div>
+              </div>
+              <div className={s.pfGrid}>
+                {GRID_IMGS.map((f) => (
+                  <div key={f} className={s.cell}><Image src={`${IMG}/${f}.jpg`} alt={ALT[f]} width={1080} height={1080} sizes="140px" /></div>
+                ))}
+                <div className={s.cell}><div className={`${s.tt} ${s.ttChar}`}><CrestOpen className={s.ttCr} /><div className={s.ttS}>Sabaidee Pi Mai</div></div></div>
+                <div className={s.cell}><div className={`${s.tt} ${s.ttRed}`}><div className={s.ttB}>APRIL<br />17</div><div className={s.ttS}>11 – 8</div></div></div>
+                {GRID_IMGS_2.map((f) => (
+                  <div key={f} className={s.cell}><Image src={`${IMG}/${f}.jpg`} alt={ALT[f]} width={1080} height={1080} sizes="140px" /></div>
+                ))}
+                <div className={s.cell}><div className={`${s.tt} ${s.ttCream}`}><div className={`${s.ttS} ${s.ttRedInk}`}>Reserve</div><div className={`${s.ttB} ${s.ttInk}`}>FREE<br />SPOT</div></div></div>
+                <div className={s.cell}><div className={`${s.tt} ${s.ttRed}`}><div className={s.ttB}>EMBRACING<br />OUR STORY</div></div></div>
+              </div>
+            </div>
+            </div>
           </div>
         </section>
 

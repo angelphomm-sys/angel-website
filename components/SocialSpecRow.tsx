@@ -8,8 +8,9 @@ import { socialSpecIntro, socialSpecPosts, specBrandColor, type SocialSpecPost }
 // Spec Instagram posts, one phone each: a row that scrolls sideways on a phone (the next phone peeks in),
 // two by two on a tablet, and four across from 1280px. The row bleeds to the page edge on mobile,
 // so the parent should carry the usual px-5 gutter. Clicking a phone opens a dialog with the caption and the strategy.
-export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro }: { posts?: SocialSpecPost[]; intro?: string | null }) {
+export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro, single = false }: { posts?: SocialSpecPost[]; intro?: string | null; single?: boolean }) {
   const [open, setOpen] = useState<SocialSpecPost | null>(null);
+  const [idx, setIdx] = useState(0);
   const dialog = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLButtonElement | null>(null);
 
@@ -40,6 +41,26 @@ export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro
     <div className="flex flex-col gap-6">
       {intro && <p className="text-[18px] leading-relaxed max-w-[620px]">{intro}</p>}
 
+      {single ? (
+        <div className="flex flex-col items-center gap-4">
+          {(() => { const p = posts[idx]; return (
+            <>
+              <button type="button" className={s.open} style={{ maxWidth: "min(300px, calc((100svh - 260px) * 757 / 1558))" }} onClick={(e) => show(p, e.currentTarget)} aria-haspopup="dialog" aria-label={`${p.title}. Open the larger view`}>
+                <Phone post={p} />
+              </button>
+              <div className="flex flex-col gap-1 text-center max-w-[340px]">
+                <span className="text-[18px] font-display font-normal tracking-[-0.01em] leading-tight">{p.title}</span>
+                <span className="text-[15px] leading-relaxed text-mid">{p.why}</span>
+              </div>
+            </>
+          ); })()}
+          <div className="flex items-center gap-4">
+            <button type="button" className="hit w-11 h-11 rounded-full border-2 border-line flex items-center justify-center hover:border-ink" onClick={() => setIdx((idx + posts.length - 1) % posts.length)} aria-label="Previous post">←</button>
+            <span className="font-mono text-[13px] tabular-nums" aria-live="polite">{idx + 1} / {posts.length}</span>
+            <button type="button" className="hit w-11 h-11 rounded-full border-2 border-line flex items-center justify-center hover:border-ink" onClick={() => setIdx((idx + 1) % posts.length)} aria-label="Next post">→</button>
+          </div>
+        </div>
+      ) : (
       <ul className="flex gap-6 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 pb-2 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 xl:grid-cols-4 md:gap-x-10 md:gap-y-14 xl:gap-x-8 md:overflow-visible [scrollbar-width:none]">
         {posts.map((p) => (
           <li key={p.slug} className="shrink-0 w-[72vw] max-w-[300px] md:w-auto md:max-w-none snap-center flex flex-col items-center gap-4">
@@ -55,6 +76,7 @@ export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro
           </li>
         ))}
       </ul>
+      )}
 
       <dialog ref={dialog} className={s.dialog} onClose={onClose} aria-labelledby="spec-dialog-title" onClick={(e) => { if (e.target === e.currentTarget) close(); }}>
         {open && (
