@@ -39,7 +39,7 @@ const lines: Record<StepId, string> = {
   menu: "",
   built: "",
   worked: "",
-  result: "The restaurant ran it live for one month, and here is the receipt.",
+  result: "",
 };
 
 function OrderStatus() {
