@@ -38,7 +38,7 @@ const lines: Record<StepId, string> = {
   brief: "The goal: drive online takeout orders.",
   menu: "",
   built: "",
-  worked: "I watched which ads people clicked and which ones they skipped.",
+  worked: "",
   result: "The restaurant ran it live for one month, and here is the receipt.",
 };
 
