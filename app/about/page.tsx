@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/JsonLd";
 import Image from "next/image";
 import { YouTube } from "@/components/Media";
 import { Stack, Certifications } from "@/components/Stack";
+import { ResumePreview } from "@/components/ResumePreview";
 import { TrackLink } from "@/components/Track";
 import { ContactForm } from "@/components/ContactForm";
 import { Shelf } from "@/components/Shelf";
@@ -88,14 +89,7 @@ export default function About() {
           <TrackLink event="resume_download" href="/Angel_Phommachan_Resume.pdf" download className="self-start bg-accent text-cream rounded-full px-6 py-3.5 font-mono text-[14px] font-medium lowercase tracking-[0.02em] hover:bg-accent-deep transition-colors whitespace-nowrap">download my résumé (pdf) ↓</TrackLink>
           <a href="/Angel_Phommachan_Resume.pdf" target="_blank" rel="noopener noreferrer" className="hit font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep">open full size ↗</a>
         </div>
-        {/* A preview of both pages, rendered from the PDF. Re-export these two images whenever the PDF changes. */}
-        <div className="grid gap-5 md:grid-cols-2 max-w-[1100px]">
-          {[1, 2].map((n) => (
-            <a key={n} href="/Angel_Phommachan_Resume.pdf" target="_blank" rel="noopener noreferrer" className="block rounded-xl overflow-hidden border border-line bg-white shadow-[0_1px_2px_rgba(28,19,16,0.06),0_8px_24px_rgba(28,19,16,0.08)] hover:shadow-[0_2px_4px_rgba(28,19,16,0.08),0_12px_32px_rgba(28,19,16,0.12)] transition-shadow">
-              <Image src={`/images/resume/resume-page-${n}.jpg`} alt={`Page ${n} of Angel Phommachan's résumé`} width={1600} height={2071} sizes="(min-width: 1200px) 540px, (min-width: 768px) 45vw, 100vw" className="w-full h-auto" />
-            </a>
-          ))}
-        </div>
+        <ResumePreview />
       </Section>
     </div>
   );
