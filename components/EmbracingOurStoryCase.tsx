@@ -69,8 +69,6 @@ export function EmbracingOurStoryCase() {
               <div className={s.cd}>
                 <span className={s.cdDot} /><span className={s.cdLbl}>Sat, April 17 · Orem, Utah</span>
               </div>
-              {/* Said right beside the date, so nobody reads the event as real. */}
-              <p className={s.noteConcept}><b>Concept.</b> The event is invented.</p>
             </div>
             <div className={s.art}>
               <Image className={s.artMain} src={`${IMG}/poster.jpg`} alt="Embracing Our Story event poster" width={1000} height={1500} sizes="(max-width: 820px) 340px, 42vw" priority />
