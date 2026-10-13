@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { work, linkFor, proofFor, type WorkItem, type Visual, type Measure, type Shot } from "@/lib/work";
+import { work, linkFor, proofFor, type WorkItem, type Visual, type Measure, type Shot, byDiscipline } from "@/lib/work";
 import { lanes, disciplines } from "@/lib/site";
 import { VideoTile } from "./VideoTile";
 import { CaseProgress, CaseRail, CaseChips, type CaseStep } from "./CaseProgress";
@@ -9,14 +9,15 @@ import { Placeholder } from "./Placeholder";
 import { PageFrame } from "./PageFrame";
 import { showNotes } from "@/lib/notes";
 
-// The next piece of work in the order the work array sets, wrapping around at the end.
+// The next piece of work in /work order (by discipline), wrapping around at the end.
 // The order lives in the data, so nothing here is hardcoded to a slug.
 // Shared with ThaiGoogleAdsCase.tsx; it belongs in lib/work.ts once that file is free to edit.
 export function nextWork(slug: string): WorkItem | undefined {
-  const i = work.findIndex((w) => w.slug === slug);
+  const order = byDiscipline(work);
+  const i = order.findIndex((w) => w.slug === slug);
   if (i < 0) return undefined;
-  for (let k = 1; k <= work.length; k++) {
-    const w = work[(i + k) % work.length];
+  for (let k = 1; k <= order.length; k++) {
+    const w = order[(i + k) % order.length];
     if (w.slug !== slug && linkFor(w)) return w;
   }
   return undefined;

@@ -109,12 +109,12 @@ export type WorkType = keyof typeof workTypes;
 // /work is sorted by marketing discipline, in this order. Only disciplines with work show a group.
 export const disciplines = {
   "paid-search": "paid search.",
-  email: "email.",
-  events: "events.",
-  "brand-campaign": "brand campaign.",
   "landing-page": "landing page.",
+  email: "email.",
+  "brand-campaign": "brand campaign.",
   photography: "photography.",
   content: "content.",
+  events: "events.",
 } as const;
 export type Discipline = keyof typeof disciplines;
 

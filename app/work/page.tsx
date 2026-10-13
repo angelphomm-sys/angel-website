@@ -22,7 +22,7 @@ export default function Work() {
       <div className="flex flex-col gap-3">
         <h1 className="text-h1 font-display font-normal tracking-[-0.01em] leading-none"><span className="num" aria-hidden="true">2</span>work.</h1>
       </div>
-      {groups.map(({ d, items }) => (
+      {groups.filter(({ d }) => d !== "events").map(({ d, items }) => (
         <section key={d} id={d} className="pt-8 pb-6 flex flex-col gap-4 scroll-mt-20">
           <h2 className="text-h3 font-display font-normal tracking-[-0.01em] leading-none">{disciplines[d]}</h2>
           <ProjectList items={items} />
@@ -33,6 +33,13 @@ export default function Work() {
         <h2 className="text-h3 font-display font-normal tracking-[-0.01em] leading-none">social.</h2>
         <SocialSpecRow />
       </section>
+      {/* Events last: the Lao New Year concept closes the page. */}
+      {groups.filter(({ d }) => d === "events").map(({ d, items }) => (
+        <section key={d} id={d} className="pt-8 pb-6 flex flex-col gap-4 scroll-mt-20">
+          <h2 className="text-h3 font-display font-normal tracking-[-0.01em] leading-none">{disciplines[d]}</h2>
+          <ProjectList items={items} />
+        </section>
+      ))}
     </div>
   );
 }
