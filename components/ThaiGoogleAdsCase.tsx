@@ -131,7 +131,7 @@ const orderRows: { k: string; v: string; blank?: boolean }[] = [
   { k: "Client", v: "Family-owned Thai restaurant, Utah" },
   { k: "One action", v: "Place an online takeout order" },
   { k: "Deliver to", v: "Nearby searchers at lunch, mostly on a phone" },
-  { k: "Budget", v: "$200, narrow radius" },
+  { k: "Budget", v: "$200" },
   { k: "Order type", v: "Solo class project, run live" },
 ];
 
