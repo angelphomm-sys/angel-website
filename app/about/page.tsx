@@ -80,6 +80,10 @@ export default function About() {
         <Shelf books={shelf.filter((b) => b.kind === "book")} />
       </Section>
 
+      <Section title="on my screen." id="screen">
+        <Shelf books={shelf.filter((b) => b.kind === "film" || b.kind === "show")} />
+      </Section>
+
       <Section title="say hi." id="contact">
         <div className="max-w-[640px]"><ContactForm /></div>
       </Section>

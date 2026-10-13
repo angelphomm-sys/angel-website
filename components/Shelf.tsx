@@ -1,6 +1,6 @@
 import { showNotes } from "@/lib/notes";
 
-export type Book = { title: string; author?: string; kind: "book" | "film" | "album" | "campaign"; status?: string; why: string; color: string; ink?: string; reading?: boolean; cover?: string };
+export type Book = { title: string; author?: string; kind: "book" | "film" | "show" | "album" | "campaign"; status?: string; why: string; color: string; ink?: string; reading?: boolean; cover?: string };
 
 // Real covers as 3D books. Idle: a slight float. Hover: the book turns toward you and the cover opens to show what it taught her.
 // A [bracketed] title is a pending entry in lib/shelf.ts. It is never drawn as a book; while notes show
@@ -28,7 +28,7 @@ export function Shelf({ books: all, compact = false }: { books: Book[]; compact?
                   <img src={b.cover} alt={`${b.title} cover`} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex flex-col justify-between p-3">
-                    {b.kind === "film" && <span className="self-start text-[9px] font-bold uppercase tracking-[0.12em] border border-white/60 rounded px-1.5 py-0.5">film</span>}
+                    {b.kind !== "book" && <span className="self-start text-[9px] font-bold uppercase tracking-[0.12em] border border-white/60 rounded px-1.5 py-0.5">{b.kind}</span>}
                     <span className="text-[15px] font-display font-normal leading-tight tracking-[-0.01em]">{b.title}</span>
                   </div>
                 )}
