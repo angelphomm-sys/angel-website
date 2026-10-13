@@ -12,5 +12,4 @@ Photos are from Pexels, free to use under the Pexels License (pexels.com/license
 | bloom-nutrition-community-playbook | Esra Afşar | pexels.com/photo/refreshing-pink-drink-with-ice-cubes-in-hand-31540149/ | Pexels License | Bloom header SVG, bloomnu.com (white version, as in bloomnu-logo.svg) |
 | duolingo-social-media-strategy | MART PRODUCTION | pexels.com/photo/person-holding-black-iphone-5-9558700/ | Pexels License | Duolingo wordmark SVG, d35aaqx5ub95lt.cloudfront.net/images/f92d5f2f7d56636846861c458c0d0b6c.svg (duolingo.com) |
 | 10-brand-moments-people-showed-up-for-2026 | Collis Torrington | pexels.com/photo/confetti-at-concert-3216866/ | Pexels License | none |
-| 5-marketing-newsletters-that-teach-you-something | Artem Podrez | pexels.com/photo/a-person-in-white-long-sleeves-holding-a-cup-of-coffee-while-typing-on-her-cellphone-8512141/ | Pexels License | none |
 | first-gen-and-figuring-it-out | Angel Phommachan (own photo) | /images/me/lake.jpg | Angel's own | none |

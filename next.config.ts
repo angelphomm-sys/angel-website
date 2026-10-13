@@ -26,6 +26,7 @@ const nextConfig: NextConfig = {
       { source: "/case/rare-beauty-email", destination: "/work", permanent: true },
       { source: "/blog/rare-beauty-marketing-strategy", destination: "/blog", permanent: true },
       { source: "/blog/meet-angel", destination: "/blog", permanent: true },
+      { source: "/blog/5-marketing-newsletters-that-teach-you-something", destination: "/blog", permanent: true },
       { source: "/blog/how-to-write-a-brand-email-that-sounds-like-a-friend", destination: "/blog", permanent: true },
       { source: "/blog/why-experiential-marketing", destination: "/blog", permanent: true },
       // Crumbl spec email replaced by the Ghia spec email, 2026-10-06.

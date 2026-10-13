@@ -30,7 +30,6 @@ This folder is not under `public/`, so nothing in it is served on the site. Imag
 ## Post slugs
 
 - `10-brand-moments-people-showed-up-for-2026`
-- `5-marketing-newsletters-that-teach-you-something`
 - `behind-the-strategy-ghia`
 - `behind-the-strategy-graza`
 - `bloom-nutrition-community-playbook`

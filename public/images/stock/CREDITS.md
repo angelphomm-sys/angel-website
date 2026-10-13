@@ -34,8 +34,6 @@ In-post photos under `public/images/blog/<post-slug>/`. Each is credited in its 
 | blog/why-experiential-marketing/cover.jpg | Daniel Duarte | pexels.com/photo/crowd-on-festival-14670407/ | Pexels License | What Is Experiential Marketing? And Why I Want the Job |
 | blog/bloom-nutrition-community-playbook/1.jpg | BOA.vision | pexels.com/photo/people-waiting-in-a-line-to-buy-food-19168409/ | Pexels License | Bloom Nutrition Marketing Strategy: A Pop-Up Teardown |
 | blog/bloom-nutrition-community-playbook/3.jpg | Ketut Subiyanto | pexels.com/photo/two-friends-talking-to-each-other-while-holding-plastic-bottles-4881020/ | Pexels License | Bloom Nutrition Marketing Strategy: A Pop-Up Teardown |
-| blog/5-marketing-newsletters-that-teach-you-something/1.jpg | Pavel Danilyuk | pexels.com/photo/a-desk-with-a-laptop-and-a-cup-of-coffee-8111798/ | Pexels License | Best Marketing Newsletters: 5 That Teach a Skill |
-| blog/5-marketing-newsletters-that-teach-you-something/2.jpg | Paul Stam | pexels.com/photo/pepernoten-28168378/ | Pexels License | Best Marketing Newsletters: 5 That Teach a Skill |
 | blog/10-brand-moments-people-showed-up-for-2026/1.jpg | Zak Bentley | pexels.com/photo/crowd-of-people-standing-outdoors-2905996/ | Pexels License | Best Brand Activations of 2026: 10 That Drew Crowds |
 | blog/10-brand-moments-people-showed-up-for-2026/2.jpg | Max Fischer | pexels.com/photo/woman-smiling-while-holding-shopping-bags-5868275/ | Pexels License | Best Brand Activations of 2026: 10 That Drew Crowds |
 | blog/10-brand-moments-people-showed-up-for-2026/3.jpg | Jessica Monte | pexels.com/photo/close-up-of-human-hand-holding-multi-colored-bracelets-322674/ | Pexels License | Best Brand Activations of 2026: 10 That Drew Crowds |
