@@ -50,7 +50,7 @@ export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro
               <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{p.brand} · {p.format}</span>
               <span className="text-[18px] font-display font-normal tracking-[-0.01em] leading-tight">{p.title}</span>
               <span className="text-[15px] leading-relaxed text-mid">{p.why}</span>
-              <span className="text-[12px] leading-snug text-mid mt-1">Spec concept · not affiliated with {p.brand}</span>
+              {!p.note && <span className="text-[12px] leading-snug text-mid mt-1">Spec concept · not affiliated with {p.brand}</span>}
             </div>
           </li>
         ))}
@@ -60,7 +60,7 @@ export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro
         {open && (
           <div className={s.sheet}>
             <button type="button" className={s.close} onClick={close} autoFocus>close <span aria-hidden="true">×</span></button>
-            <div className={s.big}>
+            <div className={s.big} style={open.ratio ? { aspectRatio: open.ratio } : undefined}>
               <Image src={open.src} alt={open.alt} fill sizes="(min-width: 768px) 540px, 92vw" className="object-cover" />
             </div>
             <div className="flex flex-col gap-5">
@@ -80,8 +80,8 @@ export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro
                   <div><dt className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">Why it resonates</dt><dd>{open.strategy.resonates}</dd></div>
                 </dl>
               </div>
-              <p className="text-[13px] leading-snug text-mid">Spec concept · not affiliated with {open.brand}. {open.credit} No brand photography or logos.</p>
-              <Link href={open.post.href} className="hit text-[15px] font-semibold underline underline-offset-4 self-start">{open.post.label}</Link>
+              <p className="text-[13px] leading-snug text-mid">{open.note ?? `Spec concept · not affiliated with ${open.brand}. ${open.credit} No brand photography or logos.`}</p>
+              {open.post && <Link href={open.post.href} className="hit text-[15px] font-semibold underline underline-offset-4 self-start">{open.post.label}</Link>}
             </div>
           </div>
         )}
@@ -116,7 +116,7 @@ function Phone({ post }: { post: SocialSpecPost }) {
           <span className={s.handle}>{post.handle}</span>
           <svg className={s.more} viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8" /><circle cx="12" cy="12" r="1.8" /><circle cx="19" cy="12" r="1.8" /></svg>
         </div>
-        <div className={s.media}>
+        <div className={s.media} style={post.ratio ? { aspectRatio: post.ratio } : undefined}>
           <Image src={post.src} alt={post.alt} fill sizes="(min-width: 768px) 280px, 68vw" className="object-cover" />
           {post.slides && <span className={s.count} aria-hidden="true">1/{post.slides}</span>}
         </div>

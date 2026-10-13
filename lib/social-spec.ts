@@ -6,7 +6,7 @@
 // Figma file fVpD1JrzJ0zaTXmymFwSU2, page "social spec": one flat 1080x1350 frame per post (figmaNode); v1 sits in a retired section.
 // Rules: no brand logos, product, bottle, or tin photos; brand names are live type; every piece says "spec".
 
-export type SpecBrand = "Ghia" | "Graza" | "Fishwife";
+export type SpecBrand = "Ghia" | "Graza" | "Fishwife" | "Embracing Our Story";
 
 export type SocialSpecPost = {
   slug: string;              // ghia-1, graza-1, ...
@@ -25,7 +25,9 @@ export type SocialSpecPost = {
     resonates: string;       // why this post lands with them, in Angel's voice
   };
   credit: string;            // where the image came from, shown in the dialog
-  post: { href: string; label: string }; // Angel's breakdown the post echoes
+  post?: { href: string; label: string }; // Angel's breakdown the post echoes
+  ratio?: string;            // image aspect in the feed slot, default "4 / 5" (e.g. "1 / 1")
+  note?: string;             // replaces the default spec line in the dialog
   figmaNode?: string;        // frame id on the Figma "social spec" page (a flat render of the post)
 };
 
@@ -34,6 +36,7 @@ export const specBrandColor: Record<SpecBrand, { bg: string; fg: string }> = {
   Ghia: { bg: "#651c32", fg: "#fef6ee" },
   Graza: { bg: "#d1e030", fg: "#3c422e" },
   Fishwife: { bg: "#73c3f5", fg: "#16205b" },
+  "Embracing Our Story": { bg: "#ec2e0e", fg: "#f6efe3" },
 };
 
 const ghiaPost = { href: "/blog/behind-the-strategy-ghia", label: "read the Ghia breakdown →" };

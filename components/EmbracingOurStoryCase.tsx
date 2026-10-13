@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { Archivo, Archivo_Black } from "next/font/google";
-import { getWork } from "@/lib/work";
 import { TrackView } from "./Track";
 import { CaseProgress } from "./CaseProgress";
 import { CaseCtaRow } from "./CaseStudyTemplate";
+import { SocialSpecRow } from "./SocialSpecRow";
+import type { SocialSpecPost } from "@/lib/social-spec";
 import s from "./EmbracingOurStoryCase.module.css";
 
 /* The campaign's own typefaces, used only inside the Instagram profile mock-up (a piece of the work,
@@ -45,12 +46,38 @@ const GALLERY = [
 ];
 
 
+
+// The four "what to expect" posts, shown in phones like the social spec row on /work.
+const feedBase = {
+  brand: "Embracing Our Story" as const,
+  handle: "embracing.ourstory",
+  format: "single image",
+  ratio: "1 / 1",
+  credit: "",
+  note: "Concept campaign I made. The event is invented.",
+};
+const FEED: SocialSpecPost[] = [
+  { ...feedBase, slug: "eos-food", title: "The Lao kitchen", src: `${IMG}/food.jpg`, alt: ALT.food,
+    caption: ["Sabaidee Pi Mai. Ring in the Lao New Year with us, April 17. Free, all welcome.", "#EmbracingOurStory"],
+    why: "Food is the easiest yes. It opens the series.",
+    strategy: { pillar: "What to expect", audience: "Lao families and their friends", resonates: "It shows the table people grew up around, so the invite feels like home." } },
+  { ...feedBase, slug: "eos-dance", title: "Dance and music", src: `${IMG}/dance.jpg`, alt: ALT.dance,
+    caption: ["Classical dance and the khaen, live on April 17. Bring the whole family.", "#EmbracingOurStory"],
+    why: "Culture first, so the city sees why it matters.",
+    strategy: { pillar: "What to expect", audience: "Second-generation youth and the wider city", resonates: "It puts tradition on stage, where newcomers can watch and ask." } },
+  { ...feedBase, slug: "eos-market", title: "Market and makers", src: `${IMG}/textiles.jpg`, alt: ALT.textiles,
+    caption: ["Handwoven silk, silver, and sweets from Lao makers. April 17.", "#EmbracingOurStory"],
+    why: "A reason to come early and stay.",
+    strategy: { pillar: "What to expect", audience: "Shoppers and local makers", resonates: "It turns the event into a morning out, not just a show." } },
+  { ...feedBase, slug: "eos-water", title: "Water blessing", src: `${IMG}/water.jpg`, alt: ALT.water,
+    caption: ["Song Nam, the water blessing, at 1:30. Everyone is welcome to take part.", "#EmbracingOurStory"],
+    why: "The heart of Pi Mai, saved for last.",
+    strategy: { pillar: "What to expect", audience: "Everyone, from elders to first-timers", resonates: "It invites people in, not just to watch." } },
+];
+
 /* ── The page ───────────────────────────────────────── */
 
 export function EmbracingOurStoryCase() {
-  const item = getWork(SLUG);
-  const differently = item?.caseStudy?.differently ?? [];
-
   return (
     <>
       <CaseProgress />
@@ -108,36 +135,15 @@ export function EmbracingOurStoryCase() {
         {/* ── In context ──────────────────────────────── */}
         <section id="social">
           <div className={s.wrap}>
-            <div className={s.ctx}>
-            <div className={`${s.head} ${s.ctxHead}`}>
+            <div className={s.head}>
               <div className={s.eyebrow}>In context</div>
               <h2>How it shows up in the feed</h2>
             </div>
-            <div className={s.devices}>
-              <Image className={s.phoneImg} src={`${IMG}/phone-post.png`} alt="The Lao kitchen post in the Instagram feed, on a phone" width={811} height={1612} sizes="(max-width: 820px) 300px, 360px" />
-              <div className={s.devCap}>The Lao kitchen post, in the feed</div>
-            </div>
-
-            </div>
+            <SocialSpecRow posts={FEED} intro={null} />
           </div>
         </section>
 
       </div>
-
-      {/* ── Back on paper: what I would change, then where to next ── */}
-      {differently.length > 0 && (
-        <section id="differently" className="mx-auto max-w-[1440px] px-5 md:px-20 pt-12 md:pt-16 pb-4 scroll-mt-16 flex flex-col gap-4">
-          <h2 className="text-[28px] md:text-[34px] tracking-[-0.01em] leading-tight">What I would do differently</h2>
-          <ol className="flex flex-col gap-2.5 max-w-[760px]">
-            {differently.map((d, i) => (
-              <li key={d} className="flex gap-3 items-baseline">
-                <span className="font-mono text-[11px] font-medium tabular-nums text-accent-deep shrink-0">{String(i + 1).padStart(2, "0")}</span>
-                <span className="text-[16px] leading-relaxed">{d}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
 
       <div className="mx-auto max-w-[1440px] px-5 md:px-20 py-10 md:py-14 flex flex-col gap-10">
         <CaseCtaRow slug={SLUG} concept />
