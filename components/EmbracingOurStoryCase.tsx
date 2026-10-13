@@ -107,7 +107,6 @@ export function EmbracingOurStoryCase() {
         <section id="pieces">
           <div className={s.wrap}>
             <div className={s.head}>
-              <div className={s.eyebrow}>The pieces</div>
               <h2>The full set</h2>
             </div>
             <div className={s.gal}>
