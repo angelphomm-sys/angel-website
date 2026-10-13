@@ -36,7 +36,7 @@ const stepIds: string[] = steps.map((x) => x.id);
 // The one sentence each step gets. The first one is the goal.
 const lines: Record<StepId, string> = {
   brief: "The goal: drive online takeout orders.",
-  menu: "I bid on what someone nearby would actually type.",
+  menu: "",
   built: "At noon people want speed, not ambiance, so I wrote every ad for noon.",
   worked: "I watched which ads people clicked and which ones they skipped.",
   result: "The restaurant ran it live for one month, and here is the receipt.",
@@ -107,7 +107,7 @@ function SectionHead({ id, chip = true }: { id: StepId; chip?: boolean }) {
         <h2 className="text-[30px] md:text-[38px] leading-tight">{step.title}</h2>
       </div>
       {chip && <Chip>{step.chip}</Chip>}
-      <p className="basis-full text-[16px] leading-snug text-mid">{lines[id]}</p>
+      {lines[id] && <p className="basis-full text-[16px] leading-snug text-mid">{lines[id]}</p>}
     </div>
   );
 }
