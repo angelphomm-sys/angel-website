@@ -1,6 +1,6 @@
 # On my screen: image sources
 
-Posters from The Movie Database (themoviedb.org), shown small as a favorites list. This product uses the TMDB API but is not endorsed or certified by TMDB.
+Poster images via The Movie Database (themoviedb.org), shown small as a favorites list. Not endorsed by TMDB.
 
 | File | Title | Rights holder |
 |---|---|---|
