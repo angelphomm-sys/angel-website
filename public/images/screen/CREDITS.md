@@ -1,7 +1,9 @@
 # On my screen: image sources
 
-| File | Source |
-|---|---|
-| peanut-butter-falcon.jpg | Theatrical poster, via Wikipedia (File:The Peanut Butter Falcon poster.jpeg). © Roadside Attractions / Armory Films. Shown small as a favorites list. |
-| howls-moving-castle.jpg | Theatrical poster, via Wikipedia (File:Howls-moving-castleposter.jpg). © Studio Ghibli. Shown small as a favorites list. |
-| severance.jpg | Made for this site: the Severance logo (Wikimedia Commons, File:Severance logo.svg) in white on a teal gradient. Severance © Apple TV+. |
+Posters from The Movie Database (themoviedb.org), shown small as a favorites list. This product uses the TMDB API but is not endorsed or certified by TMDB.
+
+| File | Title | Rights holder |
+|---|---|---|
+| peanut-butter-falcon.jpg | The Peanut Butter Falcon (2019) poster | Roadside Attractions / Armory Films |
+| howls-moving-castle.jpg | Howl's Moving Castle (2004) poster | Studio Ghibli |
+| severance.jpg | Severance series poster | Apple TV+ |
