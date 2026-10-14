@@ -11,7 +11,7 @@ import s from "./ThaiGoogleAdsCase.module.css";
 
 // This case study reads as one takeout order, start to finish, in the patterns a delivery app uses:
 // the store page, the cart (the brief), the menu (keywords and ads), the kitchen ticket (the build),
-// the driver on the way (what I watched), and the receipt with a tip screen (the results).
+// the driver on the way (what I watched), and the receipt with its tip lines (the results and what to do next).
 // Patterns only: no app's name, logo, or colors. The page keeps the site's palette and faces.
 // Privacy: the restaurant stays anonymous. Never its name, never its town.
 // data-copy marks row labels, row values, and receipt lines, so a word count of body copy can skip them.
@@ -424,11 +424,13 @@ const receiptLines = [
 
 // The receipt prints out of a small thermal printer. At rest (no JS, before hydration, reduced motion, a screenshot
 // tool that never scrolls) the receipt is fully out and readable. A client effect tucks it into the slot only once
-// the printer is about to scroll into view, then feeds it out when the printer is on screen. The button replays it.
+// the printer is about to scroll into view. Tapping the printer feeds it out with the printer sound (sound needs a
+// tap, so this is the only way to hear it). If nobody taps within a few seconds of seeing it, it prints on its own,
+// silently, so the results are never left hidden.
 type Feed = "rest" | "armed" | "printing" | "done";
 
 // The feed animation's length and its line count, from .printing and @keyframes feed in the module CSS.
-const FEED_SECONDS = 2.6;
+const FEED_SECONDS = 3.2;
 const FEED_LINES = 14;
 
 // A thermal receipt printer, synthesized with Web Audio: no audio file, nothing to license.
@@ -533,8 +535,21 @@ function scheduleReceiptSound(ctx: BaseAudioContext, dest: AudioNode, t0: number
 }
 // sound:end
 
+// A recorded receipt printer, when public/sounds/receipt-printer.mp3 exists. Until then (or if it fails to load),
+// the synthesized printer above plays instead.
+const PRINTER_MP3 = "/sounds/receipt-printer.mp3";
 let audioCtx: AudioContext | null = null;
 function playPrinterSound() {
+  try {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const a = new Audio(PRINTER_MP3);
+    a.volume = 0.6;
+    a.play().catch(() => playSynthPrinter());
+  } catch {
+    playSynthPrinter();
+  }
+}
+function playSynthPrinter() {
   try {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
@@ -548,19 +563,8 @@ function playPrinterSound() {
   }
 }
 
-// A tiny speaker, so the button says it makes a sound.
-function SpeakerIcon() {
-  return (
-    <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M2 6h3l4-3v10l-4-3H2Z" fill="currentColor" />
-      <path d="M11.5 5.5a3.5 3.5 0 0 1 0 5" />
-      <path d="M13.5 3.5a6.5 6.5 0 0 1 0 9" />
-    </svg>
-  );
-}
-
 function Receipt({ tools }: { tools: string[] }) {
-  const printerRef = useRef<HTMLDivElement>(null);
+  const printerRef = useRef<HTMLButtonElement>(null);
   const paperRef = useRef<HTMLDivElement>(null);
   const [feed, setFeed] = useState<Feed>("rest");
   const [run, setRun] = useState(0);
@@ -578,21 +582,22 @@ function Receipt({ tools }: { tools: string[] }) {
       arm.disconnect();
       setFeed((f) => (f === "rest" ? "armed" : f));
     }, { rootMargin: "0px 0px 35% 0px" });
-    // Print once most of the printer is on screen.
+    // Once most of the printer is on screen, wait for a tap; print on its own if none comes.
+    let timer: number | undefined;
     const go = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting || printed) return;
       printed = armed = true;
       arm.disconnect();
       go.disconnect();
-      setRun((n) => n + 1);
-      setFeed("printing");
+      setFeed((f) => (f === "rest" ? "armed" : f));
+      timer = window.setTimeout(() => setFeed((f) => { if (f !== "armed") return f; setRun((n) => n + 1); return "printing"; }), 6000);
     }, { threshold: 0.6 });
     arm.observe(el);
     go.observe(el);
-    return () => { arm.disconnect(); go.disconnect(); };
+    return () => { arm.disconnect(); go.disconnect(); window.clearTimeout(timer); };
   }, []);
 
-  const printAgain = () => { playPrinterSound(); setRun((n) => n + 1); setFeed("printing"); };
+  const print = () => { if (feed === "printing") return; playPrinterSound(); setRun((n) => n + 1); setFeed("printing"); };
 
   // A paper copy: clone the receipt onto the body, print only that clone, then remove it.
   const printCopy = () => {
@@ -610,32 +615,36 @@ function Receipt({ tools }: { tools: string[] }) {
   };
 
   const busy = feed === "printing";
-  const label = busy ? "printing…" : feed === "done" ? "print again" : "print receipt";
+  const label = busy ? "printing…" : feed === "armed" ? "tap to print" : "tap to reprint";
 
   return (
     <div className="mx-auto w-full max-w-[412px]">
-      <div ref={printerRef} className={`${s.printer} ${busy ? s.busy : ""}`}>
-        <div className="flex items-center justify-between gap-3 px-4 pt-3.5 pb-3">
+      {/* The whole printer is the button: tap it and the receipt prints, with the printer sound. */}
+      <button
+        ref={printerRef}
+        type="button"
+        onClick={print}
+        aria-controls="thai-receipt"
+        aria-label={`${label}: prints the results receipt with a printer sound`}
+        className={`${s.printer} ${busy ? s.busy : ""} block w-full text-left cursor-pointer`}
+      >
+        <span className="flex items-center justify-between gap-3 px-4 pt-3.5 pb-3">
           <span className="flex items-center gap-2 min-w-0 font-mono text-[11px] tracking-[0.06em] text-cream/85" data-copy="receipt">
-            <span className={`${s.lamp} ${busy ? s.blink : ""}`} aria-hidden="true" />
+            <span className={`${s.lamp} ${busy || feed === "armed" ? s.blink : ""}`} aria-hidden="true" />
             order #012726
           </span>
-          <button
-            type="button"
-            onClick={printAgain}
-            disabled={busy}
-            aria-controls="thai-receipt"
-            className={`${s.printBtn} hit shrink-0 inline-flex items-center gap-1.5 rounded-full border border-cream/35 px-3 py-1 font-mono text-[11px] lowercase tracking-[0.04em] text-cream hover:bg-cream hover:text-ink disabled:opacity-60 disabled:hover:bg-transparent disabled:hover:text-cream transition-colors`}
-          >
-            <SpeakerIcon />
-            {label}
-            <span className="sr-only"> (plays a short printer sound)</span>
-          </button>
-        </div>
-        <div className={s.slot} aria-hidden="true" />
-      </div>
+          <span className={`${s.printBtn} shrink-0 rounded-full border border-cream/35 px-3 py-1 font-mono text-[11px] lowercase tracking-[0.04em] text-cream`} aria-hidden="true">{label}</span>
+        </span>
+        <span className={`${s.slot} block`} aria-hidden="true" />
+      </button>
 
       <div className={s.feed}>
+        {/* While the paper waits in the printer, the empty space says what to do. */}
+        {feed === "armed" && (
+          <button type="button" onClick={print} className="absolute inset-x-0 top-8 z-[1] mx-auto w-fit font-mono text-[12px] lowercase tracking-[0.04em] text-mid hover:text-ink" aria-hidden="true" tabIndex={-1}>
+            ↑ tap the printer for your receipt
+          </button>
+        )}
         <div
           key={run}
           className={`${s.mover} ${feed === "armed" ? s.armed : ""} ${busy ? s.printing : ""}`}
@@ -677,6 +686,22 @@ function Receipt({ tools }: { tools: string[] }) {
 
             <hr className={s.rule} />
 
+            {/* The tip lines: where a receipt asks for a tip, this one leaves tips for the next campaign, handwritten. */}
+            <div className="flex flex-col gap-3" data-copy="receipt">
+              <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.1em]">Tips for next time</h3>
+              {tips.map((t, i) => (
+                <div key={t.head}>
+                  <div className="flex items-end gap-2">
+                    <span className="shrink-0 text-[12px] font-bold tracking-[0.06em]">TIP {i + 1}</span>
+                    <span className="flex-1 min-w-0 border-b border-ink/60 pb-0.5 hand text-[17px] leading-tight text-oxblood">{t.head}</span>
+                  </div>
+                  <p className="mt-1 text-[11px] leading-snug opacity-75">{t.body}</p>
+                </div>
+              ))}
+            </div>
+
+            <hr className={s.rule} />
+
             <div className="text-[12px] leading-snug" data-copy="receipt">
               <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.1em]">Prepared with</h3>
               <ul className="mt-1">
@@ -714,23 +739,6 @@ const tips = [
   { head: "Shrink the radius to takeout distance.", body: "27 of 29 orders came from the home town." },
   { head: "Track completed orders, then scale.", body: "Orders cost $10.69 each. If an average order is worth more, raise the budget and run longer." },
 ];
-
-// Laid out like the tip screen after a delivery: rows that look like choices.
-function TipScreen() {
-  return (
-    <div className={`${card} px-4 sm:px-5 pt-4 pb-4`}>
-      <h3 className="text-[22px] font-display font-normal leading-tight">Tip for next time</h3>
-      <ul className="mt-3 flex flex-col gap-2">
-        {tips.map((t, i) => (
-          <li key={t.head} className="flex items-start gap-3 rounded-xl border-2 border-line bg-paper px-3.5 py-3">
-            <span className="mt-0.5 flex items-center justify-center w-6 h-6 rounded-full border-2 border-oxblood font-mono text-[11px] text-oxblood shrink-0" aria-hidden="true">{i + 1}</span>
-            <p className="text-[15px] leading-snug"><span className="font-bold">{t.head}</span> {t.body}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
 // The next case study, styled as a reorder button.
 function Reorder() {
@@ -816,10 +824,7 @@ export function ThaiGoogleAdsCase({ banner }: { banner?: string }) {
 
           <section id="result" className={section}>
             <SectionHead id="result" />
-            <div className="flex flex-col gap-4">
-              <Receipt tools={tools} />
-              <TipScreen />
-            </div>
+            <Receipt tools={tools} />
           </section>
         </div>
 

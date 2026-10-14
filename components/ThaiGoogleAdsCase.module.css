@@ -78,7 +78,7 @@
 
 .mover { filter: drop-shadow(0 1px 1px rgba(27, 22, 20, 0.08)) drop-shadow(0 8px 14px rgba(27, 22, 20, 0.12)); }
 .armed { transform: translateY(-100%); }
-.printing { animation: feed 2.6s ease-out both; }
+.printing { animation: feed 3.2s ease-out both; }
 
 /* Line by line: a quick advance, a short hold, a hair of sideways jitter, the way a thermal head feeds paper. */
 @keyframes feed {
@@ -201,5 +201,4 @@
   .car { animation: none; }
   .blink, .busy, .printing { animation: none; }
   .armed { transform: none; }
-  .printBtn { display: none; }
 }
