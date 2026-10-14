@@ -1,13 +1,13 @@
 export const site = {
   name: "Angel Phommachan",
   // The role, said the same way everywhere: header, home title, share cards, Person JSON-LD.
-  role: "Integrated marketer",
-  tagline: "Integrated marketer",
+  role: "Digital marketing specialist",
+  tagline: "Digital marketing specialist",
   description:
-    "Angel Phommachan is an integrated marketer who writes, shoots, builds, and measures campaigns across paid search, email, social, and events. Utah Valley University, Woodbury School of Business.",
+    "Angel Phommachan is a first-generation digital marketing specialist in Utah who works across search, email, social, and content. Utah Valley University, Woodbury School of Business.",
   // Search-result length (140 to 155 characters). `description` above stays the long form for About and JSON-LD.
   seoDescription:
-    "Angel Phommachan is an integrated marketer in Utah. I write it, shoot it, build it, and check the number, across paid search, email, social, and events.",
+    "Angel Phommachan is a first-generation digital marketing specialist in Utah who works across search, email, social, and content.",
   // The one-line positioning, shown under the role on home. Source: .harness/brand-platform.md. Provisional: Angel may swap it.
   positioning: "I write it, shoot it, build it, and check the number. One person, the whole campaign.",
   // The channels, under the hero. Every one has work behind it on the site.
