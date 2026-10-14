@@ -3,7 +3,6 @@ import { pageMeta } from "@/lib/seo";
 import { ProjectList } from "@/components/ProjectList";
 import { disciplines, type Discipline } from "@/lib/site";
 import { work } from "@/lib/work";
-import { SocialSpecRow } from "@/components/SocialSpecRow";
 import { ShippedPostsRow } from "@/components/ShippedPostsRow";
 
 export const metadata: Metadata = pageMeta({ title: "Marketing Portfolio: Campaigns, Email, and Content", absolute: true, description: "Work I planned and built, sorted by channel: Google Ads for a Thai restaurant, spec emails for a coffee shop, a Lao New Year concept, and a landing page.", path: "/work" });
@@ -29,17 +28,10 @@ export default function Work() {
           <ProjectList items={items} />
         </section>
       ))}
-      {/* Social: published posts for Shyft first, then spec posts for brands I write about (designs, not results). */}
+      {/* Social: posts made and published for Shyft. (The spec posts for Ghia, Graza, and Fishwife came off 2026-10-13.) */}
       <section id="social" className="pt-8 pb-6 flex flex-col gap-4 scroll-mt-20">
         <h2 className="text-h3 font-display font-normal tracking-[-0.01em] leading-none">social.</h2>
-        <div className="flex flex-col gap-4">
-          <h3 className="font-mono text-[13px] font-medium uppercase tracking-[0.08em]">published · Shyft</h3>
-          <ShippedPostsRow />
-        </div>
-        <div className="flex flex-col gap-4 mt-10">
-          <h3 className="font-mono text-[13px] font-medium uppercase tracking-[0.08em]">spec</h3>
-          <SocialSpecRow />
-        </div>
+        <ShippedPostsRow />
       </section>
       {/* Events last: the Lao New Year concept closes the page. */}
       {groups.filter(({ d }) => d === "events").map(({ d, items }) => (

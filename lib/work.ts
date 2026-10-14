@@ -367,8 +367,12 @@ const allWork: WorkItem[] = [
 export const ghiaImagesReady = false;
 const showUnfinished = process.env.NODE_ENV !== "production";
 
+// Taken off the site 2026-10-13 at Angel's request. The entry and its components stay in the code;
+// /case/jj-coffee-email redirects to /work (next.config.ts).
+const removed = new Set(["jj-coffee-email"]);
+
 export const work: WorkItem[] = allWork.filter(
-  (w) => (w.slug !== "social-reels" || hasLiveSocial) && (w.slug !== "ghia-email" || ghiaImagesReady || showUnfinished),
+  (w) => !removed.has(w.slug) && (w.slug !== "social-reels" || hasLiveSocial) && (w.slug !== "ghia-email" || ghiaImagesReady || showUnfinished),
 );
 
 export const workByLane = (lane: Lane) => work.filter((w) => w.lane === lane);
