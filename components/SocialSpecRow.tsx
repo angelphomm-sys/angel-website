@@ -113,7 +113,8 @@ export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro
 }
 
 // The phone: Instagram's single-post view at the screen's scale, with the post image in the 4:5 slot.
-function Phone({ post }: { post: SocialSpecPost }) {
+// `media` and `dots` replace the still image and the static dots (the live carousel in ShippedPostsRow uses them).
+export function Phone({ post, media, dots }: { post: SocialSpecPost; media?: React.ReactNode; dots?: React.ReactNode }) {
   const c = specBrandColor[post.brand];
   const first = post.caption[0];
   return (
@@ -139,8 +140,12 @@ function Phone({ post }: { post: SocialSpecPost }) {
           <svg className={s.more} viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8" /><circle cx="12" cy="12" r="1.8" /><circle cx="19" cy="12" r="1.8" /></svg>
         </div>
         <div className={s.media} style={post.ratio ? { aspectRatio: post.ratio } : undefined}>
-          <Image src={post.src} alt={post.alt} fill sizes="(min-width: 768px) 280px, 68vw" className="object-cover" />
-          {post.slides && <span className={s.count} aria-hidden="true">1/{post.slides}</span>}
+          {media ?? (
+            <>
+              <Image src={post.src} alt={post.alt} fill sizes="(min-width: 768px) 280px, 68vw" className="object-cover" />
+              {post.slides && <span className={s.count} aria-hidden="true">1/{post.slides}</span>}
+            </>
+          )}
         </div>
         <div className={s.actions} aria-hidden="true">
           <span className={s.actionsLeft}>
@@ -148,7 +153,7 @@ function Phone({ post }: { post: SocialSpecPost }) {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round"><path d="M20.7 16.5A9 9 0 1 0 17 20l3.9 1-.2-4.5Z" /></svg>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round"><path d="M21.5 3 3 10.2l7.2 3.1L21.5 3Zm0 0-7.3 18-4-7.7" /></svg>
           </span>
-          {post.slides ? <span className={s.dots}>{Array.from({ length: post.slides }, (_, i) => <span key={i} />)}</span> : <span />}
+          {dots ?? (post.slides ? <span className={s.dots}>{Array.from({ length: post.slides }, (_, i) => <span key={i} />)}</span> : <span />)}
           <svg className={s.save} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round"><path d="M19 21 12 15.5 5 21V3h14v18Z" /></svg>
         </div>
         <p className={s.caption} aria-hidden="true"><b>{post.handle}</b>{first} <i>more</i></p>
