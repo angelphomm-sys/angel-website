@@ -6,7 +6,7 @@ export const shelf: Book[] = [
   { title: "Contagious", author: "Jonah Berger", kind: "book", cover: "/images/books/contagious.jpg", why: "things spread when they give people something to say. Build the trigger before the post.", color: "#C8551F" },
   { title: "Teaching to Transgress", author: "bell hooks", kind: "book", cover: "/images/books/teaching-to-transgress.jpg", why: "", color: "#7A2E2E" },
   { title: "As a Man Thinketh", author: "James Allen", kind: "book", cover: "/images/books/as-a-man-thinketh.jpg", why: "", color: "#E8A12B" },
-  { title: "The Peanut Butter Falcon", author: "film, 2019", kind: "film", why: "", color: "#B5803B" },
-  { title: "Howl's Moving Castle", author: "film, 2004", kind: "film", why: "", color: "#5B7FA3" },
-  { title: "Severance", author: "series, Apple TV+", kind: "show", why: "", color: "#23414D" },
+  { title: "The Peanut Butter Falcon", author: "film, 2019", kind: "film", cover: "/images/screen/peanut-butter-falcon.jpg", why: "", color: "#B5803B" },
+  { title: "Howl's Moving Castle", author: "film, 2004", kind: "film", cover: "/images/screen/howls-moving-castle.jpg", why: "", color: "#5B7FA3" },
+  { title: "Severance", author: "series, Apple TV+", kind: "show", cover: "/images/screen/severance.jpg", why: "", color: "#23414D" },
 ];
