@@ -8,5 +8,5 @@ export const shelf: Book[] = [
   { title: "As a Man Thinketh", author: "James Allen", kind: "book", cover: "/images/books/as-a-man-thinketh.jpg", why: "", color: "#E8A12B" },
   { title: "The Peanut Butter Falcon", author: "film, 2019", kind: "film", cover: "/images/screen/peanut-butter-falcon.jpg", why: "", color: "#B5803B" },
   { title: "Howl's Moving Castle", author: "film, 2004", kind: "film", cover: "/images/screen/howls-moving-castle.jpg", why: "", color: "#5B7FA3" },
-  { title: "Severance", author: "series, Apple TV+", kind: "show", cover: "/images/screen/severance.jpg", why: "", color: "#23414D" },
+  { title: "Interstellar", author: "film, 2014", kind: "film", cover: "/images/screen/interstellar.jpg", why: "", color: "#23414D" },
 ];
