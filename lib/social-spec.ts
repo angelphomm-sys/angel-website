@@ -42,7 +42,7 @@ export const specBrandColor: Record<SpecBrand, { bg: string; fg: string }> = {
 
 const ghiaPost = { href: "/blog/behind-the-strategy-ghia", label: "read the Ghia breakdown →" };
 const grazaPost = { href: "/blog/behind-the-strategy-graza", label: "read the Graza breakdown →" };
-const fishwifePost = { href: "/blog/fishwife-cult-following", label: "read the Fishwife breakdown →" };
+const fishwifePost = { href: "/blog/fishwife-marketing-strategy", label: "read the Fishwife breakdown →" };
 
 export const socialSpecIntro = "Spec posts for the brands I break down on my blog, each planned from who follows the brand and made in its look. Not affiliated with any of them.";
 

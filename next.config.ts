@@ -27,6 +27,9 @@ const nextConfig: NextConfig = {
       { source: "/blog/rare-beauty-marketing-strategy", destination: "/blog", permanent: true },
       { source: "/blog/meet-angel", destination: "/blog", permanent: true },
       { source: "/blog/5-marketing-newsletters-that-teach-you-something", destination: "/blog", permanent: true },
+      // Renamed before launch so each address matches its post title.
+      { source: "/blog/fishwife-cult-following", destination: "/blog/fishwife-marketing-strategy", permanent: true },
+      { source: "/blog/bloom-nutrition-community-playbook", destination: "/blog/bloom-nutrition-marketing-strategy", permanent: true },
       { source: "/blog/how-to-write-a-brand-email-that-sounds-like-a-friend", destination: "/blog", permanent: true },
       { source: "/blog/why-experiential-marketing", destination: "/blog", permanent: true },
       // Crumbl spec email replaced by the Ghia spec email, 2026-10-06.

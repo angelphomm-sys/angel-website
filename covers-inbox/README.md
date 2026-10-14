@@ -32,10 +32,10 @@ This folder is not under `public/`, so nothing in it is served on the site. Imag
 - `10-brand-moments-people-showed-up-for-2026`
 - `behind-the-strategy-ghia`
 - `behind-the-strategy-graza`
-- `bloom-nutrition-community-playbook`
+- `bloom-nutrition-marketing-strategy`
 - `duolingo-social-media-strategy`
 - `first-gen-and-figuring-it-out`
-- `fishwife-cult-following`
+- `fishwife-marketing-strategy`
 
 ## Photo credits
 
