@@ -1,9 +1,7 @@
 "use client";
 import Giscus from "@giscus/react";
 
-// True once the three Giscus env vars are set. Until then the post page shows no comments section at all.
-export const commentsEnabled = !!(process.env.NEXT_PUBLIC_GISCUS_REPO && process.env.NEXT_PUBLIC_GISCUS_REPO_ID && process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID);
-
+// Shown only when lib/comments.ts says the Giscus env vars are set.
 export function Comments() {
   const repo = process.env.NEXT_PUBLIC_GISCUS_REPO as `${string}/${string}` | undefined;
   const repoId = process.env.NEXT_PUBLIC_GISCUS_REPO_ID;
