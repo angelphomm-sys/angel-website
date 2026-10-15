@@ -98,7 +98,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               <TrackLink event={`postcta_${post.slug}`} href={post.cta.href} className="inline-flex items-center gap-2 max-w-full text-[15px] font-bold bg-cream text-ink rounded-full px-5 py-3 hover:bg-blue transition-colors" {...(post.cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{post.cta.label} →</TrackLink>
             </div>
           )}
-          <ShareBar slug={post.slug} path={`/blog/${post.slug}`} title={post.title} />
+          <ShareBar slug={post.slug} path={`/blog/${post.slug}`} title={post.title} linkedinPost={post.linkedinPost} />
           {series.length > 1 && (
             <div className="border-2 border-line rounded-3xl p-5 flex flex-col gap-2">
               <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{post.series} · {idx + 1} of {series.length}</span>

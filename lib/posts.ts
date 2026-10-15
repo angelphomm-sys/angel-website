@@ -17,6 +17,8 @@ export type Post = {
   cta?: { label: string; href: string }; series?: string; keywords?: string[]; updated?: string;
   /** The brand a breakdown is about, with its official site. Feeds the BlogPosting's `about` in JSON-LD. */
   brand?: { name: string; url: string };
+  /** The LinkedIn post where this blog post is discussed. Comments live there; the post page links to it. */
+  linkedinPost?: string;
 };
 
 /** Frontmatter `brand: { name, url }`, kept only when both are non-empty strings. */
@@ -59,6 +61,7 @@ function read(file: string): Post {
     coverCredit, coverCreditUrl: coverCredit ? str(data.coverCreditUrl) : undefined,
     readingTime: Math.max(1, Math.round(words / 200)), draft: Boolean(data.draft), featured: Boolean(data.featured), content,
     cta: data.cta, series: data.series, keywords: data.keywords, updated: day(data.updated), brand: brandOf(data.brand),
+    linkedinPost: str(data.linkedinPost) && /^https:\/\/(www\.)?linkedin\.com\//.test(data.linkedinPost) ? data.linkedinPost : undefined,
   };
 }
 
