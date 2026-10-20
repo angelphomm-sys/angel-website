@@ -77,11 +77,13 @@ export default function About() {
         <Stack />
       </Section>
 
-      <Section title="on my shelf." id="shelf">
+      {/* What shapes how I think: the books and films behind how I see people and stories, each opening to a
+          favorite quote and the lesson I took for my work. Tap or hover to open. */}
+      <Section title="what shapes how i think." id="shelf">
+        <p className="text-[17px] leading-relaxed max-w-[60ch] -mt-1">Marketing is about why people believe something and why they show up. These are the books and films that taught me that. Hover or tap to open each one.</p>
+        <h3 className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-mid mt-2">on my shelf</h3>
         <Shelf books={shelf.filter((b) => b.kind === "book")} />
-      </Section>
-
-      <Section title="on my screen." id="screen">
+        <h3 id="screen" className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-mid mt-6 scroll-mt-24">on my screen</h3>
         <Screen picks={shelf.filter((b) => b.kind === "film" || b.kind === "show")} />
       </Section>
 

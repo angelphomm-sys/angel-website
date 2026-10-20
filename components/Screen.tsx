@@ -1,9 +1,9 @@
 import Image from "next/image";
 import type { Book } from "./Shelf";
 
-// "on my screen.": films and shows as posters, not books. A real poster shows when `cover` is set in
-// lib/shelf.ts; until then each card is a simple type-only poster in the pick's color. Hover lifts the
-// poster, and a "why" line (when filled) slides up over it.
+// Films and shows as posters, not books. A real poster shows when `cover` is set in lib/shelf.ts; until
+// then each card is a type-only poster in the pick's color. Hover, focus, or a tap lifts the poster and
+// fades in the favorite quote and the lesson behind it.
 export function Screen({ picks }: { picks: Book[] }) {
   const items = picks.filter((p) => !p.title.trim().startsWith("["));
   return (
@@ -11,10 +11,10 @@ export function Screen({ picks }: { picks: Book[] }) {
       {items.map((p) => (
         <figure key={p.title} className="group m-0 flex flex-col gap-3 min-w-0">
           <div
-            className="relative aspect-[2/3] rounded-[14px] overflow-hidden shadow-[0_2px_4px_rgba(28,19,16,0.10),0_12px_28px_rgba(28,19,16,0.16)] transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-1.5 motion-safe:group-hover:rotate-[-0.6deg]"
+            className="relative aspect-[2/3] rounded-[14px] overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-accent shadow-[0_2px_4px_rgba(28,19,16,0.10),0_12px_28px_rgba(28,19,16,0.16)] transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-1.5 motion-safe:group-hover:rotate-[-0.6deg]"
             style={{ background: p.color, color: p.ink ?? "#fff" }}
             tabIndex={0}
-            aria-label={`${p.title}, ${p.author ?? p.kind}${p.why ? `. ${p.why}` : ""}`}
+            aria-label={`${p.title}, ${p.author ?? p.kind}${p.quote ? `. Favorite quote: ${p.quote}${p.lesson ? `. ${p.lesson}` : ""}` : p.why ? `. ${p.why}` : ""}`}
           >
             {p.cover ? (
               <Image src={p.cover} alt={`${p.title} poster`} fill sizes="(min-width: 768px) 230px, 30vw" className="object-cover" />
@@ -26,9 +26,17 @@ export function Screen({ picks }: { picks: Book[] }) {
                 <span className="relative font-display text-[16px] sm:text-[22px] md:text-[28px] leading-[1.02] tracking-[-0.01em] text-balance">{p.title}</span>
               </div>
             )}
-            {p.why && (
-              <div className="absolute inset-x-0 bottom-0 p-4 pt-10 bg-gradient-to-t from-black/80 to-transparent text-white text-[14px] leading-snug translate-y-full group-hover:translate-y-0 group-focus-within:translate-y-0 transition-transform duration-300">
-                {p.why}
+            {(p.quote || p.why) && (
+              <div className="absolute inset-0 flex flex-col justify-end gap-1.5 p-3 md:p-4 bg-gradient-to-t from-black/90 via-black/70 to-black/20 text-white opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-within:opacity-100 transition-opacity duration-300 motion-reduce:transition-none">
+                {p.quote ? (
+                  <>
+                    <span className="hand text-[13px] md:text-[16px] leading-snug">&ldquo;{p.quote}&rdquo;</span>
+                    {p.quoteBy && <span className="font-mono text-[9px] md:text-[10px] uppercase tracking-[0.08em] opacity-80">{p.quoteBy}</span>}
+                    {p.lesson && <span className="text-[11px] md:text-[13px] leading-snug mt-1 pt-1.5 border-t border-white/30">{p.lesson}</span>}
+                  </>
+                ) : (
+                  <span className="text-[13px] leading-snug">{p.why}</span>
+                )}
               </div>
             )}
           </div>

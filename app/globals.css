@@ -100,14 +100,14 @@ body { background: var(--color-paper); color: var(--color-ink); font-family: var
 /* Books: 3D covers that turn toward you and open on hover */
 .bookshelf { perspective: 1400px; }
 .book3d { position: relative; transform-style: preserve-3d; transform: rotateY(-20deg); transition: transform 300ms cubic-bezier(.2,.8,.2,1); }
-.book3d:hover, .book3d:focus-within { transform: rotateY(-6deg) translateY(-8px); }
+.book3d:hover, .book3d:focus-within, .book3d:focus { transform: rotateY(-6deg) translateY(-8px); outline: none; }
 .book3d .back { position: absolute; inset: 0; transform: translateZ(calc(var(--depth) * -1)); border-radius: 2px 6px 6px 2px; }
 .book3d .spine { position: absolute; top: 0; bottom: 0; left: 0; width: calc(var(--depth) * 2); transform-origin: left center; transform: translateZ(var(--depth)) rotateY(-90deg); border-radius: 2px 0 0 2px; }
 .book3d .pages { position: absolute; top: 3px; bottom: 3px; right: 0; width: calc(var(--depth) * 2); transform-origin: right center; transform: translateZ(var(--depth)) rotateY(90deg); background: repeating-linear-gradient(to right, #f5f2ea 0 1px, #dedad0 1px 2px); }
 .book3d .inside { position: absolute; inset: 0; transform: translateZ(calc(var(--depth) - 1px)); background: var(--color-card); border-radius: 0 4px 4px 0; padding: 12px; box-sizing: border-box; visibility: hidden; opacity: 0; transition: opacity 250ms ease 150ms, visibility 0s 150ms; }
-.book3d:hover .inside, .book3d:focus-within .inside { visibility: visible; opacity: 1; }
+.book3d:hover .inside, .book3d:focus-within .inside, .book3d:focus .inside { visibility: visible; opacity: 1; }
 .book3d .cover { position: absolute; inset: 0; transform: translateZ(var(--depth)); transform-origin: left center; border-radius: 2px 6px 6px 2px; overflow: hidden; box-shadow: 0 18px 30px rgba(0,0,0,0.18); background: var(--color-mist); transition: transform 300ms cubic-bezier(.2,.8,.2,1); backface-visibility: hidden; }
-.book3d:hover .cover, .book3d:focus-within .cover { transform: translateZ(var(--depth)) rotateY(-32deg); }
+.book3d:hover .cover, .book3d:focus-within .cover, .book3d:focus .cover { transform: translateZ(var(--depth)) rotateY(-118deg); }
 .ribbon { transform-origin: 50% 0; animation: ribbon 2.8s ease-in-out infinite; }
 @keyframes ribbon { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(5deg); } }
 @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }

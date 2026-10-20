@@ -1,9 +1,10 @@
 import { showNotes } from "@/lib/notes";
 
-export type Book = { title: string; author?: string; kind: "book" | "film" | "show" | "album" | "campaign"; status?: string; why: string; color: string; ink?: string; reading?: boolean; cover?: string; quote?: string };
+export type Book = { title: string; author?: string; kind: "book" | "film" | "show" | "album" | "campaign"; status?: string; why: string; color: string; ink?: string; reading?: boolean; cover?: string; quote?: string; quoteBy?: string; lesson?: string; link?: { href: string; label: string } };
 
-// Real covers as 3D books. Idle: a slight float. Hover: the book turns toward you and the cover opens to her
-// favorite quote from it (`quote` in lib/shelf.ts), or what it taught her when there is no quote yet.
+// Real covers as 3D books. Idle: a slight float. Hover, focus, or a tap: the book turns toward you and the cover
+// swings open to her favorite quote and the lesson she took from it (lib/shelf.ts), or what it taught her when
+// no quote is confirmed yet.
 // A [bracketed] title is a pending entry in lib/shelf.ts. It is never drawn as a book; while notes show
 // (lib/notes.ts), one bracket line under the shelf says how many picks are still to come.
 export function Shelf({ books: all, compact = false }: { books: Book[]; compact?: boolean }) {
@@ -15,14 +16,18 @@ export function Shelf({ books: all, compact = false }: { books: Book[]; compact?
       <div className={`grid grid-cols-2 ${books.length === 4 ? "md:grid-cols-4" : `min-[400px]:grid-cols-3 ${books.length > 3 ? "lg:grid-cols-6" : ""}`} items-end gap-x-4 gap-y-10 px-2 pt-6 pb-2`}>
         {books.map((b, i) => (
           <div key={b.title} className="floaty flex flex-col items-center gap-4 min-w-0" style={{ animationDelay: `${-i * 0.9}s` }}>
-            <div className="book3d" style={{ width: `min(${w}px, 100%)`, aspectRatio: "2 / 3", ["--depth" as string]: "14px" }} tabIndex={0} aria-label={`${b.title}${b.author ? ` by ${b.author}` : ""}. ${b.quote ? `Favorite quote: ${b.quote}` : b.why}`}>
+            <div className="book3d" style={{ width: `min(${w}px, 100%)`, aspectRatio: "2 / 3", ["--depth" as string]: "14px" }} tabIndex={0} aria-label={`${b.title}${b.author ? ` by ${b.author}` : ""}. ${b.quote ? `Favorite quote: ${b.quote}${b.lesson ? `. ${b.lesson}` : ""}` : b.why}`}>
               <div className="back" style={{ background: b.color }} />
               <div className="spine" style={{ background: b.color }} />
               <div className="pages" />
               <div className="inside">
                 <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{b.kind}{b.status ? ` · ${b.status}` : ""}</span>
                 {b.quote ? (
-                  <span className="hand block text-[16px] leading-tight mt-1">&ldquo;{b.quote}&rdquo;</span>
+                  <>
+                    <span className="hand block text-[14px] leading-snug mt-1">&ldquo;{b.quote}&rdquo;</span>
+                    {b.quoteBy && <span className="block text-[10px] font-mono uppercase tracking-[0.06em] text-mid mt-1">{b.quoteBy}</span>}
+                    {b.lesson && <span className="block text-[11px] leading-snug mt-2 pt-2 border-t border-line">{b.lesson}</span>}
+                  </>
                 ) : (
                   b.why && <span className="hand block text-[17px] leading-tight mt-1">taught me: {b.why}</span>
                 )}
@@ -44,6 +49,7 @@ export function Shelf({ books: all, compact = false }: { books: Book[]; compact?
               <span className="text-[14px] font-bold leading-tight">{b.title}</span>
               {b.author && <span className="text-[12px] text-mid">{b.author}</span>}
               {b.status && <span className="hand text-[12px] text-accent-deep">{b.status}</span>}
+              {b.link && <a href={b.link.href} className="hit mt-1 font-mono text-[11px] border-b border-accent hover:text-accent-deep">{b.link.label} →</a>}
             </div>
           </div>
         ))}
