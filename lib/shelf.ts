@@ -7,7 +7,7 @@ export const shelf: Book[] = [
   { title: "Atlas Shrugged", author: "Ayn Rand", kind: "book", status: "reading now", reading: true, cover: "/images/books/atlas-shrugged.jpg", color: "#1C1310",
     quote: "Who is John Galt?", quoteBy: "the book's first line",
     lesson: "One question, repeated until everyone wants the answer. That's a hook.", why: "" },
-  { title: "Contagious", author: "Jonah Berger", kind: "book", cover: "/images/books/contagious.jpg", color: "#C8551F",
+  { title: "Contagious", author: "Jonah Berger", kind: "book", status: "reading now", reading: true, cover: "/images/books/contagious.jpg", color: "#C8551F",
     why: "things spread when they give people something to say. Build the trigger before the post." },
   { title: "Teaching to Transgress", author: "bell hooks", kind: "book", cover: "/images/books/teaching-to-transgress.jpg", color: "#7A2E2E",
     quote: "The classroom remains the most radical space of possibility in the academy.",
