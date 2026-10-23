@@ -13,3 +13,4 @@ Photos are from Pexels, free to use under the Pexels License (pexels.com/license
 | duolingo-social-media-strategy | MART PRODUCTION | pexels.com/photo/person-holding-black-iphone-5-9558700/ | Pexels License | Duolingo wordmark SVG, d35aaqx5ub95lt.cloudfront.net/images/f92d5f2f7d56636846861c458c0d0b6c.svg (duolingo.com) |
 | 10-brand-moments-people-showed-up-for-2026 | Collis Torrington | pexels.com/photo/confetti-at-concert-3216866/ | Pexels License | none |
 | first-gen-and-figuring-it-out | Angel Phommachan (own photo) | /images/me/lake.jpg | Angel's own | none |
+| liquid-death-vs-poppi-marketing | Brand product images (Liquid Death, Poppi), supplied by Angel | liquiddeath.com, drinkpoppi.com | Used for commentary, credited in captions | none (cans shown as photographed) |
