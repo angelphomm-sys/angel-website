@@ -53,7 +53,7 @@ export default function Photography() {
           ))}
         </div>
         <div className="mx-auto max-w-[1440px] px-5 md:px-20 pb-12">
-          <TrackLink event="cta_photo_contact" href="/contact" className="inline-flex bg-accent text-cream rounded-full px-6 py-3.5 font-mono text-[14px] font-medium lowercase tracking-[0.02em] hover:bg-accent-deep transition-colors">say hi about a shoot →</TrackLink>
+          <TrackLink event="cta_photo_contact" href="/contact" className="inline-flex bg-accent text-cream rounded-full px-6 py-3.5 text-[15px] font-semibold hover:bg-accent-deep transition-colors">Say hi about a shoot →</TrackLink>
         </div>
       </section>
     </>

@@ -14,9 +14,9 @@ export function StickyCta() {
       <Link
         href="/contact"
         onClick={() => track("cta_sticky_sayhi")}
-        className="flex items-center justify-center w-full bg-accent text-cream rounded-full px-6 py-3.5 font-mono text-[14px] font-medium lowercase tracking-[0.02em] active:bg-accent-deep"
+        className="flex items-center justify-center w-full bg-accent text-cream rounded-full px-6 py-3.5 text-[15px] font-semibold active:bg-accent-deep"
       >
-        say hi →
+        Say hi
       </Link>
     </div>
   );

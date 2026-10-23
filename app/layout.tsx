@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={instrument.variable}>
       <body className="antialiased min-h-screen flex flex-col">
-        <a href="#main" className="skip-link">skip to content</a>
+        <a href="#main" className="skip-link">Skip to content</a>
         <Header />
         <main id="main" className="flex-1">{children}</main>
         <Footer />

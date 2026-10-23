@@ -120,7 +120,7 @@ export function CaseCtaRow({ slug, post }: { slug: string; concept?: boolean; po
   const nextInner = next && (
     <>
       <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em]">up next · {next.title}</span>
-      <span className="text-[22px] font-display font-semibold tracking-[-0.015em]">see the next case study →</span>
+      <span className="text-[22px] font-display font-semibold tracking-[-0.015em]">See the next case study →</span>
     </>
   );
   return (
@@ -130,8 +130,8 @@ export function CaseCtaRow({ slug, post }: { slug: string; concept?: boolean; po
           ? <a href={nextHref} target="_blank" rel="noopener noreferrer" className={`${cardCls} bg-accent text-cream hover:bg-accent-deep`}>{nextInner}</a>
           : <Link href={nextHref} className={`${cardCls} bg-accent text-cream hover:bg-accent-deep`}>{nextInner}</Link>)}
       </div>
-      {post && <Link href={post} className="hit self-start text-[14px] font-bold text-mid hover:text-accent-deep">read the longer write-up →</Link>}
-      <Link href="/work" className="hit self-start mt-2 font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep">all the work →</Link>
+      {post && <Link href={post} className="hit self-start text-[14px] font-bold text-mid hover:text-accent-deep">Read the longer write-up →</Link>}
+      <Link href="/work" className="hit self-start mt-2 text-[15px] font-semibold border-b-2 border-accent hover:text-accent-deep">All the work →</Link>
     </section>
   );
 }
@@ -140,7 +140,7 @@ export function RelatedWork({ items, heading }: { items: WorkItem[]; heading: st
   if (!items.length) return null;
   return (
     <section className="flex flex-col gap-4">
-      <div className="flex items-baseline justify-between gap-3"><h2 className="text-[13px] font-mono font-medium uppercase tracking-[0.1em] text-mid">{heading}</h2><Link href="/work" className="hit font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep hover:border-accent-deep">all the work →</Link></div>
+      <div className="flex items-baseline justify-between gap-3"><h2 className="text-[13px] font-mono font-medium uppercase tracking-[0.1em] text-mid">{heading}</h2><Link href="/work" className="hit font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep hover:border-accent-deep">All the work →</Link></div>
       <div className="grid gap-4 sm:grid-cols-3">
         {items.map((w) => { const to = linkFor(w)!; const inner = (<><span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{disciplines[w.discipline].replace(/\.$/, "")}</span><span className="text-[18px] font-display font-semibold tracking-[-0.015em] leading-tight">{w.title}</span><span className="text-[12px] font-bold text-accent-deep">{proofFor(w)}</span></>); const cls = "flex flex-col gap-2 border-2 border-line rounded-3xl p-5 hover:border-ink transition-colors";
           return to.startsWith("http") ? <a key={w.slug} href={to} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a> : <Link key={w.slug} href={to} className={cls}>{inner}</Link>; })}

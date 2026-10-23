@@ -31,7 +31,7 @@
 .subnavIn { max-width: 1160px; margin: 0 auto; padding: 0 20px; min-height: 44px; display: flex; align-items: center; gap: 14px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
 .subnavIn::-webkit-scrollbar { display: none; }
 .subnavBrand { font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; line-height: 1; flex: none; }
-.subnavLinks { margin-left: auto; display: flex; gap: 18px; font-family: var(--font-mono); font-weight: 500; font-size: 13px; text-transform: lowercase; flex: none; }
+.subnavLinks { margin-left: auto; display: flex; gap: 18px; font-family: var(--font-mono); font-weight: 500; font-size: 13px; flex: none; }
 .subnavLinks a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; } /* 44px tap targets; the row is 44px tall either way */
 .subnavLinks a:hover { text-decoration: underline; text-underline-offset: 4px; }
 

@@ -28,7 +28,7 @@ export default function SocialPage() {
               <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{r.platform} · {r.account}{r.date ? ` · ${month(r.date)}` : ""}</span>
               <span className="text-[18px] font-display font-semibold tracking-[-0.015em] leading-tight">{r.title}</span>
               {!r.line.startsWith("[") && <span className="text-[15px] leading-relaxed text-mid">{r.line}</span>}
-              {r.href && <a href={r.href} target="_blank" rel="noopener noreferrer" className="hit self-center font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep hover:border-accent-deep">open the post ↗</a>}
+              {r.href && <a href={r.href} target="_blank" rel="noopener noreferrer" className="hit self-center font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep hover:border-accent-deep">Open the post ↗</a>}
             </div>
           </li>
         ))}
@@ -44,14 +44,14 @@ export default function SocialPage() {
                 <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{r.platform}{r.platform === "linkedin" ? " · facebook" : ""}{r.date ? ` · ${month(r.date)}` : ""}</span>
                 <span className="text-[18px] font-display font-semibold tracking-[-0.015em] leading-tight">{r.title}</span>
                 {!r.line.startsWith("[") && <span className="text-[15px] leading-relaxed text-mid">{r.line}</span>}
-                {r.href && <a href={r.href} target="_blank" rel="noopener noreferrer" className="hit self-center font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep hover:border-accent-deep">open the post ↗</a>}
+                {r.href && <a href={r.href} target="_blank" rel="noopener noreferrer" className="hit self-center font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep hover:border-accent-deep">Open the post ↗</a>}
               </div>
             </li>
           ))}
         </ul>
       </section>
 
-      <p className="text-[15px] font-bold"><Link href="/work" className="hit border-b-2 border-ink hover:text-accent-deep hover:border-accent-deep">all the work</Link></p>
+      <p className="text-[15px] font-bold"><Link href="/work" className="hit border-b-2 border-ink hover:text-accent-deep hover:border-accent-deep">All the work</Link></p>
     </div>
   );
 }

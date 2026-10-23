@@ -166,9 +166,9 @@ function StoreHeader({ banner }: { banner?: string }) {
         <a
           href="#result"
           onClick={(e) => { e.preventDefault(); goToStep("result"); }}
-          className="hit mt-4 inline-flex items-center gap-1.5 font-mono text-[13px] font-medium lowercase tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep"
+          className="hit mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold border-b-2 border-accent hover:text-accent-deep"
         >
-          skip to the receipt <span aria-hidden="true">↓</span>
+          Skip to the receipt <span aria-hidden="true">↓</span>
         </a>
       </div>
     </div>
@@ -724,9 +724,9 @@ function Receipt({ tools }: { tools: string[] }) {
         <button
           type="button"
           onClick={printCopy}
-          className="hit font-mono text-[13px] font-medium lowercase tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep"
+          className="hit text-[15px] font-semibold border-b-2 border-accent hover:text-accent-deep"
         >
-          print a copy
+          Print a copy
         </button>
       </div>
     </div>
@@ -759,7 +759,7 @@ function Reorder() {
       {next && href && (href.startsWith("http")
         ? <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
         : <Link href={href} className={cls}>{inner}</Link>)}
-      <Link href="/work" className="hit self-start mt-2 font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep">all the work →</Link>
+      <Link href="/work" className="hit self-start mt-2 text-[15px] font-semibold border-b-2 border-accent hover:text-accent-deep">All the work →</Link>
     </section>
   );
 }

@@ -41,8 +41,8 @@ export function ContactForm() {
         <span className={label}>Message</span>
         <textarea name="message" required rows={5} className={field} />
       </label>
-      <button type="submit" disabled={state === "loading"} className="self-start bg-accent text-cream rounded-full px-6 py-3.5 font-mono text-[14px] font-medium lowercase tracking-[0.02em] hover:bg-accent-deep transition-colors disabled:opacity-60">
-        {state === "loading" ? "sending…" : "send →"}
+      <button type="submit" disabled={state === "loading"} className="self-start bg-accent text-cream rounded-full px-6 py-3.5 text-[15px] font-semibold hover:bg-accent-deep transition-colors disabled:opacity-60">
+        {state === "loading" ? "Sending…" : "Send →"}
       </button>
       {state === "error" && <p role="alert" className="text-base text-accent-deep">{msg}</p>}
     </form>

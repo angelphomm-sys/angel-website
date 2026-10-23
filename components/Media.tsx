@@ -104,7 +104,7 @@ export function LinkCard({ href, label, title }: { href: string; label: string; 
         <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{label}</span>
         <span className="font-sans font-semibold text-base leading-tight">{title}</span>
       </span>
-      <span className="text-[12px] font-bold shrink-0">open ↗</span>
+      <span className="text-[12px] font-bold shrink-0">Open ↗</span>
     </a>
   );
 }

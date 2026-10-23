@@ -23,11 +23,11 @@ export function ShareBar({ slug, path, title, linkedinPost }: { slug: string; pa
         {linkedinPost ? (
           <a href={linkedinPost} target="_blank" rel="noopener noreferrer" onClick={() => track(`share_${slug}`)} className={link} aria-label={`join the conversation on LinkedIn: ${title}`}>join the conversation on LinkedIn ↗</a>
         ) : (
-          <a href={linkedinShare(url)} target="_blank" rel="noopener noreferrer" onClick={() => track(`share_${slug}`)} className={link} aria-label={`share on LinkedIn: ${title}`}>share on LinkedIn ↗</a>
+          <a href={linkedinShare(url)} target="_blank" rel="noopener noreferrer" onClick={() => track(`share_${slug}`)} className={link} aria-label={`share on LinkedIn: ${title}`}>Share on LinkedIn ↗</a>
         )}
-        {linkedinPost && <a href={linkedinShare(url)} target="_blank" rel="noopener noreferrer" onClick={() => track(`share_${slug}`)} className={link} aria-label={`share on LinkedIn: ${title}`}>share it ↗</a>}
-        <button type="button" onClick={copy} className={link}>{copied ? "copied" : "copy link"}</button>
-        <a href="/contact" className={link}>or say hi privately →</a>
+        {linkedinPost && <a href={linkedinShare(url)} target="_blank" rel="noopener noreferrer" onClick={() => track(`share_${slug}`)} className={link} aria-label={`share on LinkedIn: ${title}`}>Share it ↗</a>}
+        <button type="button" onClick={copy} className={link}>{copied ? "Copied" : "Copy link"}</button>
+        <a href="/contact" className={link}>Or say hi privately →</a>
       </div>
     </section>
   );

@@ -21,7 +21,7 @@ export function ShippedPostsRow({ posts = shippedPosts, intro = shippedIntro }: 
               <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">Shyft · {p.format}</span>
               <span className="text-[18px] font-display font-semibold tracking-[-0.015em] leading-tight">{p.title}</span>
               <span className="text-[15px] leading-relaxed text-mid">{p.why}</span>
-              <a href={p.href} target="_blank" rel="noopener noreferrer" className="hit self-center mt-1 font-mono text-[12px] font-medium border-b border-accent hover:text-accent-deep">see it on Instagram ↗</a>
+              <a href={p.href} target="_blank" rel="noopener noreferrer" className="hit self-center mt-1 font-mono text-[12px] font-medium border-b border-accent hover:text-accent-deep">See it on Instagram ↗</a>
             </div>
           </li>
         ))}
