@@ -42,7 +42,7 @@ export default function Home() {
     <>
     <JsonLd data={{ "@context": "https://schema.org", ...person }} />
     <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: site.url }} />
-    {/* hello: a red block with the stacked wordmark in cream, the one-line who, and the channels. The monogram sits beside it, also in cream, on wide screens. */}
+    {/* hello: a red block with the stacked wordmark in cream, the one-line who, and the channels. Her flower mark turns slowly beside it, in cream, on wide screens. */}
     <section className="bg-red text-cream">
       <div className="mx-auto max-w-[1440px] px-5 md:px-20 py-12 md:py-20 grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div className="flex flex-col gap-6 md:gap-8 hero-in min-w-0">
@@ -56,7 +56,7 @@ export default function Home() {
             {site.skills.map((s) => <li key={s} className="text-[14px] font-semibold border border-cream/60 rounded-full px-3.5 py-1.5 first-letter:uppercase">{s}</li>)}
           </ul>
         </div>
-        <div className="hidden lg:block hero-photo"><BrandMark variant="monogram" className="h-[180px] xl:h-[220px] text-cream" /></div>
+        <div className="hidden lg:block hero-photo"><BrandMark variant="asterisk" className="spin-slow h-[200px] xl:h-[240px] text-cream" /></div>
       </div>
     </section>
 

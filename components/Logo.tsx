@@ -36,13 +36,7 @@ export function MarkBadge({ className = "inline-flex", markClassName = "h-[58%]"
   );
 }
 
-/** The header lockup: the AP monogram in red beside the horizontal wordmark in near-black. The wordmark drops out on the
- *  narrowest phones; the monogram stays. */
+/** The header mark: the AP monogram in red, on its own. The full name already leads the home page and closes the footer. */
 export function Logo({ className = "" }: { className?: string }) {
-  return (
-    <span className={`inline-flex items-center gap-3 md:gap-3.5 ${className}`}>
-      <BrandMark variant="monogram" className="h-8 md:h-9 text-red" />
-      <BrandMark variant="horizontal" className="h-[12px] md:h-[14px] max-[359px]:hidden" />
-    </span>
-  );
+  return <BrandMark variant="monogram" className={`h-9 md:h-10 text-red ${className}`} />;
 }
