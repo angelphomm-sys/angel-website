@@ -101,7 +101,7 @@ export function LinkCard({ href, label, title }: { href: string; label: string; 
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className="not-prose flex items-center justify-between gap-4 border-2 border-ink rounded-2xl bg-card p-4 no-underline hover:bg-mist transition-colors" style={{ textDecoration: "none" }}>
       <span className="flex flex-col gap-1">
-        <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{label}</span>
+        <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{label}</span>
         <span className="font-sans font-semibold text-base leading-tight">{title}</span>
       </span>
       <span className="text-[12px] font-bold shrink-0">open ↗</span>

@@ -7,7 +7,7 @@ export function PostCard({ post, showExcerpt = false, showMeta = false, layout =
   return (
     <Link href={`/blog/${post.slug}`} className="group flex flex-col gap-3">
       <CoverImage variant="card" src={post.cover} alt={post.coverAlt ?? post.title} layout={layout} priority={priority} />
-      <span className="text-[21px] font-display font-normal tracking-[-0.01em] leading-tight group-hover:text-accent-deep">{post.title}</span>
+      <span className="text-[21px] font-display font-semibold tracking-[-0.015em] leading-tight group-hover:text-accent-deep">{post.title}</span>
       {showMeta && <span className="-mt-1 font-mono text-[12px] font-medium">{formatDate(post.date)} · {post.readingTime} min read</span>}
       {showExcerpt && <p className="text-[16px] leading-relaxed text-mid max-w-[65ch]">{post.excerpt}</p>}
     </Link>

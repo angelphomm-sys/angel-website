@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -17,19 +18,15 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-// The browser bar and the home-screen splash take the oxblood, as the app icon does.
-export const viewport: Viewport = { themeColor: "#421F23" };
+// Angel's one family, from the brand sheet. Self-hosted at build time, with the width axis for condensed display lines.
+const instrument = Instrument_Sans({ subsets: ["latin"], axes: ["wdth"], style: ["normal", "italic"], display: "swap", variable: "--font-instrument" });
+
+// The browser bar and the home-screen splash take the brand red, as the app icon does.
+export const viewport: Viewport = { themeColor: "#BB2426" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <head>
-        {/* Angel's faces, from her Adobe Fonts web project (kit ttt0zqg): IvyOra Display, Benton Modern Text, Ballinger Mono, Bookmania.
-            The kit is allowed on angelphommachan.com, www, *.vercel.app, and localhost. Families and fallbacks live in app/globals.css. */}
-        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://p.typekit.net" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://use.typekit.net/ttt0zqg.css" />
-      </head>
+    <html lang="en" className={instrument.variable}>
       <body className="antialiased min-h-screen flex flex-col">
         <a href="#main" className="skip-link">skip to content</a>
         <Header />

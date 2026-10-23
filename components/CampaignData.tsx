@@ -123,7 +123,7 @@ export function Table({
           <thead className="hidden md:table-header-group">
             <tr>
               {head.map((h, i) => (
-                <th key={i} scope="col" className="font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-mid pb-2 pr-4 border-b border-line">
+                <th key={i} scope="col" className="font-mono text-[12px] font-medium uppercase tracking-[0.06em] text-mid pb-2 pr-4 border-b border-line">
                   {h}
                 </th>
               ))}

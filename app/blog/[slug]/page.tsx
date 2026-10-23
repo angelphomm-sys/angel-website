@@ -80,12 +80,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <JsonLd data={jsonLd} />
       <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: post.title, path: `/blog/${post.slug}` }])} />
       <header className="py-12 md:py-16 grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[1fr_minmax(0,760px)_1fr]">
-        <div className="font-mono text-[12px] font-medium text-mid flex gap-2"><Link href="/blog" className="hit hover:text-accent-deep">blog</Link></div>
+        <div className="font-mono text-[12px] font-medium text-mid flex gap-2"><Link href="/blog" className="hit hover:text-accent-deep">← All posts</Link></div>
         <div className="flex flex-col gap-5">
-          <div className="flex items-center gap-2 text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid"><time dateTime={post.date}>{formatDate(post.date)}</time>{post.updated && post.updated !== post.date && <><span>·</span><span>updated <time dateTime={post.updated}>{formatDate(post.updated)}</time></span></>}<span>·</span><span>{post.readingTime} min</span>{post.series && <><span>·</span><span className="text-accent-deep">{post.series}</span></>}{post.draft && <span className="bg-[#fff6cc] text-ink rounded-full px-2.5 py-1">draft</span>}</div>
-          <h1 className="text-title font-display font-normal tracking-[-0.01em] leading-[1.12] text-balance">{post.title}</h1>
+          <div className="flex items-center gap-2 text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid"><time dateTime={post.date}>{formatDate(post.date)}</time>{post.updated && post.updated !== post.date && <><span>·</span><span>updated <time dateTime={post.updated}>{formatDate(post.updated)}</time></span></>}<span>·</span><span>{post.readingTime} min</span>{post.series && <><span>·</span><span className="text-accent-deep">{post.series}</span></>}{post.draft && <span className="bg-[#fff6cc] text-ink rounded-full px-2.5 py-1">draft</span>}</div>
+          <h1 className="text-title font-display font-semibold tracking-[-0.015em] leading-[1.12] text-balance">{post.title}</h1>
           {post.excerpt && <p className="text-[19px] md:text-[21px] leading-snug text-mid">{post.excerpt}</p>}
-          <div className="flex items-center gap-3"><div className="relative w-10 h-10 rounded-full overflow-hidden"><Image src="/images/me/avatar.jpg" alt="" fill sizes="40px" className="object-cover" /></div><div className="flex flex-col"><Link href="/about" rel="author" className="text-[13px] font-bold hover:text-accent-deep">Angel Phommachan</Link><span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{site.role.toLowerCase()}</span></div></div>
+          <div className="flex items-center gap-3"><div className="relative w-10 h-10 rounded-full overflow-hidden"><Image src="/images/me/avatar.jpg" alt="" fill sizes="40px" className="object-cover" /></div><div className="flex flex-col"><Link href="/about" rel="author" className="text-[13px] font-bold hover:text-accent-deep">Angel Phommachan</Link><span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{site.role.toLowerCase()}</span></div></div>
         </div>
       </header>
       {post.cover && <CoverImage variant="hero" src={post.cover} alt={post.coverAlt ?? post.title} priority credit={post.coverCredit} creditUrl={post.coverCreditUrl} />}
@@ -101,7 +101,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <ShareBar slug={post.slug} path={`/blog/${post.slug}`} title={post.title} linkedinPost={post.linkedinPost} />
           {series.length > 1 && (
             <div className="border-2 border-line rounded-3xl p-5 flex flex-col gap-2">
-              <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{post.series} · {idx + 1} of {series.length}</span>
+              <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{post.series} · {idx + 1} of {series.length}</span>
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-[14px] font-bold">
                 {idx > 0 && <Link href={`/blog/${series[idx - 1].slug}`} className="hit hover:text-accent-deep">← {series[idx - 1].title}</Link>}
                 {idx < series.length - 1 && <Link href={`/blog/${series[idx + 1].slug}`} className="hit hover:text-accent-deep">{series[idx + 1].title} →</Link>}
@@ -115,8 +115,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </nav>
           )}
         </div><div className="hidden lg:block" /></div>
-      {commentsEnabled && <div className="py-12 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,760px)_1fr]"><div className="hidden lg:block" /><div className="flex flex-col gap-5 min-w-0"><h2 id="comments" className="text-h3 font-display font-normal tracking-[-0.01em] scroll-mt-24">comments.</h2><Comments /></div><div className="hidden lg:block" /></div>}
-      {related.length > 0 && <div className="py-12 flex flex-col gap-6"><h2 className="text-h2 font-display font-normal tracking-[-0.01em]">read next.</h2><div className="grid gap-6 md:grid-cols-3">{related.map((p) => <PostCard key={p.slug} post={p} layout="row" />)}</div></div>}
+      {commentsEnabled && <div className="py-12 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,760px)_1fr]"><div className="hidden lg:block" /><div className="flex flex-col gap-5 min-w-0"><h2 id="comments" className="text-h3 font-display font-semibold tracking-[-0.015em] scroll-mt-24">Comments</h2><Comments /></div><div className="hidden lg:block" /></div>}
+      {related.length > 0 && <div className="py-12 flex flex-col gap-6"><h2 className="text-h2 font-display font-semibold tracking-[-0.015em]">Read next</h2><div className="grid gap-6 md:grid-cols-3">{related.map((p) => <PostCard key={p.slug} post={p} layout="row" />)}</div></div>}
     </article>
   );
 }

@@ -24,7 +24,7 @@ export function ContactForm() {
   if (state === "ok") return <p className="text-[19px] font-bold text-accent-deep">{msg}</p>;
 
   const field = "border-2 border-ink rounded-2xl bg-card px-4 py-3 text-[16px]";
-  const label = "text-[11px] font-mono font-medium uppercase tracking-[0.08em]";
+  const label = "text-[12px] font-mono font-medium uppercase tracking-[0.08em]";
   return (
     <form onSubmit={submit} className="flex flex-col gap-5">
       <div className="grid gap-5 sm:grid-cols-2">

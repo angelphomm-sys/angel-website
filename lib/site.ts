@@ -16,7 +16,7 @@ export const site = {
   mission: "Give people a clear reason to show up, and say it plainly enough that they do.",
   values: [
     { title: "Say it plainly.", line: "Short sentences, real nouns, no jargon. The blog is written the same way.", proof: { label: "read the blog →", href: "/blog" } },
-    { title: "One idea, every channel.", line: "Nine pieces, print and social, all pointing at one ask.", proof: { label: "see the campaign →", href: "/case/embracing-our-story" } },
+    { title: "One idea, every channel.", line: "Nine pieces, print and social, all pointing at one ask.", proof: { label: "See the campaign →", href: "/case/embracing-our-story" } },
     { title: "Check the number.", line: "The menu sitelink on my Thai restaurant campaign drew a 24% click rate, the best of any ad piece.", proof: { label: "see the receipt →", href: "/case/thai-google-ads" } },
     { title: "Build for the people in the room.", line: "I pitched the Hope Scholars marketing role, then built the Instagram, content pillars, and donor materials on my own.", proof: { label: "see Hope Scholars →", href: "/work#for-good" } },
   ],
@@ -89,11 +89,11 @@ export const postTypes = {
 export type PostType = keyof typeof postTypes;
 
 export const nav = [
-  { n: 1, label: "hello.", href: "/" },
-  { n: 2, label: "work.", href: "/work" },
-  { n: 3, label: "photography.", href: "/photography" },
-  { n: 4, label: "blog.", href: "/blog" },
-  { n: 5, label: "about.", href: "/about" },
+  { n: 1, label: "Home", href: "/" },
+  { n: 2, label: "Work", href: "/work" },
+  { n: 3, label: "Photography", href: "/photography" },
+  { n: 4, label: "Blog", href: "/blog" },
+  { n: 5, label: "About", href: "/about" },
 ] as const;
 
 export const workTypes = {
@@ -108,25 +108,25 @@ export type WorkType = keyof typeof workTypes;
 
 // /work is sorted by marketing discipline, in this order. Only disciplines with work show a group.
 export const disciplines = {
-  "paid-search": "paid search.",
-  "landing-page": "landing page.",
-  email: "email.",
-  "brand-campaign": "brand campaign.",
-  photography: "photography.",
-  content: "content.",
-  events: "events.",
+  "paid-search": "Paid search",
+  "landing-page": "Landing page",
+  email: "Email",
+  "brand-campaign": "Brand campaign",
+  photography: "Photography",
+  content: "Content",
+  events: "Events",
 } as const;
 export type Discipline = keyof typeof disciplines;
 
 // A card's link, one verb per discipline, so a page of cards never repeats one line four times.
 export const workLinks: Record<Discipline, string> = {
-  "paid-search": "see the campaign →",
-  email: "see the emails →",
-  "brand-campaign": "see the campaign →",
-  "landing-page": "see the page →",
-  events: "see the event →",
-  photography: "see the photos →",
-  content: "see the posts →",
+  "paid-search": "See the campaign →",
+  email: "See the emails →",
+  "brand-campaign": "See the campaign →",
+  "landing-page": "See the page →",
+  events: "See the event →",
+  photography: "See the photos →",
+  content: "See the posts →",
 };
 
 // Where a piece came from, shown on every card: paid client work, spec work, a self-initiated concept, or a class assignment.

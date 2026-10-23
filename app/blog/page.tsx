@@ -29,7 +29,7 @@ export default function Journal() {
   return (
     <div className="mx-auto max-w-[1440px] px-5 md:px-20 py-14 flex flex-col gap-8">
       <JsonLd data={collection} />
-      <div className="flex flex-col gap-3"><h1 className="text-h1 font-display font-normal tracking-[-0.01em] leading-none"><span className="num" aria-hidden="true">4</span>blog.</h1></div>
+      <div className="flex flex-col gap-3"><h1 className="text-h1 font-display font-semibold tracking-[-0.015em] leading-none">Blog</h1></div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{posts.map((p, i) => <PostCard key={p.slug} post={p} showMeta priority={i === 0} />)}</div>
       {posts.length === 0 && <p className="hand text-[20px] text-mid">nothing here yet.</p>}
     </div>

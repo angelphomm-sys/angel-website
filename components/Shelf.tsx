@@ -21,7 +21,7 @@ export function Shelf({ books: all, compact = false }: { books: Book[]; compact?
               <div className="spine" style={{ background: b.color }} />
               <div className="pages" />
               <div className="inside">
-                <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{b.kind}{b.status ? ` · ${b.status}` : ""}</span>
+                <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{b.kind}{b.status ? ` · ${b.status}` : ""}</span>
                 {b.quote ? (
                   <>
                     <span className="hand block text-[14px] leading-snug mt-1">&ldquo;{b.quote}&rdquo;</span>
@@ -39,7 +39,7 @@ export function Shelf({ books: all, compact = false }: { books: Book[]; compact?
                 ) : (
                   <div className="w-full h-full flex flex-col justify-between p-3">
                     {b.kind !== "book" && <span className="self-start text-[9px] font-bold uppercase tracking-[0.12em] border border-white/60 rounded px-1.5 py-0.5">{b.kind}</span>}
-                    <span className="text-[15px] font-display font-normal leading-tight tracking-[-0.01em]">{b.title}</span>
+                    <span className="text-[15px] font-display font-semibold leading-tight tracking-[-0.015em]">{b.title}</span>
                   </div>
                 )}
                 {b.reading && <span className="ribbon absolute -top-1 right-4 w-2.5 h-12 bg-accent rounded-b-sm" aria-hidden="true" />}
@@ -49,7 +49,7 @@ export function Shelf({ books: all, compact = false }: { books: Book[]; compact?
               <span className="text-[14px] font-bold leading-tight">{b.title}</span>
               {b.author && <span className="text-[12px] text-mid">{b.author}</span>}
               {b.status && <span className="hand text-[12px] text-accent-deep">{b.status}</span>}
-              {b.link && <a href={b.link.href} className="hit mt-1 font-mono text-[11px] border-b border-accent hover:text-accent-deep">{b.link.label} →</a>}
+              {b.link && <a href={b.link.href} className="hit mt-1 font-mono text-[12px] border-b border-accent hover:text-accent-deep">{b.link.label} →</a>}
             </div>
           </div>
         ))}

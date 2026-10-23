@@ -50,7 +50,7 @@ export function Stack() {
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {stack.map((g) => (
         <div key={g.group} className="border border-line bg-card rounded-3xl p-6 flex flex-col gap-4">
-          <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{g.group}</span>
+          <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{g.group}</span>
           <ul className="flex flex-col gap-3">
             {g.tools.map((t) => (
               <li key={t.name} className="flex items-center gap-3"><ToolIcon t={t} /><span className="flex flex-col leading-tight"><span className="text-[14px] font-bold">{t.name}</span>{showNote(t.note) && <span className="text-[11px] text-mid">{t.note}</span>}</span></li>

@@ -2,8 +2,8 @@ import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 import { brand, brandMarkPng } from "@/lib/brand-art";
 
-// The default share card for any page without its own picture: the stacked wordmark in cream on oxblood, the role and the
-// address in small tracked capitals. The wordmark is a picture of the traced logo; ImageResponse cannot use the Typekit faces.
+// The default share card for any page without its own picture: the stacked wordmark in cream on red, the role and the
+// address in small tracked capitals. The wordmark is a picture of the traced logo; ImageResponse cannot load the web font.
 export const alt = `${site.name}, ${site.role.toLowerCase()}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

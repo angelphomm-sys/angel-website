@@ -18,8 +18,8 @@ export function ShippedPostsRow({ posts = shippedPosts, intro = shippedIntro }: 
           <li key={p.slug} className="shrink-0 w-[72vw] max-w-[300px] md:w-auto md:max-w-none snap-center flex flex-col items-center gap-4">
             <LivePhone post={p} />
             <div className="flex flex-col gap-1 text-center max-w-[300px]">
-              <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">Shyft · {p.format}</span>
-              <span className="text-[18px] font-display font-normal tracking-[-0.01em] leading-tight">{p.title}</span>
+              <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">Shyft · {p.format}</span>
+              <span className="text-[18px] font-display font-semibold tracking-[-0.015em] leading-tight">{p.title}</span>
               <span className="text-[15px] leading-relaxed text-mid">{p.why}</span>
               <a href={p.href} target="_blank" rel="noopener noreferrer" className="hit self-center mt-1 font-mono text-[12px] font-medium border-b border-accent hover:text-accent-deep">see it on Instagram ↗</a>
             </div>

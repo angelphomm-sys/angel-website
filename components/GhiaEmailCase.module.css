@@ -21,7 +21,7 @@
 /* The site's small label: Ballinger Mono, uppercase, tracked, near-black. */
 .lab { font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
 /* Section heads on the site's scale, sentence case as written. */
-.h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; line-height: 1; font-size: var(--text-h2, clamp(2rem, 1.6rem + 1.2vw, 2.5rem)); margin: 10px 0 0; text-wrap: balance; }
+.h2 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; line-height: 1; font-size: var(--text-h2, clamp(2rem, 1.6rem + 1.2vw, 2.5rem)); margin: 10px 0 0; text-wrap: balance; }
 .line { font-size: 18px; line-height: 1.4; margin-top: 10px !important; max-width: 60ch; }
 /* the strategy paragraph */
 .para { font-size: 18px; line-height: 1.5; margin-top: 12px !important; max-width: 64ch; text-wrap: pretty; }
@@ -30,7 +30,7 @@
 .subnav { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--color-paper) 95%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-line); }
 .subnavIn { max-width: 1160px; margin: 0 auto; padding: 0 20px; min-height: 44px; display: flex; align-items: center; gap: 14px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
 .subnavIn::-webkit-scrollbar { display: none; }
-.subnavBrand { font-family: var(--font-display); font-weight: 400; font-size: 18px; letter-spacing: -0.01em; line-height: 1; flex: none; }
+.subnavBrand { font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; line-height: 1; flex: none; }
 .subnavLinks { margin-left: auto; display: flex; gap: 18px; font-family: var(--font-mono); font-weight: 500; font-size: 13px; text-transform: lowercase; flex: none; }
 .subnavLinks a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; } /* 44px tap targets; the row is 44px tall either way */
 .subnavLinks a:hover { text-decoration: underline; text-underline-offset: 4px; }
@@ -38,7 +38,7 @@
 /* hero */
 .hero { padding-block: 32px 8px; }
 @media (min-width: 768px) { .hero { padding-block: 40px 8px; } }
-.h1 { margin: 12px 0 0; font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; font-size: var(--text-title, clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem)); line-height: 1.02; text-wrap: balance; }
+.h1 { margin: 12px 0 0; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; font-size: var(--text-title, clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem)); line-height: 1.02; text-wrap: balance; }
 .by { margin-top: 12px !important; font-size: 15px; }
 .by b { font-weight: 600; }
 
@@ -55,7 +55,7 @@
 
 .shelf { list-style: none; margin: 14px 0 0; padding: 0; display: flex; justify-content: space-between; gap: 40px; }
 .shelfItem { flex: none; width: var(--colW); display: flex; flex-direction: column; }
-.rowTitle { font-family: var(--font-display); font-weight: 400; font-size: 19px; line-height: 1.3; }
+.rowTitle { font-family: var(--font-display); font-weight: 600; font-size: 19px; line-height: 1.3; }
 .rowNum { font-family: var(--font-mono); font-weight: 500; color: var(--color-oxblood); font-size: 11px; letter-spacing: 0.1em; margin-right: 4px; font-variant-numeric: tabular-nums; }
 .rowLine { margin-top: 1px !important; font-size: 14px; line-height: 1.35; }
 
@@ -88,6 +88,6 @@
 /* build: short items, two columns, plain lines */
 .build { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; margin: 20px 0 0; }
 .build div { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--color-line); }
-.build dt { font-family: var(--font-display); font-weight: 400; font-size: 26px; letter-spacing: -0.01em; line-height: 1.1; }
+.build dt { font-family: var(--font-display); font-weight: 600; font-size: 26px; letter-spacing: -0.01em; line-height: 1.1; }
 .build dd { margin: 0; font-size: 17px; }
 @media (max-width: 640px) { .build { grid-template-columns: minmax(0, 1fr); } }

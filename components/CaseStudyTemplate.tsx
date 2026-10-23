@@ -29,7 +29,7 @@ function Part({ step, aside, children }: { step: CaseStep; aside?: string; child
     <section id={step.id} className="flex flex-col gap-4 py-8 md:py-10 scroll-mt-16 lg:scroll-mt-6">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <span className="font-mono text-[12px] font-medium tabular-nums text-accent-deep">{step.n}</span>
-        <h2 className="text-[24px] md:text-[28px] font-display font-normal tracking-[-0.01em] leading-tight">{step.label}</h2>
+        <h2 className="text-[24px] md:text-[28px] font-display font-semibold tracking-[-0.015em] leading-tight">{step.label}</h2>
         {aside && <span className="hand text-[13px] text-mid">{aside}</span>}
       </div>
       <div className="flex flex-col gap-4 text-[17px] leading-relaxed [&>p]:max-w-[65ch]">{children}</div>
@@ -78,7 +78,7 @@ function BeforeAfter({ before, after, note, tint }: { before: Visual; after: Vis
       <div className="grid gap-4 grid-cols-2">
         {[["before", before], ["after", after]].map(([label, v]) => (
           <figure key={label as string} className="flex flex-col gap-2 m-0">
-            <span className={`self-start text-[11px] font-mono font-medium uppercase tracking-[0.08em] rounded-full px-3 py-1 ${label === "after" ? "bg-accent text-cream" : "bg-mist text-mid"}`}>{label as string}</span>
+            <span className={`self-start text-[12px] font-mono font-medium uppercase tracking-[0.08em] rounded-full px-3 py-1 ${label === "after" ? "bg-accent text-cream" : "bg-mist text-mid"}`}>{label as string}</span>
             <Frame v={v as Visual} tint={tint} />
             {(v as Visual).caption && <figcaption className="text-[12px] text-mid">{(v as Visual).caption}</figcaption>}
           </figure>
@@ -95,11 +95,11 @@ export function MeasurePlan({ rows, concept }: { rows: Measure[]; concept: boole
       <h3 className="text-[13px] font-mono font-medium uppercase tracking-[0.1em] text-mid">{concept ? "what I would measure" : "what I measured"}</h3>
       <div className="overflow-x-auto -mx-1">
         <table className="w-full min-w-[640px] text-[16px] leading-normal ">
-          <thead><tr className="text-left text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid"><th className="py-2.5 pr-4 font-bold">metric</th><th className="py-2.5 pr-4 font-bold">{concept ? "hypothesis" : "what I was testing"}</th><th className="py-2.5 pr-4 font-bold">window</th><th className="py-2.5 font-bold">where</th></tr></thead>
+          <thead><tr className="text-left text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid"><th className="py-2.5 pr-4 font-bold">metric</th><th className="py-2.5 pr-4 font-bold">{concept ? "hypothesis" : "what I was testing"}</th><th className="py-2.5 pr-4 font-bold">window</th><th className="py-2.5 font-bold">where</th></tr></thead>
           <tbody>
             {rows.map((r) => (
               <tr key={r.metric} className="align-top">
-                <td className="py-3 pr-4 font-display font-normal tracking-[-0.01em]">{r.metric}</td>
+                <td className="py-3 pr-4 font-display font-semibold tracking-[-0.015em]">{r.metric}</td>
                 <td className="py-3 pr-4 text-mid">{r.hypothesis}</td>
                 <td className="py-3 pr-4 whitespace-nowrap">{r.window}</td>
                 <td className="py-3 text-mid">{r.tool ?? ""}</td>
@@ -120,7 +120,7 @@ export function CaseCtaRow({ slug, post }: { slug: string; concept?: boolean; po
   const nextInner = next && (
     <>
       <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em]">up next · {next.title}</span>
-      <span className="text-[22px] font-display font-normal tracking-[-0.01em]">see the next case study →</span>
+      <span className="text-[22px] font-display font-semibold tracking-[-0.015em]">see the next case study →</span>
     </>
   );
   return (
@@ -142,7 +142,7 @@ export function RelatedWork({ items, heading }: { items: WorkItem[]; heading: st
     <section className="flex flex-col gap-4">
       <div className="flex items-baseline justify-between gap-3"><h2 className="text-[13px] font-mono font-medium uppercase tracking-[0.1em] text-mid">{heading}</h2><Link href="/work" className="hit font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep hover:border-accent-deep">all the work →</Link></div>
       <div className="grid gap-4 sm:grid-cols-3">
-        {items.map((w) => { const to = linkFor(w)!; const inner = (<><span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{disciplines[w.discipline].replace(/\.$/, "")}</span><span className="text-[18px] font-display font-normal tracking-[-0.01em] leading-tight">{w.title}</span><span className="text-[12px] font-bold text-accent-deep">{proofFor(w)}</span></>); const cls = "flex flex-col gap-2 border-2 border-line rounded-3xl p-5 hover:border-ink transition-colors";
+        {items.map((w) => { const to = linkFor(w)!; const inner = (<><span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{disciplines[w.discipline].replace(/\.$/, "")}</span><span className="text-[18px] font-display font-semibold tracking-[-0.015em] leading-tight">{w.title}</span><span className="text-[12px] font-bold text-accent-deep">{proofFor(w)}</span></>); const cls = "flex flex-col gap-2 border-2 border-line rounded-3xl p-5 hover:border-ink transition-colors";
           return to.startsWith("http") ? <a key={w.slug} href={to} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a> : <Link key={w.slug} href={to} className={cls}>{inner}</Link>; })}
       </div>
     </section>
@@ -182,7 +182,7 @@ export function CaseStudyTemplate({ item }: { item: WorkItem & { caseStudy: NonN
 
       <header className="grid gap-6 lg:grid-cols-[1fr_380px] lg:gap-12 items-start">
         <div className="flex flex-col gap-4">
-          <h1 className="text-[38px] md:text-[56px] font-display font-normal tracking-[-0.01em] leading-[1.02] text-balance">{item.title}</h1>
+          <h1 className="text-[38px] md:text-[56px] font-display font-semibold tracking-[-0.015em] leading-[1.02] text-balance">{item.title}</h1>
           <p className="text-[18px] leading-relaxed max-w-[620px]">{item.blurb}</p>
           {c.concept && <p className="text-[16px] leading-relaxed text-mid border-l-2 border-accent pl-4 max-w-[560px]">{c.concept.disclaimer}</p>}
           {c.disclosure && <p className="text-[16px] leading-relaxed text-mid border-l-2 border-accent pl-4 max-w-[560px]">{c.disclosure}</p>}
@@ -196,7 +196,7 @@ export function CaseStudyTemplate({ item }: { item: WorkItem & { caseStudy: NonN
       <div className="grid gap-8 lg:grid-cols-[190px_minmax(0,1fr)] lg:gap-14 items-start">
         <CaseRail steps={steps} />
         <div className="flex flex-col min-w-0">
-          {c.opener && <p className="text-[20px] md:text-[23px] leading-snug tracking-[-0.01em] max-w-[760px] pb-1">{c.opener}</p>}
+          {c.opener && <p className="text-[20px] md:text-[23px] leading-snug tracking-[-0.015em] max-w-[760px] pb-1">{c.opener}</p>}
 
           <Part step={step("brief")}>
             <p><strong>{concept ? "What I set out to do." : "What was asked."}</strong> {c.brief.ask}</p>
@@ -228,7 +228,7 @@ export function CaseStudyTemplate({ item }: { item: WorkItem & { caseStudy: NonN
 
           {c.decision && (
             <Part step={step("decision")} aside="the strategic call">
-              <p className="text-[21px] font-display font-normal tracking-[-0.01em] leading-tight border-l-2 border-accent pl-4">{c.decision.call}</p>
+              <p className="text-[21px] font-display font-semibold tracking-[-0.015em] leading-tight border-l-2 border-accent pl-4">{c.decision.call}</p>
               <p>{c.decision.why}</p>
               <p><strong>The tradeoff.</strong> {c.decision.tradeoff}</p>
             </Part>
@@ -241,7 +241,7 @@ export function CaseStudyTemplate({ item }: { item: WorkItem & { caseStudy: NonN
               {c.analysis.sections.map((sec) => {
                 const text = (
                   <div className="flex flex-col gap-3">
-                    <h3 className="text-[18px] font-display font-normal tracking-[-0.01em] leading-tight">{sec.heading}</h3>
+                    <h3 className="text-[18px] font-display font-semibold tracking-[-0.015em] leading-tight">{sec.heading}</h3>
                     {sec.body.map((b) => <p key={b}>{b}</p>)}
                   </div>
                 );
@@ -267,7 +267,7 @@ export function CaseStudyTemplate({ item }: { item: WorkItem & { caseStudy: NonN
               {c.result.numbers.length > 0 && (
                 <div className="grid gap-x-6 gap-y-5 sm:grid-cols-3">
                   {c.result.numbers.map((r) => (
-                    <p key={r} className="bg-paper m-0 px-1 py-4 sm:px-4 sm:first:pl-0 text-[17px] font-display font-normal tracking-[-0.01em] leading-normal">{r}</p>
+                    <p key={r} className="bg-paper m-0 px-1 py-4 sm:px-4 sm:first:pl-0 text-[17px] font-display font-semibold tracking-[-0.015em] leading-normal">{r}</p>
                   ))}
                 </div>
               )}
@@ -284,7 +284,7 @@ export function CaseStudyTemplate({ item }: { item: WorkItem & { caseStudy: NonN
             <ol className="flex flex-col gap-2.5">
               {differently.map((d, i) => (
                 <li key={d} className="flex gap-3 items-baseline">
-                  <span className="font-mono text-[11px] font-medium tabular-nums text-accent-deep shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-mono text-[12px] font-medium tabular-nums text-accent-deep shrink-0">{String(i + 1).padStart(2, "0")}</span>
                   <span className={d.trim().startsWith("[") ? "text-[14px] font-medium leading-relaxed" : "text-[16px] leading-relaxed"}>{d}</span>
                 </li>
               ))}

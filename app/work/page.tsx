@@ -20,23 +20,23 @@ export default function Work() {
   return (
     <div className="mx-auto max-w-[1440px] px-5 md:px-20 py-6 md:py-8 flex flex-col gap-5">
       <div className="flex flex-col gap-3">
-        <h1 className="text-h1 font-display font-normal tracking-[-0.01em] leading-none"><span className="num" aria-hidden="true">2</span>work.</h1>
+        <h1 className="text-h1 font-display font-semibold tracking-[-0.015em] leading-none">Work</h1>
       </div>
       {groups.filter(({ d }) => d !== "events").map(({ d, items }) => (
         <section key={d} id={d} className="pt-8 pb-6 flex flex-col gap-4 scroll-mt-20">
-          <h2 className="text-h3 font-display font-normal tracking-[-0.01em] leading-none">{disciplines[d]}</h2>
+          <h2 className="text-h3 font-display font-semibold tracking-[-0.015em] leading-none">{disciplines[d]}</h2>
           <ProjectList items={items} />
         </section>
       ))}
       {/* Social: posts made and published for Shyft. (The spec posts for Ghia, Graza, and Fishwife came off 2026-10-13.) */}
       <section id="social" className="pt-8 pb-6 flex flex-col gap-4 scroll-mt-20">
-        <h2 className="text-h3 font-display font-normal tracking-[-0.01em] leading-none">social.</h2>
+        <h2 className="text-h3 font-display font-semibold tracking-[-0.015em] leading-none">Social</h2>
         <ShippedPostsRow />
       </section>
       {/* Events last: the Lao New Year concept closes the page. */}
       {groups.filter(({ d }) => d === "events").map(({ d, items }) => (
         <section key={d} id={d} className="pt-8 pb-6 flex flex-col gap-4 scroll-mt-20">
-          <h2 className="text-h3 font-display font-normal tracking-[-0.01em] leading-none">{disciplines[d]}</h2>
+          <h2 className="text-h3 font-display font-semibold tracking-[-0.015em] leading-none">{disciplines[d]}</h2>
           <ProjectList items={items} />
         </section>
       ))}

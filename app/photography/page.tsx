@@ -29,7 +29,7 @@ export default function Photography() {
     <>
       <section className="mx-auto max-w-[1440px] px-5 md:px-20 py-8 md:py-10 grid gap-6 xl:grid-cols-[1fr_420px] xl:items-end">
         <div className="flex flex-col gap-4">
-          <h1 className="text-[40px] sm:text-[56px] md:text-[88px] font-display font-normal tracking-[-0.01em] leading-none"><span className="num" aria-hidden="true">3</span>photography.</h1>
+          <h1 className="text-[40px] sm:text-[56px] md:text-[88px] font-display font-semibold tracking-[-0.015em] leading-none">Photography</h1>
         </div>
         <div className="flex gap-5 items-end">
           <div className="relative shrink-0 w-[112px] sm:w-[140px] aspect-[2/3] rounded-2xl overflow-hidden bg-mist">

@@ -49,7 +49,7 @@ export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro
                 <Phone post={p} />
               </button>
               <div className="flex flex-col gap-1 text-center max-w-[340px]">
-                <span className="text-[18px] font-display font-normal tracking-[-0.01em] leading-tight">{p.title}</span>
+                <span className="text-[18px] font-display font-semibold tracking-[-0.015em] leading-tight">{p.title}</span>
                 <span className="text-[15px] leading-relaxed text-mid">{p.why}</span>
               </div>
             </>
@@ -68,8 +68,8 @@ export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro
               <Phone post={p} />
             </button>
             <div className="flex flex-col gap-1 text-center max-w-[300px]">
-              <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{p.brand} · {p.format}</span>
-              <span className="text-[18px] font-display font-normal tracking-[-0.01em] leading-tight">{p.title}</span>
+              <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{p.brand} · {p.format}</span>
+              <span className="text-[18px] font-display font-semibold tracking-[-0.015em] leading-tight">{p.title}</span>
               <span className="text-[15px] leading-relaxed text-mid">{p.why}</span>
               {!p.note && <span className="text-[12px] leading-snug text-mid mt-1">Spec concept · not affiliated with {p.brand}</span>}
             </div>
@@ -87,8 +87,8 @@ export function SocialSpecRow({ posts = socialSpecPosts, intro = socialSpecIntro
             </div>
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-2">
-                <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{open.brand} · {open.format} · @{open.handle}</span>
-                <h3 id="spec-dialog-title" className="text-h3 font-semibold tracking-[-0.01em]">{open.title}</h3>
+                <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{open.brand} · {open.format} · @{open.handle}</span>
+                <h3 id="spec-dialog-title" className="text-h3 font-semibold tracking-[-0.015em]">{open.title}</h3>
               </div>
               <div className="flex flex-col gap-1 text-[16px] leading-relaxed">
                 <span className="text-[12px] font-bold uppercase tracking-[0.08em]">Caption</span>

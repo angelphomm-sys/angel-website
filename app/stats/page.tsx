@@ -56,7 +56,7 @@ export default async function StatsPage() {
     <div className="mx-auto max-w-[1440px] px-5 md:px-20 py-12 md:py-14 flex flex-col gap-8">
       <header className="flex flex-col gap-3 max-w-[720px]">
         <span className="hand text-[18px] text-accent-deep">the numbers behind this site</span>
-        <h1 className="text-[44px] md:text-[64px] font-display font-normal tracking-[-0.01em] leading-[1.02]">stats.</h1>
+        <h1 className="text-[44px] md:text-[64px] font-display font-semibold tracking-[-0.015em] leading-[1.02]">Stats</h1>
         <p className="text-[18px] leading-relaxed">My own funnel, in public. Read from Google Analytics and YouTube every hour, never edited by hand.</p>
         {gaError && <p className="text-[13px] text-accent-deep">Analytics error: {gaError}</p>}
         {!live && !gaError && <p className="text-[13px] text-mid">Not connected yet. Everything below is wired and marked pending until the analytics keys are set.</p>}

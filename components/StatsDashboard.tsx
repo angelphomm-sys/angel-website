@@ -83,7 +83,7 @@ function Bars({ rows, live, unit = "" }: { rows: Row[]; live: boolean; unit?: st
 }
 
 function Big({ n, l, live }: { n: number | string; l: string; live: boolean }) {
-  return <div className="flex flex-col"><span className={`text-[40px] md:text-[48px] font-display font-normal tracking-[-0.01em] leading-none ${live ? "text-accent" : "text-mid"}`}>{live ? (typeof n === "number" ? fmt(n) : n) : "·"}</span><span className="text-[12px] text-mid">{l}</span></div>;
+  return <div className="flex flex-col"><span className={`text-[40px] md:text-[48px] font-display font-semibold tracking-[-0.015em] leading-none ${live ? "text-accent" : "text-mid"}`}>{live ? (typeof n === "number" ? fmt(n) : n) : "·"}</span><span className="text-[12px] text-mid">{l}</span></div>;
 }
 
 function Panel({ title, aside, children, className = "" }: { title: string; aside?: string; children: React.ReactNode; className?: string }) {

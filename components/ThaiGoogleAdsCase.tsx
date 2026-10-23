@@ -19,7 +19,7 @@ import s from "./ThaiGoogleAdsCase.module.css";
 const SLUG = "thai-google-ads";
 const shadow = "shadow-[0_1px_2px_rgba(27,22,20,0.06),0_8px_24px_rgba(27,22,20,0.07)]";
 const card = `bg-card rounded-2xl ${shadow}`;
-const eyebrow = "font-mono text-[11px] font-medium uppercase tracking-[0.1em]";
+const eyebrow = "font-mono text-[12px] font-medium uppercase tracking-[0.1em]";
 
 /* ── The tracker: five steps, each label is its section's heading ── */
 
@@ -46,7 +46,7 @@ function OrderStatus() {
           <span className={`w-2 h-2 rounded-full shrink-0 bg-oxblood ${delivered ? "" : s.live}`} aria-hidden="true" />
           <span className="font-display text-[15px] shrink-0 text-ink">{now.label}</span>
           <span className="font-mono text-[12px] text-mid truncate">· {now.tag}</span>
-          <span className="ml-auto shrink-0 font-mono text-[11px] font-medium tabular-nums text-mid">{at + 1} of {steps.length}</span>
+          <span className="ml-auto shrink-0 font-mono text-[12px] font-medium tabular-nums text-mid">{at + 1} of {steps.length}</span>
         </p>
         <ol className="pt-2 grid grid-cols-5 gap-1.5 max-[359px]:gap-1">
           {steps.map((step, i) => {
@@ -62,7 +62,7 @@ function OrderStatus() {
                   className="hit block pt-1 pb-0.5"
                 >
                   <span className={`block h-1.5 rounded-full transition-colors duration-300 ${bar}`} />
-                  <span className={`block mt-1.5 font-mono text-[9px] sm:text-[11px] font-medium uppercase leading-tight tracking-[0.02em] sm:tracking-[0.04em] ${on || i < at ? "text-ink" : "text-mid/60"}`}>{step.label}</span>
+                  <span className={`block mt-1.5 font-mono text-[9px] sm:text-[12px] font-medium uppercase leading-tight tracking-[0.02em] sm:tracking-[0.04em] ${on || i < at ? "text-ink" : "text-mid/60"}`}>{step.label}</span>
                 </a>
               </li>
             );
@@ -96,7 +96,7 @@ function SectionHead({ id }: { id: StepId }) {
   return (
     <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
       <h2 className="text-[30px] md:text-[38px] leading-tight">{step.label}</h2>
-      <span className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-accent-deep" data-copy="row">{step.tag}</span>
+      <span className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-accent-deep" data-copy="row">{step.tag}</span>
     </div>
   );
 }
@@ -105,7 +105,7 @@ function SectionHead({ id }: { id: StepId }) {
 function Row({ k, v }: { k: string; v: React.ReactNode }) {
   return (
     <div className="flex items-baseline justify-between gap-4 py-2.5 border-t border-line first:border-t-0" data-copy="row">
-      <dt className="font-mono text-[11px] uppercase tracking-[0.04em] leading-snug text-mid min-w-0">{k}</dt>
+      <dt className="font-mono text-[12px] uppercase tracking-[0.04em] leading-snug text-mid min-w-0">{k}</dt>
       <dd className="m-0 max-w-[64%] text-[15px] font-bold text-right leading-snug">{v}</dd>
     </div>
   );
@@ -145,7 +145,7 @@ function StoreHeader({ banner }: { banner?: string }) {
         <span className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[10px] font-medium uppercase tracking-[0.08em] bg-cream text-ink rounded-full px-3 py-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-oxblood" aria-hidden="true" />delivered
         </span>
-        <span className="absolute right-4 top-4 font-mono text-[11px] text-cream bg-ink/55 rounded-full px-2.5 py-1">order #012726</span>
+        <span className="absolute right-4 top-4 font-mono text-[12px] text-cream bg-ink/55 rounded-full px-2.5 py-1">order #012726</span>
       </div>
 
       <div className="relative px-4 sm:px-6 pb-5">
@@ -154,7 +154,7 @@ function StoreHeader({ banner }: { banner?: string }) {
           <BowlIcon />
         </span>
 
-        <h1 className="text-[32px] md:text-[44px] font-normal tracking-[-0.01em] leading-[1.05]">A local Thai restaurant</h1>
+        <h1 className="text-[32px] md:text-[44px] font-normal tracking-[-0.015em] leading-[1.05]">A local Thai restaurant</h1>
         <p className="mt-1.5 font-mono text-[12px] uppercase tracking-[0.06em] text-mid" data-copy="row">Thai · Takeout · Utah County</p>
 
         <div className="mt-4 flex flex-wrap gap-1.5">
@@ -249,7 +249,7 @@ function Menu() {
   return (
     <div className={`${card} px-4 sm:px-5 py-2`}>
       <div className="flex items-center justify-between gap-3 py-3 border-b border-line" data-copy="row">
-        <h3 className="text-[19px] font-display font-normal">Keywords</h3>
+        <h3 className="text-[19px] font-display font-semibold">Keywords</h3>
         <span className="font-mono text-[10px] uppercase tracking-[0.06em] text-mid">clicks · orders · spent</span>
       </div>
       <ul>
@@ -258,7 +258,7 @@ function Menu() {
             <span className="flex-1 min-w-0 flex flex-col gap-1">
               {d.badge && <span className="self-start rounded-md bg-oxblood text-cream px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.06em]">{d.badge}</span>}
               <span className="text-[16px] font-bold leading-snug">“{d.kw}”</span>
-              <span className="font-mono text-[11px] text-mid tabular-nums">
+              <span className="font-mono text-[12px] text-mid tabular-nums">
                 {d.clicks} clicks · {d.orders} orders{d.note ? ` · ${d.note}` : ""}
               </span>
             </span>
@@ -275,7 +275,7 @@ function Menu() {
           {soldOut.map((d) => (
             <li key={d.kw} className="flex items-baseline justify-between gap-3 py-1.5">
               <span className="text-[15px] leading-snug line-through decoration-1">“{d.kw}”</span>
-              <span className="shrink-0 font-mono text-[11px] tabular-nums">{d.clicks} clicks · {d.cost}</span>
+              <span className="shrink-0 font-mono text-[12px] tabular-nums">{d.clicks} clicks · {d.cost}</span>
             </li>
           ))}
         </ul>
@@ -378,7 +378,7 @@ function DriverCard() {
       <div className="px-4 sm:px-5 pt-3.5 pb-2 sm:py-4">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1" data-copy="row">
           <span className={`${eyebrow} text-accent-deep`}>Where the orders came from</span>
-          <span className="font-mono text-[11px] tabular-nums text-mid">Jan 27 to Mar 3</span>
+          <span className="font-mono text-[12px] tabular-nums text-mid">Jan 27 to Mar 3</span>
         </div>
         <p className="mt-1.5 text-[19px] font-bold leading-snug">Most orders came from the restaurant’s home town</p>
         <dl className="mt-2 m-0">
@@ -403,7 +403,7 @@ function Notification({ title, children }: { title: string; children?: React.Rea
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between gap-3" data-copy="row">
           <span className={`${eyebrow} text-mid`}>Driver update</span>
-          <span className="font-mono text-[11px] text-mid">Mar 3</span>
+          <span className="font-mono text-[12px] text-mid">Mar 3</span>
         </div>
         <p className="mt-0.5 text-[16px] font-bold leading-snug">{title}</p>
         {children}
@@ -629,11 +629,11 @@ function Receipt({ tools }: { tools: string[] }) {
         className={`${s.printer} ${busy ? s.busy : ""} block w-full text-left cursor-pointer`}
       >
         <span className="flex items-center justify-between gap-3 px-4 pt-3.5 pb-3">
-          <span className="flex items-center gap-2 min-w-0 font-mono text-[11px] tracking-[0.06em] text-cream/85" data-copy="receipt">
+          <span className="flex items-center gap-2 min-w-0 font-mono text-[12px] tracking-[0.06em] text-cream/85" data-copy="receipt">
             <span className={`${s.lamp} ${busy || feed === "armed" ? s.blink : ""}`} aria-hidden="true" />
             order #012726
           </span>
-          <span className={`${s.printBtn} shrink-0 rounded-full border border-cream/35 px-3 py-1 font-mono text-[11px] lowercase tracking-[0.04em] text-cream`} aria-hidden="true">{label}</span>
+          <span className={`${s.printBtn} shrink-0 rounded-full border border-cream/35 px-3 py-1 font-mono text-[12px] lowercase tracking-[0.04em] text-cream`} aria-hidden="true">{label}</span>
         </span>
         <span className={`${s.slot} block`} aria-hidden="true" />
       </button>
@@ -688,7 +688,7 @@ function Receipt({ tools }: { tools: string[] }) {
 
             {/* The tip lines: where a receipt asks for a tip, this one leaves tips for the next campaign, handwritten. */}
             <div className="flex flex-col gap-3" data-copy="receipt">
-              <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.1em]">Tips for next time</h3>
+              <h3 className="font-mono text-[12px] font-bold uppercase tracking-[0.1em]">Tips for next time</h3>
               {tips.map((t, i) => (
                 <div key={t.head}>
                   <div className="flex items-end gap-2">
@@ -703,7 +703,7 @@ function Receipt({ tools }: { tools: string[] }) {
             <hr className={s.rule} />
 
             <div className="text-[12px] leading-snug" data-copy="receipt">
-              <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.1em]">Prepared with</h3>
+              <h3 className="font-mono text-[12px] font-bold uppercase tracking-[0.1em]">Prepared with</h3>
               <ul className="mt-1">
                 {tools.map((t) => <li key={t}>{t}</li>)}
               </ul>
@@ -748,7 +748,7 @@ function Reorder() {
   const inner = next && (
     <>
       <span className="flex flex-col gap-1 min-w-0">
-        <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-cream/80">Reorder · up next</span>
+        <span className="font-mono text-[12px] uppercase tracking-[0.08em] text-cream/80">Reorder · up next</span>
         <span className="text-[20px] font-display leading-tight">{next.title}</span>
       </span>
       <span className="font-mono text-[18px] shrink-0" aria-hidden="true">→</span>

@@ -11,7 +11,7 @@ export default function Contact() {
   return (
     <div className="mx-auto max-w-[1440px] px-5 md:px-20 py-14 grid gap-12 lg:grid-cols-[1fr_520px]">
       <div className="flex flex-col gap-6">
-        <h1 className="text-h1 font-display font-normal tracking-[-0.01em] leading-none">say hi.</h1>
+        <h1 className="text-h1 font-display font-semibold tracking-[-0.015em] leading-none">Say hi</h1>
         <p className="text-[19px] leading-relaxed max-w-[520px]">Have a project, a role, or a question in mind? Send it here and I will reply within two business days.</p>
         <div className="flex flex-col gap-3 pt-2">
           <a href={`mailto:${site.email}`} className={link}>{site.email}</a>

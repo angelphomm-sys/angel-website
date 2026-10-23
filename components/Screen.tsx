@@ -22,8 +22,8 @@ export function Screen({ picks }: { picks: Book[] }) {
               <div className="absolute inset-0 flex flex-col justify-between p-3 md:p-5">
                 {/* A thin inset frame, like a printed one-sheet. */}
                 <div className="absolute inset-1.5 md:inset-2.5 rounded-[8px] border border-current opacity-30 pointer-events-none" aria-hidden="true" />
-                <span className="relative font-mono text-[9px] md:text-[11px] font-medium uppercase tracking-[0.14em] opacity-85">{p.kind === "show" ? "series" : p.kind}</span>
-                <span className="relative font-display text-[16px] sm:text-[22px] md:text-[28px] leading-[1.02] tracking-[-0.01em] text-balance">{p.title}</span>
+                <span className="relative font-mono text-[9px] md:text-[12px] font-medium uppercase tracking-[0.14em] opacity-85">{p.kind === "show" ? "series" : p.kind}</span>
+                <span className="relative font-display text-[16px] sm:text-[22px] md:text-[28px] leading-[1.02] tracking-[-0.015em] text-balance">{p.title}</span>
               </div>
             )}
             {(p.quote || p.why) && (
@@ -42,7 +42,7 @@ export function Screen({ picks }: { picks: Book[] }) {
           </div>
           <figcaption className="flex flex-col gap-0.5 px-0.5">
             <span className="text-[13px] md:text-[15px] font-bold leading-tight">{p.title}</span>
-            {p.author && <span className="font-mono text-[11px] md:text-[12px] text-mid">{p.author}</span>}
+            {p.author && <span className="font-mono text-[12px] md:text-[12px] text-mid">{p.author}</span>}
           </figcaption>
         </figure>
       ))}

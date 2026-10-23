@@ -63,8 +63,8 @@ export function WorkCard({ card, layout = "row", titleAs: Title = "h3", small = 
       {card.href ? <To href={card.href} className={`group block ${lead ? "lg:flex-1 lg:flex lg:flex-col" : ""} ${flip ? "md:order-2" : ""}`} hidden>{tile}</To> : <div className={flip ? "md:order-2" : undefined}>{tile}</div>}
       <div className={`flex flex-col ${big ? "gap-3 md:gap-4" : small ? "gap-2" : "gap-3"} ${flip ? "md:order-1" : ""}`}>
         {/* Where the piece came from: a plain label above the title, not a pill. */}
-        <span className="text-[11px] font-mono font-medium uppercase tracking-[0.08em] text-mid leading-snug">{eyebrowFor(card)}</span>
-        <Title className={`font-display font-normal tracking-[-0.01em] leading-tight ${big ? "text-[28px] md:text-[40px]" : small ? "text-[21px] md:text-[23px]" : "text-[23px] md:text-[26px]"}`}>{card.title}</Title>
+        <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid leading-snug">{eyebrowFor(card)}</span>
+        <Title className={`font-display font-semibold tracking-[-0.015em] leading-tight ${big ? "text-[28px] md:text-[40px]" : small ? "text-[21px] md:text-[23px]" : "text-[23px] md:text-[26px]"}`}>{card.title}</Title>
         {withBlurb && card.blurb && !card.blurb.startsWith("[") && <p className="text-[16px] md:text-[17px] leading-relaxed text-mid max-w-[52ch]">{card.blurb}</p>}
         {card.href && (
           <To href={card.href} className="hit font-mono text-[13px] font-medium tracking-[0.02em] border-b-2 border-accent hover:text-accent-deep hover:border-accent-deep self-start">{card.linkLabel}</To>

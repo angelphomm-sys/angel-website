@@ -70,7 +70,7 @@ export function CaseRail({ steps, heading = "the parts" }: { steps: CaseStep[]; 
                 onClick={(e) => { e.preventDefault(); goToStep(s.id); }}
                 className={`flex items-center min-h-11 gap-2.5 border-l-2 pl-3 py-2 text-[13px] leading-snug transition-colors ${on ? "border-accent text-ink font-bold" : "border-transparent text-mid hover:text-ink"}`}
               >
-                <span className={`font-mono text-[11px] font-medium tabular-nums ${on ? "text-accent-deep" : "text-mid"}`}>{s.n}</span>
+                <span className={`font-mono text-[12px] font-medium tabular-nums ${on ? "text-accent-deep" : "text-mid"}`}>{s.n}</span>
                 <span>{navLabel(s)}</span>
               </a>
             </li>

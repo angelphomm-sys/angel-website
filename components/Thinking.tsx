@@ -11,7 +11,7 @@ export function Thinking() {
     <div className="grid gap-4 md:grid-cols-3">
       {rules.map((r) => (
         <div key={r.rule} className="bg-mist rounded-3xl p-5 md:p-6 flex flex-col gap-2" title={r.why}>
-          <span className="text-[19px] md:text-[20px] font-display font-normal tracking-[-0.01em] leading-tight">{r.rule}</span>
+          <span className="text-[19px] md:text-[20px] font-display font-semibold tracking-[-0.015em] leading-tight">{r.rule}</span>
           <span className="hand text-[14px] text-mid mt-auto pt-1">from {r.book}</span>
         </div>
       ))}

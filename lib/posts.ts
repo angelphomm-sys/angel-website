@@ -93,7 +93,7 @@ export function proseWordCount(content: string) {
 
 /** "oct 5, 2026". */
 export function formatDate(d: string) {
-  return new Date(d + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).toLowerCase();
+  return new Date(d + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
 /** A post's date with a time and Utah's offset, for JSON-LD and Open Graph. */
