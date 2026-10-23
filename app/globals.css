@@ -2,26 +2,25 @@
 
 @theme {
   /* Angel's identity (brand sheet 2026-10-22; .harness/reports/brand-sheet-2026-10-22.jpg). Four colors, one family.
-     Approved pairings from the sheet: red ground with ice or cream; cream ground with near-black or red; near-black ground
-     with cream or ice; ice ground with near-black or red (red on ice only at headline size: 4.4:1).
+     The site uses two pairings only, so it reads as one system: cream (paper) ground with near-black text and red accents,
+     and a red ground with cream (the hero and the footer, 5:1). Ice is on the sheet but kept off the site for now.
      Never red on near-black (3:1). Body text is always near-black. */
   --color-red: #BB2426;
   --color-cream: #F1E7D4;
   --color-night: #210F10;
-  --color-ice: #C7DEE9;
   --color-paper: #F8F3EA;   /* the reading ground: brand cream halfway to white, so long pages stay easy on the eyes. True cream marks bands and wells. */
   --color-card: #FFFCF6;    /* lighter than paper: form fields and white-ish cards */
-  --color-ink: #210F10;     /* near-black: every readable word. 16.7:1 on paper, 15:1 on cream, 13.2:1 on ice */
+  --color-ink: #210F10;     /* near-black: every readable word. 16.7:1 on paper, 15:1 on cream */
   --color-mid: #210F10;     /* secondary text stays near-black too; hierarchy comes from size and weight, not grey */
   --color-grey: #6B5A55;    /* tiny dots and hairline details only, never text */
   --color-line: #DDD0BA;    /* hairlines on paper: cream pushed darker */
   --color-accent: #BB2426;       /* red: buttons (cream on red 5:1), links on paper (5.6:1), key numbers */
   --color-accent-deep: #8E181A;  /* red pressed: hover on red fills and on links (8.9:1 on paper) */
   --color-mist: #F1E7D4;    /* true cream: cards, hover rows, image wells */
-  /* Older names, kept so every class still resolves. They point at the new four. */
+  /* Older names, kept so every class still resolves. They point at the two pairings above. */
   --color-oxblood: #BB2426;
-  --color-blue: #C7DEE9;
-  --color-khaki: #C7DEE9;
+  --color-blue: #F1E7D4;
+  --color-khaki: #F1E7D4;
   --color-olive: #210F10;
   --color-tang: #BB2426;
   --color-ember: #BB2426;

@@ -42,7 +42,7 @@ export default function Home() {
     <>
     <JsonLd data={{ "@context": "https://schema.org", ...person }} />
     <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: site.url }} />
-    {/* hello: a red block with the stacked wordmark in cream, the one-line who, and the channels. The monogram sits beside it on wide screens. */}
+    {/* hello: a red block with the stacked wordmark in cream, the one-line who, and the channels. The monogram sits beside it, also in cream, on wide screens. */}
     <section className="bg-red text-cream">
       <div className="mx-auto max-w-[1440px] px-5 md:px-20 py-12 md:py-20 grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div className="flex flex-col gap-6 md:gap-8 hero-in min-w-0">
@@ -56,7 +56,7 @@ export default function Home() {
             {site.skills.map((s) => <li key={s} className="text-[14px] font-semibold border border-cream/60 rounded-full px-3.5 py-1.5 first-letter:uppercase">{s}</li>)}
           </ul>
         </div>
-        <div className="hidden lg:block hero-photo"><BrandMark variant="monogram" className="h-[180px] xl:h-[220px] text-ice" /></div>
+        <div className="hidden lg:block hero-photo"><BrandMark variant="monogram" className="h-[180px] xl:h-[220px] text-cream" /></div>
       </div>
     </section>
 
@@ -67,24 +67,20 @@ export default function Home() {
           {cards.map((w) => <WorkCard key={w.slug} card={cardFor(w)} layout="stack" small />)}
         </div>
       </Section>
-    </div>
 
-    {/* blog: the three latest, title and date, on an ice band (near-black on ice, 13:1). It runs straight into the footer. */}
-    <div className="bg-ice mt-6 pb-6 -mb-12 md:-mb-16">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-20">
-        <Section title="Blog" aside={<Link href="/blog" className={arrow}>All posts →</Link>}>
-          <ul className="flex flex-col border-b border-night/25">
-            {posts.map((p) => (
-              <li key={p.slug} className="border-t border-night/25">
-                <Link href={`/blog/${p.slug}`} className="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4 transition-colors hover:text-accent-deep">
-                  <span className="text-[20px] md:text-[24px] font-semibold tracking-[-0.015em] leading-tight">{p.title}</span>
-                  <span className="text-[14px] font-medium whitespace-nowrap">{formatDate(p.date)}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      </div>
+      {/* blog: the three latest, title and date. */}
+      <Section title="Blog" aside={<Link href="/blog" className={arrow}>All posts →</Link>}>
+        <ul className="flex flex-col border-b border-line">
+          {posts.map((p) => (
+            <li key={p.slug} className="border-t border-line">
+              <Link href={`/blog/${p.slug}`} className="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4 transition-colors hover:text-accent-deep">
+                <span className="text-[20px] md:text-[24px] font-semibold tracking-[-0.015em] leading-tight">{p.title}</span>
+                <span className="text-[14px] font-medium whitespace-nowrap">{formatDate(p.date)}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Section>
     </div>
     </>
   );
