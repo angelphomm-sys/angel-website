@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPost, getSeries, getRelated, getAdjacent, formatDate, isoDate, proseWordCount } from "@/lib/posts";
+import { getAllPosts, getPost, getRelated, formatDate, isoDate, proseWordCount } from "@/lib/posts";
 import { lanes, postTypes, site } from "@/lib/site";
 import { Mdx } from "@/components/Mdx";
 import { PostCard } from "@/components/PostCard";
@@ -10,7 +10,6 @@ import { CoverImage } from "@/components/CoverImage";
 import { Comments } from "@/components/Comments";
 import { commentsEnabled } from "@/lib/comments";
 import { ShareBar } from "@/components/ShareBar";
-import { TrackLink } from "@/components/Track";
 import { JsonLd } from "@/components/JsonLd";
 import { abs, breadcrumbs, clip, defaultOgImage, og, person } from "@/lib/seo";
 import { publicImageSize } from "@/lib/image-size";
@@ -40,9 +39,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const post = getPost(slug);
   if (!post || (post.draft && process.env.NODE_ENV === "production")) notFound();
   const related = getRelated(post);
-  const { older, newer } = getAdjacent(post);
-  const series = post.series ? getSeries(post.series) : [];
-  const idx = series.findIndex((p) => p.slug === post.slug);
   const wordCount = proseWordCount(post.content);
   const url = abs(`/blog/${post.slug}`);
   const coverSize = post.cover ? await publicImageSize(post.cover) : undefined;
@@ -92,28 +88,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <div className="py-12 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,760px)_1fr]"><div className="hidden lg:block" /><Mdx source={post.content} /><div className="hidden lg:block" /></div>
       <div className="pb-14 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,760px)_1fr]"><div className="hidden lg:block" />
         <div className="flex flex-col gap-4 min-w-0">
-          {post.cta && (
-            <div className="bg-accent text-cream rounded-3xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <span className="hand text-[18px] leading-tight">one thing to do next.</span>
-              <TrackLink event={`postcta_${post.slug}`} href={post.cta.href} className="inline-flex items-center gap-2 max-w-full text-[15px] font-bold bg-cream text-ink rounded-full px-5 py-3 hover:bg-blue transition-colors" {...(post.cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{post.cta.label} →</TrackLink>
-            </div>
-          )}
           <ShareBar slug={post.slug} path={`/blog/${post.slug}`} title={post.title} linkedinPost={post.linkedinPost} />
-          {series.length > 1 && (
-            <div className="border-2 border-line rounded-3xl p-5 flex flex-col gap-2">
-              <span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{post.series} · {idx + 1} of {series.length}</span>
-              <div className="flex flex-wrap gap-x-4 gap-y-1 text-[14px] font-bold">
-                {idx > 0 && <Link href={`/blog/${series[idx - 1].slug}`} className="hit hover:text-accent-deep">← {series[idx - 1].title}</Link>}
-                {idx < series.length - 1 && <Link href={`/blog/${series[idx + 1].slug}`} className="hit hover:text-accent-deep">{series[idx + 1].title} →</Link>}
-              </div>
-            </div>
-          )}
-          {(older || newer) && (
-            <nav aria-label="More posts by date" className="flex flex-col sm:flex-row sm:justify-between gap-x-6 gap-y-2 text-[14px] font-bold">
-              {older ? <Link href={`/blog/${older.slug}`} className="hit hover:text-accent-deep">← {older.title}</Link> : <span />}
-              {newer && <Link href={`/blog/${newer.slug}`} className="hit hover:text-accent-deep sm:text-right">{newer.title} →</Link>}
-            </nav>
-          )}
         </div><div className="hidden lg:block" /></div>
       {commentsEnabled && <div className="py-12 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,760px)_1fr]"><div className="hidden lg:block" /><div className="flex flex-col gap-5 min-w-0"><h2 id="comments" className="text-h3 font-display font-semibold tracking-[-0.015em] scroll-mt-24">Comments</h2><Comments /></div><div className="hidden lg:block" /></div>}
       {related.length > 0 && <div className="py-12 flex flex-col gap-6"><h2 className="text-h2 font-display font-semibold tracking-[-0.015em]">Read next</h2><div className="grid gap-6 md:grid-cols-3">{related.map((p) => <PostCard key={p.slug} post={p} layout="row" />)}</div></div>}

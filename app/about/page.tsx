@@ -41,7 +41,7 @@ export default function About() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">
             <h1 className="text-hero font-display font-semibold leading-[1.02] tracking-[-0.015em]">About me</h1>
-            <p className="text-[19px] md:text-[21px] leading-relaxed max-w-[560px]">I&rsquo;m Angel Phommachan, a first-generation digital marketing specialist who works across search, email, social, and content. Off the clock, I&rsquo;m a portrait photographer.</p>
+            <p className="text-[19px] md:text-[21px] leading-relaxed max-w-[560px]">I&rsquo;m Angel Phommachan, a first-generation digital marketing specialist who works across search, email, social, and content.</p>
           </div>
           {/* The 60-second video, once it exists. Nothing shows until NEXT_PUBLIC_ABOUT_VIDEO_ID is set. */}
           {videoId && (

@@ -759,7 +759,6 @@ function Reorder() {
       {next && href && (href.startsWith("http")
         ? <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
         : <Link href={href} className={cls}>{inner}</Link>)}
-      <Link href="/work" className="hit self-start mt-2 text-[15px] font-semibold border-b-2 border-accent hover:text-accent-deep">All the work →</Link>
     </section>
   );
 }

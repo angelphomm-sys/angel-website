@@ -112,8 +112,8 @@ export function MeasurePlan({ rows, concept }: { rows: Measure[]; concept: boole
   );
 }
 
-// The two things to do at the end of a case study, said plainly: read the next one, or get in touch.
-export function CaseCtaRow({ slug, post }: { slug: string; concept?: boolean; post?: string }) {
+// One thing to do at the end of a case study: see the next one.
+export function CaseCtaRow({ slug }: { slug: string; concept?: boolean; post?: string }) {
   const next = nextWork(slug);
   const nextHref = next ? linkFor(next) : undefined;
   const cardCls = "flex flex-col justify-between gap-6 rounded-3xl p-6 transition-colors";
@@ -130,8 +130,6 @@ export function CaseCtaRow({ slug, post }: { slug: string; concept?: boolean; po
           ? <a href={nextHref} target="_blank" rel="noopener noreferrer" className={`${cardCls} bg-accent text-cream hover:bg-accent-deep`}>{nextInner}</a>
           : <Link href={nextHref} className={`${cardCls} bg-accent text-cream hover:bg-accent-deep`}>{nextInner}</Link>)}
       </div>
-      {post && <Link href={post} className="hit self-start text-[14px] font-bold text-mid hover:text-accent-deep">Read the longer write-up →</Link>}
-      <Link href="/work" className="hit self-start mt-2 text-[15px] font-semibold border-b-2 border-accent hover:text-accent-deep">All the work →</Link>
     </section>
   );
 }
@@ -183,14 +181,13 @@ export function CaseStudyTemplate({ item }: { item: WorkItem & { caseStudy: NonN
       <header className="grid gap-6 lg:grid-cols-[1fr_380px] lg:gap-12 items-start">
         <div className="flex flex-col gap-4">
           <h1 className="text-[38px] md:text-[56px] font-display font-semibold tracking-[-0.015em] leading-[1.02] text-balance">{item.title}</h1>
-          <p className="text-[18px] leading-relaxed max-w-[620px]">{item.blurb}</p>
           {c.concept && <p className="text-[16px] leading-relaxed text-mid border-l-2 border-accent pl-4 max-w-[560px]">{c.concept.disclaimer}</p>}
           {c.disclosure && <p className="text-[16px] leading-relaxed text-mid border-l-2 border-accent pl-4 max-w-[560px]">{c.disclosure}</p>}
         </div>
         <VideoTile video={item.preview.video} poster={item.preview.poster} alt={item.title} ratio="16/10" />
       </header>
 
-      {/* Each fact shows once: the goal sits in the blurb, the ask in the brief, the role in the disclosure. */}
+      {/* Each fact shows once: the ask in the brief, the role in the disclosure. No intro blurb on the page; the title and the work carry it. */}
       <CaseChips steps={steps} className="-mt-4" />
 
       <div className="grid gap-8 lg:grid-cols-[190px_minmax(0,1fr)] lg:gap-14 items-start">
@@ -199,9 +196,11 @@ export function CaseStudyTemplate({ item }: { item: WorkItem & { caseStudy: NonN
           {c.opener && <p className="text-[20px] md:text-[23px] leading-snug tracking-[-0.015em] max-w-[760px] pb-1">{c.opener}</p>}
 
           <Part step={step("brief")}>
-            <p><strong>{concept ? "What I set out to do." : "What was asked."}</strong> {c.brief.ask}</p>
-            <p><strong>The constraint.</strong> {c.brief.constraint}</p>
-            <p><strong>The audience.</strong> {c.brief.audience}</p>
+            <dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-6 gap-y-2 m-0">
+              <dt className="font-semibold">{concept ? "Goal" : "Task"}</dt><dd className="m-0">{c.brief.ask}</dd>
+              <dt className="font-semibold">Product</dt><dd className="m-0">{c.brief.constraint}</dd>
+              <dt className="font-semibold">Audience</dt><dd className="m-0">{c.brief.audience}</dd>
+            </dl>
             {c.brief.given && c.brief.given.length > 0 && <Shots items={c.brief.given} />}
           </Part>
 

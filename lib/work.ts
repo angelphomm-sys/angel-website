@@ -287,24 +287,24 @@ const allWork: WorkItem[] = [
     preview: { poster: "/images/work/kents-laptop.jpg", focus: "50% 50%" },
     caseStudy: {
       disclosure:
-        "A school project for Digital Marketing 3660, so there is no sales data. The store, the product, and the ad were given. The page, the copy, and the reasoning are mine.",
+        "Class project for Digital Marketing 3660. The store, product, and ad were given. The page and copy are mine.",
       brief: {
-        title: "What I was given",
-        ask: "Replace a landing page that was not converting, using the seven principles of conversion-centered design.",
-        constraint: "Sell the HERO12 Black at $369.99, built in Canva.",
-        audience: "Skiers and snowboarders who came from a winter sports ad.",
+        title: "The brief",
+        ask: "Rebuild a landing page that wasn't selling.",
+        constraint: "The HERO12 Black, $369.99. Built in Canva.",
+        audience: "Skiers and snowboarders coming from a winter ad.",
         given: [
           {
             src: "/images/work/landing-page/before.jpg",
             alt: "The store's existing GoPro Hero 4 landing page",
-            caption: "The old page: still selling the Hero 4, lorem ipsum in the feature columns, one button that said \u201cPAY FOR IT.\u201d",
+            caption: "The old page, still selling the Hero 4.",
             width: 874,
             height: 1196,
           },
           {
             src: "/images/work/landing-page/display-ad.jpg",
             alt: "The display ad that sends people to the page",
-            caption: "The ad the page had to match.",
+            caption: "The ad it had to match.",
             width: 1200,
             height: 1200,
           },
@@ -330,26 +330,26 @@ const allWork: WorkItem[] = [
         ],
       },
       analysis: {
-        title: "Three of the seven principles",
+        title: "Why it works",
         sections: [
           {
-            heading: "Attention",
+            heading: "One button",
             body: [
-              "One goal, one button, no navigation, nothing else to click.",
+              "No menu, no extra links. Just Buy Now.",
             ],
             image: { src: "/images/work/landing-page/sec-hero.jpg", alt: "The split hero: a black panel with the headline, price, and Buy Now button beside the snowboarder photo", width: 1440, height: 752 },
           },
           {
-            heading: "Clarity",
+            heading: "Benefit first",
             body: [
-              "Each feature card leads with the outcome in bold, then the spec.",
+              "Each card says what the camera does for you, then the spec.",
             ],
             image: { src: "/images/work/landing-page/sec-performance.jpg", alt: "The \u201cBuilt for the mountain\u201d three-card feature grid with the Product Specs line underneath", width: 1440, height: 704 },
           },
           {
-            heading: "Credibility",
+            heading: "Proof",
             body: [
-              "200+ verified 5-star Google reviews, three named quotes, and the Authorized GoPro\u00ae Reseller mark.",
+              "200+ five-star Google reviews, three named quotes, and the Authorized GoPro\u00ae Reseller mark.",
             ],
             image: { src: "/images/work/landing-page/sec-reviews.jpg", alt: "The 5-star review section beside the In stock and Authorized GoPro Reseller card with its Buy Now button", width: 1440, height: 524 },
           },
