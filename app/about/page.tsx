@@ -81,7 +81,7 @@ export default function About() {
       {/* What shapes how I think: the books and films behind how I see people and stories, each opening to a
           favorite quote and the lesson I took for my work. Tap or hover to open. */}
       <Section title="What shapes how I think" id="shelf">
-        <p className="text-[17px] leading-relaxed max-w-[60ch] -mt-1">Marketing is about why people believe something and why they show up. These are the books and films that taught me that. Hover or tap to open each one.</p>
+        <p className="text-[17px] leading-relaxed max-w-[60ch] -mt-1">The books and films I keep coming back to, and what each one taught me. Hover or tap to open one.</p>
         <h3 className="text-[13px] font-semibold uppercase tracking-[0.08em] mt-2">On my shelf</h3>
         <Shelf books={shelf.filter((b) => b.kind === "book")} />
         <h3 id="screen" className="text-[13px] font-semibold uppercase tracking-[0.08em] mt-6 scroll-mt-24">On my screen</h3>

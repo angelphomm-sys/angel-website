@@ -25,8 +25,8 @@ export function Shelf({ books: all, compact = false }: { books: Book[]; compact?
                 {b.quote ? (
                   <>
                     <span className="hand block text-[14px] leading-snug mt-1">&ldquo;{b.quote}&rdquo;</span>
-                    {b.quoteBy && <span className="block text-[10px] font-mono uppercase tracking-[0.06em] text-mid mt-1">{b.quoteBy}</span>}
-                    {b.lesson && <span className="block text-[11px] leading-snug mt-2 pt-2 border-t border-line">{b.lesson}</span>}
+                    {b.quoteBy && <span className="block text-[11px] font-semibold uppercase tracking-[0.06em] text-accent mt-1">{b.quoteBy}</span>}
+                    {b.lesson && <span className="block text-[12px] font-medium leading-snug mt-2 pt-2 border-t-2 border-accent">{b.lesson}</span>}
                   </>
                 ) : (
                   b.why && <span className="hand block text-[17px] leading-tight mt-1">taught me: {b.why}</span>

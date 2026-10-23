@@ -3,7 +3,7 @@ import type { Book } from "./Shelf";
 
 // Films and shows as posters, not books. A real poster shows when `cover` is set in lib/shelf.ts; until
 // then each card is a type-only poster in the pick's color. Hover, focus, or a tap lifts the poster and
-// fades in the favorite quote and the lesson behind it.
+// fades in a solid brand-red card (cream text) with the favorite quote and the lesson behind it.
 export function Screen({ picks }: { picks: Book[] }) {
   const items = picks.filter((p) => !p.title.trim().startsWith("["));
   return (
@@ -27,12 +27,12 @@ export function Screen({ picks }: { picks: Book[] }) {
               </div>
             )}
             {(p.quote || p.why) && (
-              <div className="absolute inset-0 flex flex-col justify-end gap-1.5 p-3 md:p-4 bg-gradient-to-t from-black/90 via-black/70 to-black/20 text-white opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-within:opacity-100 transition-opacity duration-300 motion-reduce:transition-none">
+              <div className="absolute inset-0 flex flex-col justify-end gap-1.5 p-3 md:p-4 bg-red text-cream opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-within:opacity-100 transition-opacity duration-300 motion-reduce:transition-none">
                 {p.quote ? (
                   <>
                     <span className="hand text-[13px] md:text-[16px] leading-snug">&ldquo;{p.quote}&rdquo;</span>
-                    {p.quoteBy && <span className="font-mono text-[9px] md:text-[10px] uppercase tracking-[0.08em] opacity-80">{p.quoteBy}</span>}
-                    {p.lesson && <span className="text-[11px] md:text-[13px] leading-snug mt-1 pt-1.5 border-t border-white/30">{p.lesson}</span>}
+                    {p.quoteBy && <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.08em]">{p.quoteBy}</span>}
+                    {p.lesson && <span className="text-[11px] md:text-[13px] leading-snug mt-1 pt-1.5 border-t border-cream/50">{p.lesson}</span>}
                   </>
                 ) : (
                   <span className="text-[13px] leading-snug">{p.why}</span>
