@@ -42,9 +42,9 @@ export default function Home() {
     <>
     <JsonLd data={{ "@context": "https://schema.org", ...person }} />
     <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: site.url }} />
-    {/* hello: a red block with the stacked wordmark in cream, the one-line who, and the channels. Her flower mark turns slowly beside it, in cream, on wide screens. */}
+    {/* hello: a red block with the stacked wordmark in cream and the one-line who. */}
     <section className="bg-red text-cream">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-20 py-12 md:py-20 grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+      <div className="mx-auto max-w-[1440px] px-5 md:px-20 py-12 md:py-20">
         <div className="flex flex-col gap-6 md:gap-8 hero-in min-w-0">
           <p className="text-[18px] md:text-[22px] font-medium">Hello, my name is</p>
           <h1 className="m-0">
@@ -52,11 +52,7 @@ export default function Home() {
             <BrandMark variant="stacked" className="w-full max-w-[860px] text-cream" />
           </h1>
           <p className="max-w-[40ch] text-[19px] md:text-[23px] leading-snug font-medium tracking-[-0.01em]">I&apos;m a first-generation {site.role.toLowerCase()} who works across search, email, social, and content.</p>
-          <ul className="flex flex-wrap gap-2" aria-label="What I do">
-            {site.skills.map((s) => <li key={s} className="text-[14px] font-semibold border border-cream/60 rounded-full px-3.5 py-1.5 first-letter:uppercase">{s}</li>)}
-          </ul>
         </div>
-        <div className="hidden lg:block hero-photo"><BrandMark variant="asterisk" className="spin-slow h-[200px] xl:h-[240px] text-cream" /></div>
       </div>
     </section>
 
