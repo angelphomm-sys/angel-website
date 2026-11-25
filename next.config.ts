@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Set by `next upgrade --agent=security` (16.4.0 to 16.4.6, security advisory).
+  experimental: { agentUpgrade: "security" },
   images: {
     // AVIF first, WebP for browsers without it. Covers are 2400px WebP sources; the default deviceSizes (up to 3840) cover them.
     formats: ["image/avif", "image/webp"],
