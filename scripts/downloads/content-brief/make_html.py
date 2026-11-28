@@ -14,7 +14,8 @@ def sec(num, title, hint=None):
 
 def field(f, h=22):
     ex = f"<i>e.g. {e(f[2])}</i>" if len(f) > 2 and f[2] else ""
-    return f'<tr><th><b>{e(f[0])}</b><span>{e(f[1])}</span>{ex}</th><td style="height:{h}px"></td></tr>'
+    ans = f'<span class="opts">{e(f[3])}</span>' if len(f) > 3 else ""
+    return f'<tr><th><b>{e(f[0])}</b><span>{e(f[1])}</span>{ex}</th><td style="height:{h}px">{ans}</td></tr>'
 
 
 def grid(cols, widths, rows, h, prefill=None, cls="grid"):
@@ -64,7 +65,7 @@ table {{ width:100%; border-collapse:collapse; }}
 .exg td {{ font-size:9pt; }}
 .callout {{ background:{ICE}; padding:7px 12px; margin-top:10px; font-size:9.5pt; }} .callout.cream {{ background:{CREAM}; }}
 .check {{ margin:5px 0; font-size:10pt; }} .check:before {{ content:'\\2610'; font-size:12pt; margin-right:8px; }}
-.gap {{ height:6px; }}
+.gap {{ height:6px; }} .opts {{ font-size:9pt; white-space:pre; }}
 .ex-f th {{ width:30%; }} .ex-f td, .ex-f th {{ padding:4px 9px; font-size:9pt; }}
 """
 
@@ -92,8 +93,8 @@ for b in F["blocks"]:
         pages.append(cur)
         x = F["example"]
         pages.append(title_block(x["title"], x["subtitle"]) + pairs(x["rows"]))
-        cur = sec(None, "Outline") + grid(["Part", "Heading", "Words"], [18, 70, 12], x["outline"], 0, cls="exg")
-        cur += sec(None, "Links, sources, and photos") + pairs(x["links"])
+        cur = sec(None, "Outline") + grid(["Heading level", "Heading", "Words"], [18, 70, 12], x["outline"], 0, cls="exg")
+        cur += sec(None, "Links, sources, and images") + pairs(x["links"])
         cur += f'<div class="callout cream"><b>{e(x["note"][0])}</b> {e(x["note"][1])}</div>'
 pages.append(cur)
 pages = [p for p in pages if p]

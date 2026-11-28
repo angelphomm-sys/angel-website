@@ -35,11 +35,11 @@ function heading(num, text, hint) {
   if (hint) out.push(p(run(hint, { size: 17, color: MUTED }), { spacing: { after: 100 }, keepNext: true }));
   return out;
 }
-function fieldRow([label, prompt, example], height = 520) {
+function fieldRow([label, prompt, example, answer], height = 520) {
   const left = [p(run(label, { bold: true })), p(run(prompt, { size: 16 }), { spacing: { before: 30 } })];
   if (example) left.push(p(run(`e.g. ${example}`, { size: 15, italics: true, color: MUTED }), { spacing: { before: 30 } }));
   return new TableRow({ height: { value: height, rule: HeightRule.ATLEAST }, cantSplit: true, children: [
-    cell(left, LABEL, { shading: shade(CREAM) }), cell(p(run("")), ANSWER),
+    cell(left, LABEL, { shading: shade(CREAM) }), cell(p(run(answer || "", { size: 18 })), ANSWER),
   ] });
 }
 const fieldTable = (fields, height) => table([LABEL, ANSWER], fields.map((f) => fieldRow(f, height)));
@@ -94,8 +94,8 @@ for (const b of F.blocks) {
   else if (b.type === "example") {
     const x = F.example;
     children.push(p(new PageBreak()), ...titleBlock(x.title, x.subtitle), pairs(x.rows), p(new PageBreak()),
-      ...heading(null, "Outline"), grid(["Part", "Heading", "Words"], pct([18, 70, 12]), x.outline, 0),
-      ...heading(null, "Links, sources, and photos"), pairs(x.links), gap(160), callout(x.note[0], x.note[1], CREAM));
+      ...heading(null, "Outline"), grid(["Heading level", "Heading", "Words"], pct([18, 70, 12]), x.outline, 0),
+      ...heading(null, "Links, sources, and images"), pairs(x.links), gap(160), callout(x.note[0], x.note[1], CREAM));
   }
 }
 
