@@ -14,7 +14,7 @@
         25
       ],
       [
-        "Publish date",
+        "Reviewer",
         25
       ]
     ],
@@ -25,12 +25,22 @@
         "☐ How-to   ☐ List   ☐ Comparison   ☐ Other:"
       ],
       [
-        "Where it will be published",
+        "Due date",
         25
       ],
       [
+        "Publish date",
+        25
+      ]
+    ],
+    [
+      [
+        "Where it will be published",
+        50
+      ],
+      [
         "New post or update?",
-        25,
+        50,
         "☐ New   ☐ Update (link):"
       ]
     ]
@@ -59,34 +69,38 @@
           "What the post should do for the reader and for you."
         ]
       ],
-      "height": 52
+      "height": 42
     },
     {
       "type": "fields",
       "num": "02",
       "title": "Keyword research",
-      "hint": "Free tools: Ahrefs Keyword Generator, Google autocomplete, People also ask.",
+      "hint": "Use any keyword tool, plus Google's People also ask.",
       "fields": [
         [
           "Primary keyword",
-          "Include monthly volume and keyword difficulty (KD)."
+          "Monthly search volume and keyword difficulty (KD)."
         ],
         [
           "Secondary keywords",
           "Two or three related phrases."
         ],
         [
+          "Keywords to avoid",
+          "Keywords your other pages already target."
+        ],
+        [
           "Search intent",
           "What kind of page ranks for it?",
           "",
-          "☐ Informational   ☐ Commercial   ☐ Transactional"
+          "☐ Informational   ☐ Navigational   ☐ Commercial   ☐ Transactional"
         ],
         [
           "Questions to answer",
           "From People also ask. Use them as headings and FAQs."
         ]
       ],
-      "height": 52
+      "height": 42
     },
     {
       "type": "grid",
@@ -98,7 +112,7 @@
         "Title and URL",
         "Word count",
         "What it covers",
-        "Content gap"
+        "What it misses"
       ],
       "widths": [
         5,
@@ -112,7 +126,7 @@
         "2",
         "3"
       ],
-      "height": 48,
+      "height": 40,
       "after": [
         [
           "AI Overview",
@@ -134,7 +148,7 @@
         ],
         [
           "Unique value",
-          "A story, result, or example from your own work."
+          "First-hand experience, expert input, or original data."
         ],
         [
           "Editorial angle",
@@ -142,7 +156,7 @@
         ],
         [
           "Target word count",
-          "The top-three average ÷ 3 is a starting point."
+          "Use the top-ranking pages as a guide."
         ]
       ],
       "height": 52
@@ -154,11 +168,11 @@
       "fields": [
         [
           "SEO title",
-          "50 to 60 characters, primary keyword first."
+          "About 50 to 60 characters, primary keyword near the start."
         ],
         [
           "Meta description",
-          "150 to 160 characters."
+          "About 150 to 160 characters."
         ],
         [
           "URL slug",
@@ -228,7 +242,7 @@
       "type": "grid",
       "num": "07",
       "title": "Links, sources, and images",
-      "hint": "Link neutral sources, not competitors. Credit every image.",
+      "hint": "Link original sources, not competitors. Credit every image.",
       "cols": [
         "Type",
         "URL or file",
@@ -263,7 +277,7 @@
         ],
         [
           "KPI",
-          "One number to check after 30 days."
+          "One number tied to the content goal. Review it monthly."
         ]
       ],
       "height": 52
@@ -285,6 +299,10 @@
         [
           "Avoid",
           "Claims, words, or topics to leave out."
+        ],
+        [
+          "Style guide",
+          "Link to brand or style guidelines."
         ]
       ]
     },
@@ -297,9 +315,10 @@
         "Title and meta description match section 05",
         "Every number links to a source",
         "Two or three internal links",
+        "One or two older posts link to the new one",
         "Images credited, with alt text",
         "CTA matches the content goal",
-        "KPI check on your calendar for 30 days out"
+        "Monthly KPI review on your calendar"
       ]
     }
   ]
