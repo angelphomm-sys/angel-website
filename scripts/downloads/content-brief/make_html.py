@@ -15,7 +15,8 @@ def sec(num, title, hint=None):
 def field(f, h=22):
     ex = f"<i>e.g. {e(f[2])}</i>" if len(f) > 2 and f[2] else ""
     ans = f'<span class="opts">{e(f[3])}</span>' if len(f) > 3 else ""
-    return f'<tr><th><b>{e(f[0])}</b><span>{e(f[1])}</span>{ex}</th><td style="height:{h}px">{ans}</td></tr>'
+    pr = f"<span>{e(f[1])}</span>" if f[1] else ""
+    return f'<tr><th><b>{e(f[0])}</b>{pr}{ex}</th><td style="height:{h}px">{ans}</td></tr>'
 
 
 def grid(cols, widths, rows, h, prefill=None, cls="grid"):
@@ -31,7 +32,7 @@ def grid(cols, widths, rows, h, prefill=None, cls="grid"):
 
 
 def title_block(title, sub=None):
-    t = f'<div class="kicker">{e(F["kicker"])}</div>'
+    t = f'<div class="kicker">{e(F["kicker"])}</div>' if F["kicker"] else ""
     return t + (f'<h1>{e(title)}</h1><p class="sub">{e(sub)}</p>' if sub else f'<h1 class="ruled">{e(title)}</h1>')
 
 

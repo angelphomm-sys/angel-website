@@ -36,7 +36,8 @@ function heading(num, text, hint) {
   return out;
 }
 function fieldRow([label, prompt, example, answer], height = 520) {
-  const left = [p(run(label, { bold: true })), p(run(prompt, { size: 16 }), { spacing: { before: 30 } })];
+  const left = [p(run(label, { bold: true }))];
+  if (prompt) left.push(p(run(prompt, { size: 16 }), { spacing: { before: 30 } }));
   if (example) left.push(p(run(`e.g. ${example}`, { size: 15, italics: true, color: MUTED }), { spacing: { before: 30 } }));
   return new TableRow({ height: { value: height, rule: HeightRule.ATLEAST }, cantSplit: true, children: [
     cell(left, LABEL, { shading: shade(CREAM) }), cell(p(run(answer || "", { size: 18 })), ANSWER),
@@ -64,7 +65,7 @@ function callout(title, body, fill) {
 }
 function titleBlock(title, sub) {
   const rule = { bottom: { style: BorderStyle.SINGLE, size: 12, color: RED, space: 8 } };
-  const out = [p(run(F.kicker, { bold: true, color: RED, size: 18 }), { spacing: { after: 60 } })];
+  const out = F.kicker ? [p(run(F.kicker, { bold: true, color: RED, size: 18 }), { spacing: { after: 60 } })] : [];
   if (!sub) return [...out, p(run(title, { bold: true, size: 40 }), { spacing: { after: 180 }, border: rule })];
   return [...out, p(run(title, { bold: true, size: 44 }), { spacing: { after: 80 } }), p(run(sub, { size: 19 }), { spacing: { after: 200 }, border: rule })];
 }
@@ -105,7 +106,7 @@ const doc = new Document({
   styles: { default: { document: { run: { font: FONT, size: 20, color: INK } } } },
   sections: [{
     properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1080, bottom: 1080, left: 1080, right: 1080 } } },
-    footers: { default: new Footer({ children: [p([run(F.footer_left, { size: 16 }), run("\t" + F.footer_right, { size: 16, color: RED, bold: true })],
+    footers: { default: new Footer({ children: [p([run(F.footer_left || "", { size: 16 }), run("\t" + F.footer_right, { size: 16, color: RED, bold: true })],
       { tabStops: [{ type: TabStopType.RIGHT, position: W }] })] }) },
     children,
   }],
