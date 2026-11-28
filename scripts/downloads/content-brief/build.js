@@ -85,7 +85,7 @@ const gap = (after = 100) => p(run(""), { spacing: { after } });
 const children = [...titleBlock(F.title)];
 for (const b of F.blocks) {
   if (b.type === "meta") children.push(metaTable());
-  else if (b.type === "fields") children.push(...heading(b.num, b.title, b.hint), fieldTable(b.fields, (b.height || 22) * 20 + 80));
+  else if (b.type === "fields") children.push(...heading(b.num, b.title, b.hint), fieldTable(b.fields, (b.height || 22) * 14));
   else if (b.type === "grid") {
     children.push(...heading(b.num, b.title, b.hint), grid(b.cols, pct(b.widths), b.first, b.height * 12, b.prefill));
     if (b.after) children.push(gap(60), fieldTable(b.after, 560));

@@ -46,8 +46,7 @@
       "fields": [
         [
           "Target audience",
-          "Who it's for and what they already know.",
-          "Marketers starting out who write their own posts"
+          "Who it's for and what they already know."
         ],
         [
           "Funnel stage",
@@ -57,11 +56,10 @@
         ],
         [
           "Content goal",
-          "What the post should do for the reader and for you.",
-          "Readers write a brief; I get template downloads"
+          "What the post should do for the reader and for you."
         ]
       ],
-      "height": 30
+      "height": 52
     },
     {
       "type": "fields",
@@ -71,30 +69,24 @@
       "fields": [
         [
           "Primary keyword",
-          "Include monthly volume and keyword difficulty (KD).",
-          "seo content brief (500 a month, KD 1)"
+          "Include monthly volume and keyword difficulty (KD)."
         ],
         [
           "Secondary keywords",
-          "Two or three related phrases.",
-          "seo content brief template, content brief template"
+          "Two or three related phrases."
         ],
         [
           "Search intent",
           "What kind of page ranks for it?",
-          "Informational: how-to guides with templates",
+          "",
           "☐ Informational   ☐ Commercial   ☐ Transactional"
         ],
         [
           "Questions to answer",
-          "From People also ask. Use them as headings and FAQs.",
-          "What is an SEO content brief? What should it include?"
+          "From People also ask. Use them as headings and FAQs."
         ]
       ],
-      "height": 30
-    },
-    {
-      "type": "break"
+      "height": 52
     },
     {
       "type": "grid",
@@ -120,7 +112,7 @@
         "2",
         "3"
       ],
-      "height": 40,
+      "height": 48,
       "after": [
         [
           "AI Overview",
@@ -129,31 +121,31 @@
       ]
     },
     {
+      "type": "break"
+    },
+    {
       "type": "fields",
       "num": "04",
       "title": "Content angle",
       "fields": [
         [
           "Content gap",
-          "What the top results don't cover.",
-          "Every guide is written for agency teams"
+          "What the top results don't cover."
         ],
         [
           "Unique value",
-          "A story, result, or example from your own work.",
-          "My own filled-in brief and what I'd change"
+          "A story, result, or example from your own work."
         ],
         [
           "Editorial angle",
-          "Your post's main idea in one sentence.",
-          "A plain-language brief for people who write their own posts"
+          "Your post's main idea in one sentence."
         ],
         [
           "Target word count",
-          "The top-three average ÷ 3 is a starting point.",
-          "900 to 1,200"
+          "The top-three average ÷ 3 is a starting point."
         ]
-      ]
+      ],
+      "height": 52
     },
     {
       "type": "fields",
@@ -162,29 +154,24 @@
       "fields": [
         [
           "SEO title",
-          "50 to 60 characters, primary keyword first.",
-          "How to Write an SEO Content Brief (With a Free Template)"
+          "50 to 60 characters, primary keyword first."
         ],
         [
           "Meta description",
-          "150 to 160 characters.",
-          "How to write an SEO content brief in seven plain steps, plus a free template you can download."
+          "150 to 160 characters."
         ],
         [
           "URL slug",
-          "Short, lowercase, hyphens.",
-          "/blog/how-to-write-an-seo-content-brief"
+          "Short, lowercase, hyphens."
         ]
-      ]
+      ],
+      "height": 52
     },
     {
       "type": "callout",
       "tone": "ice",
       "title": "Ready to write?",
       "body": "You can name the audience, search intent, and content gap in one sentence each."
-    },
-    {
-      "type": "break"
     },
     {
       "type": "grid",
@@ -232,7 +219,10 @@
           ""
         ]
       },
-      "height": 30
+      "height": 34
+    },
+    {
+      "type": "break"
     },
     {
       "type": "grid",
@@ -260,10 +250,7 @@
         "Image",
         "Image"
       ],
-      "height": 30
-    },
-    {
-      "type": "break"
+      "height": 34
     },
     {
       "type": "fields",
@@ -272,36 +259,32 @@
       "fields": [
         [
           "Call to action (CTA)",
-          "What the reader does next, plus the link.",
-          "Download the template"
+          "What the reader does next, plus the link."
         ],
         [
           "KPI",
-          "One number to check after 30 days.",
-          "Template downloads"
+          "One number to check after 30 days."
         ]
-      ]
+      ],
+      "height": 52
     },
     {
       "type": "fields",
       "num": "09",
       "title": "Brand voice and guidelines",
-      "height": 30,
+      "height": 52,
       "fields": [
         [
           "Voice and tone",
-          "",
-          "Plain, friendly, first person"
+          ""
         ],
         [
           "Must include",
-          "Disclaimers, required terms, product names.",
-          "A credit line for every image"
+          "Disclaimers, required terms, product names."
         ],
         [
           "Avoid",
-          "Claims, words, or topics to leave out.",
-          "Numbers without a source"
+          "Claims, words, or topics to leave out."
         ]
       ]
     },
@@ -318,153 +301,6 @@
         "CTA matches the content goal",
         "KPI check on your calendar for 30 days out"
       ]
-    },
-    {
-      "type": "example"
     }
-  ],
-  "example": {
-    "title": "Example: a filled-in brief",
-    "subtitle": "The brief behind “Owala vs. Stanley: New Colors or New Products?” Search data from Ahrefs (US). Word counts are from the finished post.",
-    "rows": [
-      [
-        "Content type",
-        "Comparison, new blog post"
-      ],
-      [
-        "Target audience",
-        "People starting out in marketing who want to see how two brands grow after one hit product"
-      ],
-      [
-        "Funnel stage",
-        "Awareness"
-      ],
-      [
-        "Content goal",
-        "Readers understand the tradeoff between refreshing a best-seller and launching new products"
-      ],
-      [
-        "Primary keyword",
-        "owala vs stanley (1,800 a month, easy to rank for)"
-      ],
-      [
-        "Secondary keywords",
-        "owala color drop (4,600), why is owala so popular (250), stanley marketing strategy"
-      ],
-      [
-        "Search intent",
-        "Commercial: every top result is a product test"
-      ],
-      [
-        "Questions to answer",
-        "Is Owala more popular than Stanley? What is an Owala Color Drop?"
-      ],
-      [
-        "Content gap",
-        "No one compared the two brands’ marketing"
-      ],
-      [
-        "Unique value",
-        "My side-by-side read of their products, ads, and blogs"
-      ],
-      [
-        "Editorial angle",
-        "New colors or new products: what each strategy costs and when it works"
-      ],
-      [
-        "Target word count",
-        "≈470 suggested; finished at 1,480 to cover products, ads, and blogs"
-      ],
-      [
-        "SEO title",
-        "Owala vs. Stanley: New Colors or New Products?"
-      ],
-      [
-        "Meta description",
-        "Owala sells the same FreeSip in a new color every month. Stanley is building bags, coolers, and soccer collections around the Quencher. What each costs."
-      ],
-      [
-        "URL slug",
-        "/blog/owala-vs-stanley"
-      ],
-      [
-        "Call to action",
-        "Notice where each brand’s ads and links send you: refresh it or build something new?"
-      ],
-      [
-        "KPI",
-        "Google ranking for “owala vs stanley” and time on page"
-      ]
-    ],
-    "outline": [
-      [
-        "H1 (title)",
-        "Owala vs. Stanley: New Colors or New Products?",
-        ""
-      ],
-      [
-        "Intro",
-        "Two bottles, two answers, plus a comparison table",
-        "115"
-      ],
-      [
-        "H2",
-        "How Stanley turned a work cup into a craze",
-        "105"
-      ],
-      [
-        "H2",
-        "Why Stanley is building past the Quencher",
-        "230"
-      ],
-      [
-        "H2",
-        "How Owala's Color Drops keep fans coming back",
-        "215"
-      ],
-      [
-        "H2",
-        "Is Owala more popular than Stanley?",
-        "110"
-      ],
-      [
-        "H2",
-        "How the bottles, ads, and blogs differ",
-        "335"
-      ],
-      [
-        "H2",
-        "Owala vs. Stanley: which strategy works?",
-        "145"
-      ],
-      [
-        "Conclusion",
-        "New colors or new products?",
-        "160"
-      ],
-      [
-        "FAQ",
-        "What is an Owala Color Drop? Is Owala more popular than Stanley?",
-        ""
-      ]
-    ],
-    "links": [
-      [
-        "Internal links",
-        "Liquid Death vs. Poppi, How the Utah Mammoth Got Its Name"
-      ],
-      [
-        "External sources",
-        "Retail Dive, Fast Company, The Drum, Owala’s Color Drop FAQ, ASI"
-      ],
-      [
-        "Images",
-        "Brand photos from Stanley and Owala, credited"
-      ]
-    ],
-    "note": [
-      "What changed after research:",
-      "A quote I planned to use was gone from Owala’s site, so I cut it. A classmate noted the growth number came from a tool companies use to order branded gifts, so the post says so."
-    ]
-  }
+  ]
 }
