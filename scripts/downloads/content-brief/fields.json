@@ -1,61 +1,447 @@
 {
-  "title": "SEO content brief",
-  "kicker": "SEO CONTENT BRIEF TEMPLATE",
-  "sections": [
-    { "num": "01", "title": "Reader and goal", "fields": [
-      ["Reader", "Who is this for? One sentence, specific enough to picture."],
-      ["Goal", "What should they know or be able to do when they finish?"]
-    ]},
-    { "num": "02", "title": "Search", "fields": [
-      ["Main keyword", "The phrase your reader types into Google. Note how many people search it each month."],
-      ["Related searches", "Two or three other phrases or questions people search (from \"People also ask\" and autocomplete)."],
-      ["What searchers want", "Search the keyword yourself. What kind of page shows up most: a how-to, a list, a review?"]
-    ]},
-    { "num": "03", "title": "Your angle", "fields": [
-      ["What's missing", "What none of the top three results do. Fill in page 2 first, then sum it up here."],
-      ["What only you can add", "A story, photo, result, or example from your own experience."],
-      ["Your angle", "The one idea your post adds, in one sentence."],
-      ["Length", "Average the top three, then divide by 3. It's a starting point, not a rule."]
-    ]},
-    { "num": "04", "title": "Next step and proof", "fields": [
-      ["Next step for the reader", "The one thing they should do after reading (your call to action). Decide it now."],
-      ["How you'll know it worked", "One number to check 30 days after publishing, like your Google ranking or clicks."]
-    ]}
+ "title": "SEO content brief",
+ "kicker": "SEO CONTENT BRIEF TEMPLATE",
+ "footer_left": "SEO content brief template by Angel Phommachan",
+ "footer_right": "angelphommachan.com",
+ "meta": [
+  [
+   [
+    "Working title",
+    50
+   ],
+   [
+    "Writer",
+    25
+   ],
+   [
+    "Publish date",
+    25
+   ]
   ],
-  "ready": ["Ready to write?", "You should be able to say the reader, the goal, and what's missing in one sentence each. If you can't, keep researching before you draft."],
-  "ranks": { "num": "05", "title": "What already shows up on Google", "hint": "Open the top three results that aren't ads. Skim their headings and look for what's missing.",
-    "cols": ["#", "Title and link", "Length", "What it covers", "What it misses"], "ai": ["AI summary (if Google shows one)", "What it covers, and what it leaves out."] },
-  "outline": { "num": "06", "title": "Outline", "hint": "Turn the questions people search into your headings. Big questions become sections; follow-up questions become subsections.",
-    "cols": ["Level", "Heading", "Question it answers"], "levels": ["Title", "Section", "Subsection", "Section", "Subsection", "Section"] },
-  "sources": { "num": "07", "title": "Sources, photos, and links", "hint": "Open every source and make sure it still says what you need before you write.",
-    "cols": ["Source, photo, or link", "What it supports", "Checked"] },
-  "publish": { "num": "08", "title": "Before you publish", "items": [
-    "Main keyword in the title, the first paragraph, and one section heading",
+  [
+   [
+    "Where it will be posted",
+    50
+   ],
+   [
+    "New post or update?",
+    50,
+    "☐ New     ☐ Update (link):"
+   ]
+  ]
+ ],
+ "blocks": [
+  {
+   "type": "meta"
+  },
+  {
+   "type": "fields",
+   "num": "01",
+   "title": "Reader and goal",
+   "fields": [
+    [
+     "Reader",
+     "Who is this for? Specific enough to picture.",
+     "Marketers starting out who write their own blog posts"
+    ],
+    [
+     "Goal",
+     "What should they know or be able to do when they finish?",
+     "Write a one-page brief before their next post"
+    ]
+   ]
+  },
+  {
+   "type": "fields",
+   "num": "02",
+   "title": "Search",
+   "hint": "Free tools work: the Ahrefs Keyword Generator, Google's autocomplete, and the \"People also ask\" box.",
+   "fields": [
+    [
+     "Main keyword",
+     "The phrase your reader types into Google. Add monthly searches and difficulty if your tool shows them.",
+     "seo content brief (500 searches a month, easy)"
+    ],
+    [
+     "Related searches",
+     "Two or three other phrases or questions people search.",
+     "seo content brief template, content brief template"
+    ],
+    [
+     "What searchers want",
+     "Search the main keyword. What kind of page shows up most: a how-to, a list, a review?",
+     "Step-by-step guides, most with a template"
+    ]
+   ]
+  },
+  {
+   "type": "grid",
+   "num": "03",
+   "title": "What already shows up on Google",
+   "hint": "Open the top three results that aren't ads. Skim their headings and look for what they skip.",
+   "cols": [
+    "#",
+    "Title and link",
+    "Length",
+    "What it covers",
+    "What it misses"
+   ],
+   "widths": [
+    5,
+    31,
+    11,
+    26.5,
+    26.5
+   ],
+   "first": [
+    "1",
+    "2",
+    "3"
+   ],
+   "height": 46,
+   "after": [
+    [
+     "AI summary (if Google shows one)",
+     "What it covers, and what it leaves out."
+    ]
+   ]
+  },
+  {
+   "type": "break"
+  },
+  {
+   "type": "fields",
+   "num": "04",
+   "title": "Your angle",
+   "fields": [
+    [
+     "What's missing",
+     "What none of the top three do. Use section 03.",
+     "Every guide is written for agency teams, not people writing their own posts"
+    ],
+    [
+     "What only you can add",
+     "A story, photo, result, or example from your own work.",
+     "My own filled-in brief and what I'd change"
+    ],
+    [
+     "Your angle",
+     "The one idea your post adds, in one sentence.",
+     "A plain-language brief for people who write their own posts"
+    ],
+    [
+     "Length",
+     "A range. Average the top three and divide by 3 for a starting point, not a rule.",
+     "900 to 1,200 words"
+    ]
+   ],
+   "height": 30
+  },
+  {
+   "type": "fields",
+   "num": "05",
+   "title": "Title and Google listing",
+   "hint": "This is what people see in search results before they click.",
+   "fields": [
+    [
+     "Page title",
+     "Main keyword near the start. About 60 characters or fewer so it isn't cut off.",
+     "How to Write an SEO Content Brief (With a Free Template)"
+    ],
+    [
+     "Meta description",
+     "The short description under your title on Google. About 150 characters. Google may rewrite it.",
+     "How to write an SEO content brief in seven plain steps, what has changed in search and what hasn't, plus a free template you can download."
+    ],
+    [
+     "Web address (URL)",
+     "Short, lowercase, words separated by hyphens.",
+     "/blog/how-to-write-an-seo-content-brief"
+    ]
+   ],
+   "height": 30
+  },
+  {
+   "type": "callout",
+   "tone": "ice",
+   "title": "Ready to write?",
+   "body": "You should be able to say the reader, the goal, and what's missing in one sentence each. If you can't, keep researching before you draft."
+  },
+  {
+   "type": "break"
+  },
+  {
+   "type": "grid",
+   "num": "06",
+   "title": "Outline",
+   "hint": "Turn the questions people search into headings. Big questions become sections (H2), follow-up questions become subsections (H3). A rough word count for each keeps the length on track.",
+   "cols": [
+    "Part",
+    "Heading",
+    "What it covers",
+    "Words"
+   ],
+   "widths": [
+    16,
+    36,
+    38,
+    10
+   ],
+   "first": [
+    "Title (H1)",
+    "Intro",
+    "Section (H2)",
+    "Subsection (H3)",
+    "Section (H2)",
+    "Subsection (H3)",
+    "Section (H2)",
+    "Section (H2)",
+    "FAQ",
+    "Closing"
+   ],
+   "prefill": {
+    "1": [
+     "",
+     "Main keyword in the first 100 words",
+     ""
+    ],
+    "8": [
+     "",
+     "Two or three questions from \"People also ask\"",
+     ""
+    ],
+    "9": [
+     "",
+     "The next step from section 08",
+     ""
+    ]
+   },
+   "height": 30
+  },
+  {
+   "type": "grid",
+   "num": "07",
+   "title": "Links, sources, and photos",
+   "hint": "Link two or three of your own posts. Use competitors' pages for research, and link to neutral sources like the original report. Credit every photo.",
+   "cols": [
+    "Type",
+    "Link or file",
+    "What it supports",
+    "Checked"
+   ],
+   "widths": [
+    16,
+    40,
+    32,
+    12
+   ],
+   "first": [
+    "Your post",
+    "Your post",
+    "Source",
+    "Source",
+    "Source",
+    "Photo",
+    "Photo"
+   ],
+   "height": 30
+  },
+  {
+   "type": "break"
+  },
+  {
+   "type": "fields",
+   "num": "08",
+   "title": "Next step and proof",
+   "fields": [
+    [
+     "Next step for the reader",
+     "The one thing they should do after reading (your call to action), plus the link.",
+     "Download the template"
+    ],
+    [
+     "How you'll know it worked",
+     "One number to check 30 days after publishing.",
+     "Template downloads and Google ranking"
+    ]
+   ]
+  },
+  {
+   "type": "fields",
+   "num": "09",
+   "title": "Notes for the writer",
+   "hint": "Skip this if you're writing it yourself, or use it to remember the rules you set.",
+   "fields": [
+    [
+     "Voice",
+     "How it should sound.",
+     "Plain and friendly, first person"
+    ],
+    [
+     "Must include",
+     "Required lines, disclaimers, product names, or terms.",
+     "A credit line for every photo"
+    ],
+    [
+     "Avoid",
+     "Claims, words, or topics to leave out.",
+     "Any number I can't link to a source"
+    ]
+   ],
+   "height": 34
+  },
+  {
+   "type": "check",
+   "num": "10",
+   "title": "Before you publish",
+   "items": [
+    "Main keyword in the title, the first 100 words, and one section heading",
     "Every number links to a source you opened",
     "Two or three links to your other posts",
     "Photos credited, each with a short description for screen readers (alt text)",
-    "The next step matches the goal on page 1",
+    "Page title and meta description match section 05",
+    "The next step matches the goal in section 01",
     "A reminder on your calendar to check your number in 30 days"
-  ]},
-  "example": {
-    "title": "Example: a filled-in brief",
-    "subtitle": "The brief behind “Owala vs. Stanley: New Colors or New Products?” on angelphommachan.com. Search numbers from Ahrefs, US.",
-    "rows": [
-      ["Reader", "People starting out in marketing who want to see how two brands grow after one hit product"],
-      ["Goal", "Understand the tradeoff between refreshing a best-seller and launching new products"],
-      ["Main keyword", "owala vs stanley (1,800 searches a month, easy to rank for)"],
-      ["Related searches", "owala color drop (4,600), why is owala so popular (250), stanley marketing strategy"],
-      ["What searchers want", "Shoppers comparing the bottles: every top result is a product test"],
-      ["What's missing", "No one compared the two brands’ marketing"],
-      ["What only I can add", "My own side-by-side read of their products, ads, and blogs"],
-      ["Angle", "New colors or new products: what each strategy costs and when it works"],
-      ["Length", "Average ÷ 3 ≈ 470 words; finished at about 1,480 to cover products, ads, and blogs"],
-      ["Sources", "Retail Dive, Fast Company, The Drum, Owala’s Color Drop FAQ, ASI (each opened and checked)"],
-      ["Next step for the reader", "Notice where each brand’s ads and links send you, then answer: refresh it or build something new?"],
-      ["How I’ll know it worked", "Google ranking for “owala vs stanley” and time on page after 30 days"]
-    ],
-    "note": ["What changed after research:", "One quote I planned to use was no longer on Owala’s site, so it came out before drafting. A classmate pointed out that the main growth number came from a search tool companies use to order branded gifts, so the post now says that plainly."]
+   ]
   },
-  "footer_left": "SEO content brief template by Angel Phommachan",
-  "footer_right": "angelphommachan.com"
+  {
+   "type": "example"
+  }
+ ],
+ "example": {
+  "title": "Example: a filled-in brief",
+  "subtitle": "The brief behind “Owala vs. Stanley: New Colors or New Products?” on angelphommachan.com. Search numbers from Ahrefs, US. Section word counts are from the finished post.",
+  "rows": [
+   [
+    "Where it's posted",
+    "Blog on angelphommachan.com (new post)"
+   ],
+   [
+    "Reader",
+    "People starting out in marketing who want to see how two brands grow after one hit product"
+   ],
+   [
+    "Goal",
+    "Understand the tradeoff between refreshing a best-seller and launching new products"
+   ],
+   [
+    "Main keyword",
+    "owala vs stanley (1,800 searches a month, easy to rank for)"
+   ],
+   [
+    "Related searches",
+    "owala color drop (4,600), why is owala so popular (250), stanley marketing strategy"
+   ],
+   [
+    "What searchers want",
+    "Shoppers comparing the bottles: every top result is a product test"
+   ],
+   [
+    "What's missing",
+    "No one compared the two brands’ marketing"
+   ],
+   [
+    "What only I can add",
+    "My own side-by-side read of their products, ads, and blogs"
+   ],
+   [
+    "Angle",
+    "New colors or new products: what each strategy costs and when it works"
+   ],
+   [
+    "Length",
+    "Average ÷ 3 ≈ 470 words; finished at about 1,480 to cover products, ads, and blogs"
+   ],
+   [
+    "Page title",
+    "Owala vs. Stanley: New Colors or New Products?"
+   ],
+   [
+    "Meta description",
+    "Owala sells the same FreeSip in a new color every month. Stanley is building bags, coolers, and soccer collections around the Quencher. What each costs."
+   ],
+   [
+    "Web address",
+    "/blog/owala-vs-stanley"
+   ],
+   [
+    "Next step for the reader",
+    "Notice where each brand’s ads and links send you, then answer: refresh it or build something new?"
+   ],
+   [
+    "How I’ll know it worked",
+    "Google ranking for “owala vs stanley” and time on page after 30 days"
+   ]
+  ],
+  "outline": [
+   [
+    "Title (H1)",
+    "Owala vs. Stanley: New Colors or New Products?",
+    ""
+   ],
+   [
+    "Intro",
+    "Two bottles, two answers, plus a comparison table",
+    "115"
+   ],
+   [
+    "Section (H2)",
+    "How Stanley turned a work cup into a craze",
+    "105"
+   ],
+   [
+    "Section (H2)",
+    "Why Stanley is building past the Quencher",
+    "230"
+   ],
+   [
+    "Section (H2)",
+    "How Owala's Color Drops keep fans coming back",
+    "215"
+   ],
+   [
+    "Section (H2)",
+    "Is Owala more popular than Stanley?",
+    "110"
+   ],
+   [
+    "Section (H2)",
+    "How the bottles, ads, and blogs differ",
+    "335"
+   ],
+   [
+    "Section (H2)",
+    "Owala vs. Stanley: which strategy works?",
+    "145"
+   ],
+   [
+    "Closing",
+    "New colors or new products?",
+    "160"
+   ],
+   [
+    "FAQ",
+    "What is an Owala Color Drop? Is Owala more popular than Stanley?",
+    ""
+   ]
+  ],
+  "links": [
+   [
+    "Your posts",
+    "Liquid Death vs. Poppi, How the Utah Mammoth Got Its Name"
+   ],
+   [
+    "Sources",
+    "Retail Dive, Fast Company, The Drum, Owala’s Color Drop FAQ, ASI (each opened and checked)"
+   ],
+   [
+    "Photos",
+    "Brand photos from Stanley and Owala, each credited"
+   ]
+  ],
+  "note": [
+   "What changed after research:",
+   "One quote I planned to use was no longer on Owala’s site, so it came out before drafting. A classmate pointed out that the main growth number came from a search tool companies use to order branded gifts, so the post now says that plainly."
+  ]
+ }
 }

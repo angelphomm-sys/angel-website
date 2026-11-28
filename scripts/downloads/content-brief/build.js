@@ -7,18 +7,19 @@ const {
 } = require("docx");
 
 const F = JSON.parse(fs.readFileSync(process.argv[2] || "fields.json", "utf8"));
-const OUT = process.argv[3] || "content-brief-template.docx";
+const OUT = process.argv[3] || "seo-content-brief-template.docx";
 
-const RED = "BB2426", INK = "210F10", CREAM = "F1E7D4", ICE = "C7DEE9", LINE = "D9CDB8", WHITE = "FFFFFF";
+const RED = "BB2426", INK = "210F10", CREAM = "F1E7D4", ICE = "C7DEE9", LINE = "D9CDB8", MUTED = "6B5A50", WHITE = "FFFFFF";
 const FONT = "Arial";
 const W = 10080; // US Letter, 0.75in margins
 const LABEL = 3800, ANSWER = W - LABEL;
+const pct = (widths) => { const px = widths.map((w) => Math.round((W * w) / 100)); px[px.length - 1] += W - px.reduce((a, b) => a + b, 0); return px; };
 
 const border = { style: BorderStyle.SINGLE, size: 4, color: LINE };
 const borders = { top: border, bottom: border, left: border, right: border };
 const none = { style: BorderStyle.NONE, size: 0, color: WHITE };
 const noBorders = { top: none, bottom: none, left: none, right: none };
-const pad = { top: 90, bottom: 90, left: 140, right: 140 };
+const pad = { top: 60, bottom: 60, left: 140, right: 140 };
 const shade = (fill) => ({ fill, type: ShadingType.CLEAR, color: "auto" });
 
 const run = (text, o = {}) => new TextRun({ text, font: FONT, color: INK, size: 20, ...o });
@@ -29,24 +30,33 @@ const cell = (children, width, o = {}) => new TableCell({
   children: Array.isArray(children) ? children : [children], ...o,
 });
 
-function heading(num, text) {
-  return p([run(`${num}  `, { color: RED, bold: true, size: 24 }), run(text, { bold: true, size: 24 })], { spacing: { before: 260, after: 110 }, keepNext: true });
+function heading(num, text, hint) {
+  const out = [p([...(num ? [run(`${num}  `, { color: RED, bold: true, size: 24 })] : []), run(text, { bold: true, size: 24 })], { spacing: { before: 200, after: hint ? 30 : 90 }, keepNext: true })];
+  if (hint) out.push(p(run(hint, { size: 17, color: MUTED }), { spacing: { after: 100 }, keepNext: true }));
+  return out;
 }
-function hint(text) { return p(run(text, { size: 18 }), { spacing: { after: 110 } }); }
-function fieldRow(label, prompt, height = 520) {
+function fieldRow([label, prompt, example], height = 520) {
+  const left = [p(run(label, { bold: true })), p(run(prompt, { size: 16 }), { spacing: { before: 30 } })];
+  if (example) left.push(p(run(`e.g. ${example}`, { size: 15, italics: true, color: MUTED }), { spacing: { before: 30 } }));
   return new TableRow({ height: { value: height, rule: HeightRule.ATLEAST }, cantSplit: true, children: [
-    cell([p(run(label, { bold: true })), p(run(prompt, { size: 16 }), { spacing: { before: 40 } })], LABEL, { shading: shade(CREAM) }),
-    cell(p(run("")), ANSWER),
+    cell(left, LABEL, { shading: shade(CREAM) }), cell(p(run("")), ANSWER),
   ] });
 }
-function exRow(label, text) {
-  return new TableRow({ cantSplit: true, children: [cell(p(run(label, { bold: true })), LABEL, { shading: shade(CREAM) }), cell(p(run(text)), ANSWER)] });
-}
-function grid(cols, widths, n, first, height) {
+const fieldTable = (fields, height) => table([LABEL, ANSWER], fields.map((f) => fieldRow(f, height)));
+function grid(cols, widths, rows, height, prefill = {}) {
   const head = new TableRow({ tableHeader: true, children: cols.map((c, i) => cell(p(run(c, { bold: true, size: 17, color: WHITE })), widths[i], { shading: shade(INK) })) });
-  const rows = Array.from({ length: n }, (_, r) => new TableRow({ height: { value: height, rule: HeightRule.ATLEAST }, cantSplit: true,
-    children: widths.map((w, i) => cell(p(run(i === 0 && first ? first(r) : "", { bold: true, size: 18 })), w)) }));
-  return table(widths, [head, ...rows]);
+  const body = rows.map((row, r) => {
+    let cells = Array.isArray(row) ? row : [row, ...cols.slice(1).map(() => "")];
+    if (prefill[String(r)]) cells = [cells[0], ...prefill[String(r)]];
+    return new TableRow({ height: { value: height, rule: HeightRule.ATLEAST }, cantSplit: true,
+      children: cells.map((c, i) => cell(p(run(c, i === 0 ? { bold: true, size: 17 } : (Array.isArray(row) ? { size: 18 } : { size: 16, italics: true, color: MUTED }))), widths[i])) });
+  });
+  return table(widths, [head, ...body]);
+}
+function pairs(rows) {
+  const L = 3000;
+  return table([L, W - L], rows.map(([l, t]) => new TableRow({ cantSplit: true, children: [
+    cell(p(run(l, { bold: true, size: 18 })), L, { shading: shade(CREAM) }), cell(p(run(t, { size: 18 })), W - L)] })));
 }
 function callout(title, body, fill) {
   return table([W], [new TableRow({ children: [new TableCell({ borders: noBorders, width: { size: W, type: WidthType.DXA }, shading: shade(fill),
@@ -55,57 +65,49 @@ function callout(title, body, fill) {
 function titleBlock(title, sub) {
   const rule = { bottom: { style: BorderStyle.SINGLE, size: 12, color: RED, space: 8 } };
   const out = [p(run(F.kicker, { bold: true, color: RED, size: 18 }), { spacing: { after: 60 } })];
-  if (!sub) return [...out, p(run(title, { bold: true, size: 44 }), { spacing: { after: 200 }, border: rule })];
-  return [...out,
-    p(run(title, { bold: true, size: 44 }), { spacing: { after: 80 } }),
-    p(run(sub, { size: 21 }), { spacing: { after: 200 }, border: rule }),
-  ];
+  if (!sub) return [...out, p(run(title, { bold: true, size: 40 }), { spacing: { after: 180 }, border: rule })];
+  return [...out, p(run(title, { bold: true, size: 44 }), { spacing: { after: 80 } }), p(run(sub, { size: 19 }), { spacing: { after: 200 }, border: rule })];
+}
+function metaTable() {
+  const widths = pct(F.meta[0].map((c) => c[1]));
+  return table(widths, F.meta.map((row) => new TableRow({ height: { value: 560, rule: HeightRule.ATLEAST }, children: row.map((c, i) => {
+    const span = i === row.length - 1 ? widths.length - row.length + 1 : 1;
+    const w = widths.slice(i, i + span).reduce((a, b) => a + b, 0);
+    const kids = [p(run(c[0], { bold: true, size: 17 }))];
+    if (c[2]) kids.push(p(run(c[2], { size: 16 }), { spacing: { before: 60 } }));
+    return cell(kids, w, span > 1 ? { columnSpan: span } : {});
+  }) })));
 }
 const check = (text) => p([run("☐  ", { size: 22 }), run(text)], { spacing: { before: 60, after: 60 } });
+const gap = (after = 100) => p(run(""), { spacing: { after } });
 
-const page1 = [
-  ...titleBlock(F.title, F.subtitle),
-  table([5040, 2520, 2520], [new TableRow({ children: [
-    cell([p(run("Working title", { bold: true, size: 17 })), p(run(""))], 5040),
-    cell([p(run("Writer", { bold: true, size: 17 })), p(run(""))], 2520),
-    cell([p(run("Publish date", { bold: true, size: 17 })), p(run(""))], 2520),
-  ] })]),
-  ...F.sections.flatMap((s) => [heading(s.num, s.title), table([LABEL, ANSWER], s.fields.map(([l, pr]) => fieldRow(l, pr)))]),
-  p(run(""), { spacing: { after: 100 } }),
-  callout(F.ready[0], F.ready[1], ICE),
-];
-
-const page2 = [
-  p(new PageBreak()),
-  heading(F.ranks.num, F.ranks.title), hint(F.ranks.hint),
-  grid(F.ranks.cols, [500, 3080, 1100, 2700, 2700], 3, (r) => String(r + 1), 720),
-  p(run(""), { spacing: { after: 60 } }),
-  table([LABEL, ANSWER], [fieldRow(F.ranks.ai[0], F.ranks.ai[1], 560)]),
-  heading(F.outline.num, F.outline.title), hint(F.outline.hint),
-  grid(F.outline.cols, [1500, 4790, 3790], F.outline.levels.length, (r) => F.outline.levels[r], 420),
-  heading(F.sources.num, F.sources.title), hint(F.sources.hint),
-  grid(F.sources.cols, [4590, 4290, 1200], 5, null, 420),
-  heading(F.publish.num, F.publish.title),
-  ...F.publish.items.map(check),
-];
-
-const page3 = [
-  p(new PageBreak()),
-  ...titleBlock(F.example.title, F.example.subtitle),
-  table([LABEL, ANSWER], F.example.rows.map(([l, t]) => exRow(l, t))),
-  p(run(""), { spacing: { after: 160 } }),
-  callout(F.example.note[0], F.example.note[1], CREAM),
-];
+const children = [...titleBlock(F.title)];
+for (const b of F.blocks) {
+  if (b.type === "meta") children.push(metaTable());
+  else if (b.type === "fields") children.push(...heading(b.num, b.title, b.hint), fieldTable(b.fields, (b.height || 22) * 20 + 80));
+  else if (b.type === "grid") {
+    children.push(...heading(b.num, b.title, b.hint), grid(b.cols, pct(b.widths), b.first, b.height * 12, b.prefill));
+    if (b.after) children.push(gap(60), fieldTable(b.after, 560));
+  } else if (b.type === "callout") children.push(gap(), callout(b.title, b.body, b.tone === "cream" ? CREAM : ICE));
+  else if (b.type === "check") children.push(...heading(b.num, b.title), ...b.items.map(check));
+  else if (b.type === "break") children.push(p(new PageBreak()));
+  else if (b.type === "example") {
+    const x = F.example;
+    children.push(p(new PageBreak()), ...titleBlock(x.title, x.subtitle), pairs(x.rows), p(new PageBreak()),
+      ...heading(null, "Outline"), grid(["Part", "Heading", "Words"], pct([18, 70, 12]), x.outline, 0),
+      ...heading(null, "Links, sources, and photos"), pairs(x.links), gap(160), callout(x.note[0], x.note[1], CREAM));
+  }
+}
 
 const doc = new Document({
   creator: "Angel Phommachan", title: "SEO Content Brief Template",
-  description: "A three-page SEO content brief template for one blog post, with a filled-in example.",
+  description: "An SEO content brief template for one blog post, with a filled-in example.",
   styles: { default: { document: { run: { font: FONT, size: 20, color: INK } } } },
   sections: [{
     properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1080, bottom: 1080, left: 1080, right: 1080 } } },
     footers: { default: new Footer({ children: [p([run(F.footer_left, { size: 16 }), run("\t" + F.footer_right, { size: 16, color: RED, bold: true })],
       { tabStops: [{ type: TabStopType.RIGHT, position: W }] })] }) },
-    children: [...page1, ...page2, ...page3],
+    children,
   }],
 });
 Packer.toBuffer(doc).then((buf) => { fs.writeFileSync(OUT, buf); console.log("written", OUT, buf.length); });
