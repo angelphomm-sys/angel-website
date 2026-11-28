@@ -68,11 +68,21 @@ export function Instagram({ url, title }: { url: string; title: string }) {
   );
 }
 
+// In-post photos are capped at about 440px tall, so a portrait shot doesn't fill the whole screen.
+// The width follows from the ratio: a 4/5 portrait sits at about 350px, a 3/2 landscape at about 660px,
+// and anything wider fills the reading column. Narrow figures center in the column.
+const FIGURE_MAX_HEIGHT = 440;
+function figureMaxWidth(ratio: string) {
+  const [w, h] = ratio.split("/").map(Number);
+  return w > 0 && h > 0 ? Math.round((FIGURE_MAX_HEIGHT * w) / h) : undefined;
+}
+
 export function Figure({ src, alt, caption, ratio = "4/3" }: { src: string; alt: string; caption?: string; ratio?: string }) {
+  const maxWidth = figureMaxWidth(ratio);
   return (
-    <figure>
+    <figure className="mx-auto" style={{ maxWidth }}>
       <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: ratio }}>
-        <Image src={src} alt={alt} fill sizes="(min-width: 768px) 720px, 100vw" className="object-cover" />
+        <Image src={src} alt={alt} fill sizes={maxWidth ? `(min-width: 768px) ${Math.min(maxWidth, 720)}px, 100vw` : "(min-width: 768px) 720px, 100vw"} className="object-cover" />
       </div>
       {caption && <figcaption>{caption}</figcaption>}
     </figure>
