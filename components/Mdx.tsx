@@ -2,6 +2,7 @@ import { Children, isValidElement } from "react";
 import { compile, run } from "@mdx-js/mdx";
 import * as runtime from "react/jsx-runtime";
 import { YouTube, TikTok, Instagram, Figure, Gallery, Todo, LinkCard } from "./Media";
+import { Download } from "./Download";
 import { Stat, Bars, Table } from "./CampaignData";
 import { getWork } from "@/lib/work";
 
@@ -19,7 +20,7 @@ function IfWork({ slug, children }: { slug: string; children: React.ReactNode })
   return getWork(slug) ? <>{children}</> : null;
 }
 
-const components = { YouTube, TikTok, Instagram, Figure, Gallery, Todo, LinkCard, Stat, Bars, Table, IfWork, p: P };
+const components = { YouTube, TikTok, Instagram, Figure, Gallery, Todo, LinkCard, Download, Stat, Bars, Table, IfWork, p: P };
 
 export async function Mdx({ source }: { source: string }) {
   const compiled = await compile(source, { outputFormat: "function-body", development: false });
