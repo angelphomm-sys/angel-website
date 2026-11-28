@@ -305,21 +305,6 @@
           ""
         ]
       ]
-    },
-    {
-      "type": "check",
-      "num": "10",
-      "title": "Pre-publish checklist",
-      "items": [
-        "Primary keyword in the title, first 100 words, and one H2",
-        "Title and meta description match section 05",
-        "Every number links to a source",
-        "Two or three internal links",
-        "One or two older posts link to the new one",
-        "Images credited, with alt text",
-        "CTA matches the content goal",
-        "Monthly KPI review on your calendar"
-      ]
     }
   ]
 }
