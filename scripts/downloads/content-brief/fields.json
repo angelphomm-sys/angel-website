@@ -56,20 +56,20 @@
       "fields": [
         [
           "Target audience",
-          "Who it's for and what they already know."
+          ""
         ],
         [
           "Funnel stage",
-          "Learning, comparing, or ready to act?",
+          "",
           "",
           "☐ Awareness     ☐ Consideration     ☐ Decision"
         ],
         [
           "Content goal",
-          "What the post should do for the reader and for you."
+          ""
         ]
       ],
-      "height": 42
+      "height": 48
     },
     {
       "type": "fields",
@@ -79,28 +79,28 @@
       "fields": [
         [
           "Primary keyword",
-          "Monthly search volume and keyword difficulty (KD)."
+          ""
         ],
         [
           "Secondary keywords",
-          "Two or three related phrases."
+          ""
         ],
         [
           "Keywords to avoid",
-          "Keywords your other pages already target."
+          ""
         ],
         [
           "Search intent",
-          "What kind of page ranks for it?",
+          "",
           "",
           "☐ Informational   ☐ Navigational   ☐ Commercial   ☐ Transactional"
         ],
         [
           "Questions to answer",
-          "From People also ask. Use them as headings and FAQs."
+          ""
         ]
       ],
-      "height": 42
+      "height": 48
     },
     {
       "type": "grid",
@@ -130,7 +130,7 @@
       "after": [
         [
           "AI Overview",
-          "What it covers and misses, if Google shows one."
+          ""
         ]
       ]
     },
@@ -144,19 +144,19 @@
       "fields": [
         [
           "Content gap",
-          "What the top results don't cover."
+          ""
         ],
         [
           "Unique value",
-          "First-hand experience, expert input, or original data."
+          ""
         ],
         [
           "Editorial angle",
-          "Your post's main idea in one sentence."
+          ""
         ],
         [
           "Target word count",
-          "Use the top-ranking pages as a guide."
+          ""
         ]
       ],
       "height": 52
@@ -168,15 +168,15 @@
       "fields": [
         [
           "SEO title",
-          "About 50 to 60 characters, primary keyword near the start."
+          ""
         ],
         [
           "Meta description",
-          "About 150 to 160 characters."
+          ""
         ],
         [
           "URL slug",
-          "Short, lowercase, hyphens."
+          ""
         ]
       ],
       "height": 52
@@ -273,11 +273,11 @@
       "fields": [
         [
           "Call to action (CTA)",
-          "What the reader does next, plus the link."
+          ""
         ],
         [
           "KPI",
-          "One number tied to the content goal. Review it monthly."
+          ""
         ]
       ],
       "height": 52
@@ -294,15 +294,15 @@
         ],
         [
           "Must include",
-          "Disclaimers, required terms, product names."
+          ""
         ],
         [
           "Avoid",
-          "Claims, words, or topics to leave out."
+          ""
         ],
         [
           "Style guide",
-          "Link to brand or style guidelines."
+          ""
         ]
       ]
     },

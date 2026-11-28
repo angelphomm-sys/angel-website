@@ -54,7 +54,7 @@ h2 {{ font-size:12pt; margin:13px 0 4px; }} h2 em {{ font-style:normal; color:{R
 .page > h2:first-child {{ margin-top:0; }}
 .hint {{ font-size:8.5pt; margin:0 0 5px; color:{MUTED}; }}
 table {{ width:100%; border-collapse:collapse; }}
-.f th {{ width:38%; background:{CREAM}; text-align:left; vertical-align:top; padding:5px 9px; border:1px solid {LINE}; font-weight:400; }}
+.f th {{ width:28%; background:{CREAM}; text-align:left; vertical-align:top; padding:5px 9px; border:1px solid {LINE}; font-weight:400; }}
 .f th b {{ display:block; font-size:10pt; }} .f th span {{ display:block; font-size:8pt; margin-top:1px; }}
 .f th i {{ display:block; font-size:7.5pt; margin-top:2px; color:{MUTED}; }}
 .f td {{ border:1px solid {LINE}; padding:5px 9px; vertical-align:top; }}

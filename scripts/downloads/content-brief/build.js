@@ -12,7 +12,7 @@ const OUT = process.argv[3] || "seo-content-brief-template.docx";
 const RED = "BB2426", INK = "210F10", CREAM = "F1E7D4", ICE = "C7DEE9", LINE = "D9CDB8", MUTED = "6B5A50", WHITE = "FFFFFF";
 const FONT = "Arial";
 const W = 10080; // US Letter, 0.75in margins
-const LABEL = 3800, ANSWER = W - LABEL;
+const LABEL = 2900, ANSWER = W - LABEL;
 const pct = (widths) => { const px = widths.map((w) => Math.round((W * w) / 100)); px[px.length - 1] += W - px.reduce((a, b) => a + b, 0); return px; };
 
 const border = { style: BorderStyle.SINGLE, size: 4, color: LINE };
