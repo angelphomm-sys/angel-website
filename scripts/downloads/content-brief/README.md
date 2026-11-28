@@ -1,6 +1,11 @@
-# Content brief template (download)
+# SEO content brief template (download)
 
-- `build.js` builds `public/downloads/content-brief-template.docx` (run from a folder with the `docx` npm package: `node build.js`, then copy the output).
-- `template.html` is the same template for the PDF. Print it with headless Chrome:
-  `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --no-pdf-header-footer --print-to-pdf=public/downloads/content-brief-template.pdf scripts/downloads/content-brief/template.html`
-- Keep the two in sync when a field changes. The post that offers it: content/posts/how-to-write-a-content-brief.mdx.
+All wording lives in `fields.json`. Edit it, then rebuild both files:
+
+1. Word: from a folder with the `docx` npm package installed,
+   `node build.js <repo>/scripts/downloads/content-brief/fields.json <repo>/public/downloads/seo-content-brief-template.docx`
+2. PDF: `python3 make_html.py fields.json template.html`, then
+   `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --no-pdf-header-footer --print-to-pdf=<repo>/public/downloads/seo-content-brief-template.pdf template.html`
+   Check it is still 3 pages.
+
+Offered in content/posts/how-to-write-an-seo-content-brief.mdx (Download component, components/Download.tsx).

@@ -1,0 +1,62 @@
+{
+  "title": "SEO content brief",
+  "kicker": "SEO CONTENT BRIEF TEMPLATE",
+  "subtitle": "Plan one blog post before you write it. Fill it in order; most briefs take about 20 minutes.",
+  "sections": [
+    { "num": "01", "title": "Reader and goal", "fields": [
+      ["Reader", "Who is this for? One sentence, specific enough to picture."],
+      ["Goal", "What should they know or be able to do when they finish?"]
+    ]},
+    { "num": "02", "title": "Search", "fields": [
+      ["Main keyword", "The phrase your reader types into Google. Note how many people search it each month."],
+      ["Related searches", "Two or three other phrases or questions people search (from \"People also ask\" and autocomplete)."],
+      ["What searchers want", "Search the keyword yourself. What kind of page shows up most: a how-to, a list, a review?"]
+    ]},
+    { "num": "03", "title": "Your angle", "fields": [
+      ["What's missing", "What none of the top three results do. Fill in page 2 first, then sum it up here."],
+      ["What only you can add", "A story, photo, result, or example from your own experience."],
+      ["Your angle", "The one idea your post adds, in one sentence."],
+      ["Length", "Average the top three, then divide by 3. It's a starting point, not a rule."]
+    ]},
+    { "num": "04", "title": "Next step and proof", "fields": [
+      ["Next step for the reader", "The one thing they should do after reading (your call to action). Decide it now."],
+      ["How you'll know it worked", "One number to check 30 days after publishing, like your Google ranking or clicks."]
+    ]}
+  ],
+  "ready": ["Ready to write?", "You should be able to say the reader, the goal, and what's missing in one sentence each. If you can't, keep researching before you draft."],
+  "ranks": { "num": "05", "title": "What already shows up on Google", "hint": "Open the top three results that aren't ads. Skim their headings and look for what's missing.",
+    "cols": ["#", "Title and link", "Length", "What it covers", "What it misses"], "ai": ["AI summary (if Google shows one)", "What it covers, and what it leaves out."] },
+  "outline": { "num": "06", "title": "Outline", "hint": "Turn the questions people search into your headings. Big questions become sections; follow-up questions become subsections.",
+    "cols": ["Level", "Heading", "Question it answers"], "levels": ["Title", "Section", "Subsection", "Section", "Subsection", "Section"] },
+  "sources": { "num": "07", "title": "Sources, photos, and links", "hint": "Open every source and make sure it still says what you need before you write.",
+    "cols": ["Source, photo, or link", "What it supports", "Checked"] },
+  "publish": { "num": "08", "title": "Before you publish", "items": [
+    "Main keyword in the title, the first paragraph, and one section heading",
+    "Every number links to a source you opened",
+    "Two or three links to your other posts",
+    "Photos credited, each with a short description for screen readers (alt text)",
+    "The next step matches the goal on page 1",
+    "A reminder on your calendar to check your number in 30 days"
+  ]},
+  "example": {
+    "title": "Example: a filled-in brief",
+    "subtitle": "The brief behind “Owala vs. Stanley: New Colors or New Products?” on angelphommachan.com. Search numbers from Ahrefs, US.",
+    "rows": [
+      ["Reader", "People starting out in marketing who want to see how two brands grow after one hit product"],
+      ["Goal", "Understand the tradeoff between refreshing a best-seller and launching new products"],
+      ["Main keyword", "owala vs stanley (1,800 searches a month, easy to rank for)"],
+      ["Related searches", "owala color drop (4,600), why is owala so popular (250), stanley marketing strategy"],
+      ["What searchers want", "Shoppers comparing the bottles: every top result is a product test"],
+      ["What's missing", "No one compared the two brands’ marketing"],
+      ["What only I can add", "My own side-by-side read of their products, ads, and blogs"],
+      ["Angle", "New colors or new products: what each strategy costs and when it works"],
+      ["Length", "Average ÷ 3 ≈ 470 words; finished at about 1,480 to cover products, ads, and blogs"],
+      ["Sources", "Retail Dive, Fast Company, The Drum, Owala’s Color Drop FAQ, ASI (each opened and checked)"],
+      ["Next step for the reader", "Notice where each brand’s ads and links send you, then answer: refresh it or build something new?"],
+      ["How I’ll know it worked", "Google ranking for “owala vs stanley” and time on page after 30 days"]
+    ],
+    "note": ["What changed after research:", "One quote I planned to use was no longer on Owala’s site, so it came out before drafting. A classmate pointed out that the main growth number came from a search tool companies use to order branded gifts, so the post now says that plainly."]
+  },
+  "footer_left": "SEO content brief template by Angel Phommachan",
+  "footer_right": "angelphommachan.com"
+}
