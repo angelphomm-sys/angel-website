@@ -11,7 +11,7 @@ export function AuthorCta({ slug }: { slug: string }) {
           <Image src="/images/me/avatar.jpg" alt="Angel Phommachan" fill sizes="56px" className="object-cover" />
         </div>
         <p className="m-0 text-[16px] leading-snug">
-          <span className="font-semibold">Written by Angel Phommachan</span>, a digital marketing specialist who works across search, email, social, and content.
+          <span className="font-semibold">Written by Angel Phommachan</span>, digital marketing specialist
         </p>
       </div>
       <TrackLink event={`postcta_${slug}_work`} href="/work" className="self-start sm:self-center shrink-0 inline-flex items-center bg-accent text-cream rounded-full px-5 py-3 text-[15px] font-semibold hover:bg-accent-deep transition-colors whitespace-nowrap">See my work →</TrackLink>
