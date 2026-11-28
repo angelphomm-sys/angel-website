@@ -173,3 +173,12 @@ All files in public/images/blog/liquid-death-vs-poppi-marketing/. Downloaded 202
 |---|---|---|---|---|
 | TikTok | "Toilet Blind Taste Test: LD Soda-Flavored Sparkling Water vs Prebiotic Soda", posted 2025-05-29 | https://www.tiktok.com/@liquiddeath/video/7509896836438592798 | @liquiddeath | Opened 2026-10-24, caption and author confirmed |
 | TikTok | "vibes? vibes...vibes! (vibes) @Charli XCX @Rachel Sennott", 122-second Super Bowl LX spot cut, posted 2026-02-08 (US time) | https://www.tiktok.com/@drinkpoppi/video/7604680130820099358 | @drinkpoppi | Opened 2026-10-24, caption and author confirmed |
+
+## owala-vs-stanley
+
+| File | What it shows | Source page | Direct image URL | Owner |
+|---|---|---|---|---|
+| stanley-quencher-lifestyle-cover.jpg | Woman outdoors hugging a pink patterned Quencher (cover). Resized to 2400 wide. | https://www.stanley1913.com/collections/adventure-quencher-travel-tumblers | https://www.stanley1913.com/cdn/shop/files/040126_CLP_Hero_Quencher_Hero-Desktop.jpg | Stanley 1913 |
+| stanley-vitalize-backpack-tumbler-pocket.jpg | Vitalize backpack with labeled tumbler-securing belt and pocket | https://www.stanley1913.com/collections/vitalize-collection | https://www.stanley1913.com/cdn/shop/files/021726_Vitalize_CLP_Lifestyle_1_d9e8e2a8-1d45-430a-be05-ad766d6f705e.jpg | Stanley 1913 |
+| owala-fall-color-drop-freesip.jpg | FreeSip with a fall landscape Color Drop print. Resized to 2000 wide. | https://owalalife.com/color-drop | https://cdn.shopify.com/s/files/1/0439/2537/3087/files/Color_Drop_Logo_Option_3_V2.webp | Owala (Trove Brands) |
+| owala-halloween-color-drop-freesip.jpg | Black FreeSip with a glowing haunted house Color Drop print | https://owalalife.com/color-drop | https://cdn.shopify.com/s/files/1/0439/2537/3087/files/Haunted_House_Non_Glow_Final.webp | Owala (Trove Brands) |
