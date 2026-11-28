@@ -9,7 +9,7 @@ import { PostCard } from "@/components/PostCard";
 import { CoverImage } from "@/components/CoverImage";
 import { Comments } from "@/components/Comments";
 import { commentsEnabled } from "@/lib/comments";
-import { ShareBar } from "@/components/ShareBar";
+import { AuthorCta } from "@/components/AuthorCta";
 import { JsonLd } from "@/components/JsonLd";
 import { abs, breadcrumbs, clip, defaultOgImage, og, person } from "@/lib/seo";
 import { publicImageSize } from "@/lib/image-size";
@@ -74,6 +74,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <article className="mx-auto max-w-[1440px] px-5 md:px-20">
       <JsonLd data={jsonLd} />
+      {post.faq?.length ? <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: post.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} /> : null}
       <JsonLd data={breadcrumbs([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: post.title, path: `/blog/${post.slug}` }])} />
       <header className="py-12 md:py-16 grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[1fr_minmax(0,760px)_1fr]">
         <div className="font-mono text-[12px] font-medium text-mid flex gap-2"><Link href="/blog" className="hit hover:text-accent-deep">← All posts</Link></div>
@@ -88,7 +89,18 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <div className="py-12 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,760px)_1fr]"><div className="hidden lg:block" /><Mdx source={post.content} /><div className="hidden lg:block" /></div>
       <div className="pb-14 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,760px)_1fr]"><div className="hidden lg:block" />
         <div className="flex flex-col gap-4 min-w-0">
-          <ShareBar slug={post.slug} path={`/blog/${post.slug}`} title={post.title} linkedinPost={post.linkedinPost} />
+          {post.faq?.length ? (
+            <section aria-labelledby="faq" className="prose-post flex flex-col gap-4 pb-6">
+              <h2 id="faq">FAQ</h2>
+              {post.faq.map((f) => (
+                <div key={f.q}>
+                  <h3>{f.q}</h3>
+                  <p className="!mt-2">{f.a}</p>
+                </div>
+              ))}
+            </section>
+          ) : null}
+          <AuthorCta slug={post.slug} />
         </div><div className="hidden lg:block" /></div>
       {commentsEnabled && <div className="py-12 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,760px)_1fr]"><div className="hidden lg:block" /><div className="flex flex-col gap-5 min-w-0"><h2 id="comments" className="text-h3 font-display font-semibold tracking-[-0.015em] scroll-mt-24">Comments</h2><Comments /></div><div className="hidden lg:block" /></div>}
       {related.length > 0 && <div className="py-12 flex flex-col gap-6"><h2 className="text-h2 font-display font-semibold tracking-[-0.015em]">Read next</h2><div className="grid gap-6 md:grid-cols-3">{related.map((p) => <PostCard key={p.slug} post={p} layout="row" />)}</div></div>}

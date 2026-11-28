@@ -21,6 +21,8 @@ export type Post = {
   linkedinPost?: string;
   /** Hide the excerpt on the page and cards; it still feeds the meta description. */
   hideExcerpt?: boolean;
+  /** Frontmatter `faq: [{ q, a }]`: rendered under the post and sent to Google as FAQPage structured data. */
+  faq?: { q: string; a: string }[];
 };
 
 /** Frontmatter `brand: { name, url }`, kept only when both are non-empty strings. */
@@ -64,6 +66,7 @@ function read(file: string): Post {
     readingTime: Math.max(1, Math.round(words / 200)), draft: Boolean(data.draft), featured: Boolean(data.featured), content,
     cta: data.cta, series: data.series, keywords: data.keywords, updated: day(data.updated), brand: brandOf(data.brand),
     hideExcerpt: data.hideExcerpt === true,
+    faq: Array.isArray(data.faq) ? data.faq.filter((f: { q?: unknown; a?: unknown }) => str(f?.q) && str(f?.a)) : undefined,
     linkedinPost: str(data.linkedinPost) && /^https:\/\/(www\.)?linkedin\.com\//.test(data.linkedinPost) ? data.linkedinPost : undefined,
   };
 }
