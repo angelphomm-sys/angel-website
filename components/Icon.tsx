@@ -1,4 +1,4 @@
-type Name = "linkedin" | "instagram" | "cart" | "play" | "arrow" | "link" | "mail";
+type Name = "linkedin" | "instagram" | "cart" | "play" | "arrow" | "link" | "mail" | "x";
 
 export function Icon({ name, size = 20, className }: { name: Name; size?: number; className?: string }) {
   const common = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, className };
@@ -9,6 +9,8 @@ export function Icon({ name, size = 20, className }: { name: Name; size?: number
       return <svg {...common}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><path d="M17.5 6.5v.01" /></svg>;
     case "cart":
       return <svg {...common}><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.5" /><circle cx="9.5" cy="20" r="1" /><circle cx="17" cy="20" r="1" /></svg>;
+    case "x":
+      return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.17h1.7L7.4 4.73H5.58l11.09 14.44Z" /></svg>;
     case "play":
       return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}><path d="M8 5v14l11-7z" /></svg>;
     case "arrow":

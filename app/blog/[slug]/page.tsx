@@ -10,6 +10,7 @@ import { CoverImage } from "@/components/CoverImage";
 import { Comments } from "@/components/Comments";
 import { commentsEnabled } from "@/lib/comments";
 import { AuthorCta } from "@/components/AuthorCta";
+import { ShareMenu } from "@/components/ShareMenu";
 import { JsonLd } from "@/components/JsonLd";
 import { abs, breadcrumbs, clip, defaultOgImage, og, person } from "@/lib/seo";
 import { publicImageSize } from "@/lib/image-size";
@@ -82,7 +83,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <div className="flex items-center gap-2 text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid"><time dateTime={post.date}>{formatDate(post.date)}</time>{post.updated && post.updated !== post.date && <><span>·</span><span>updated <time dateTime={post.updated}>{formatDate(post.updated)}</time></span></>}<span>·</span><span>{post.readingTime} min</span>{post.series && <><span>·</span><span className="text-accent-deep">{post.series}</span></>}{post.draft && <span className="bg-[#fff6cc] text-ink rounded-full px-2.5 py-1">draft</span>}</div>
           <h1 className="text-title font-display font-semibold tracking-[-0.015em] leading-[1.12] text-balance">{post.title}</h1>
           {post.excerpt && !post.hideExcerpt && <p className="text-[19px] md:text-[21px] leading-snug text-mid">{post.excerpt}</p>}
-          <div className="flex items-center gap-3"><div className="relative w-10 h-10 rounded-full overflow-hidden"><Image src="/images/me/avatar.jpg" alt="" fill sizes="40px" className="object-cover" /></div><div className="flex flex-col"><Link href="/about" rel="author" className="text-[13px] font-bold hover:text-accent-deep">Angel Phommachan</Link><span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{site.role.toLowerCase()}</span></div></div>
+          <div className="flex flex-wrap items-center gap-3"><div className="relative w-10 h-10 rounded-full overflow-hidden"><Image src="/images/me/avatar.jpg" alt="" fill sizes="40px" className="object-cover" /></div><div className="flex flex-col"><Link href="/about" rel="author" className="text-[13px] font-bold hover:text-accent-deep">Angel Phommachan</Link><span className="text-[12px] font-mono font-medium uppercase tracking-[0.08em] text-mid">{site.role.toLowerCase()}</span></div><div className="w-full sm:w-auto sm:ml-auto"><ShareMenu slug={post.slug} path={`/blog/${post.slug}`} title={post.title} /></div></div>
         </div>
       </header>
       {post.cover && <CoverImage variant="hero" src={post.cover} alt={post.coverAlt ?? post.title} priority credit={post.coverCredit} creditUrl={post.coverCreditUrl} />}
@@ -100,6 +101,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               ))}
             </section>
           ) : null}
+          <div className="pb-2"><ShareMenu slug={post.slug} path={`/blog/${post.slug}`} title={post.title} label="Share this post" /></div>
           <AuthorCta slug={post.slug} />
         </div><div className="hidden lg:block" /></div>
       {commentsEnabled && <div className="py-12 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[1fr_minmax(0,760px)_1fr]"><div className="hidden lg:block" /><div className="flex flex-col gap-5 min-w-0"><h2 id="comments" className="text-h3 font-display font-semibold tracking-[-0.015em] scroll-mt-24">Comments</h2><Comments /></div><div className="hidden lg:block" /></div>}
