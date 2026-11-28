@@ -1,6 +1,6 @@
 import type { Book } from "@/components/Shelf";
 
-// "what shapes how i think." on About: books (they open to a favorite quote) and films (the poster flips to one).
+// "What shapes how I think" on About: books that open to a favorite quote. Films were removed 2026-11-27 at Angel's request.
 // `quote` is word-for-word from the work, checked against more than one source; `quoteBy` names the speaker.
 // `lesson` is what it taught her, in her voice (personal, not forced to marketing): drafts for her to edit.
 // Every `color` (the spine and back) is brand near-black, so the shelf reads as one set. `why` is the fallback when no quote is confirmed.
@@ -12,17 +12,8 @@ export const shelf: Book[] = [
     why: "" },  // Angel is pulling her own lesson (she has read through chapter 6)
   { title: "Teaching to Transgress", author: "bell hooks", kind: "book", cover: "/images/books/teaching-to-transgress.jpg", color: "#210F10",
     quote: "The classroom remains the most radical space of possibility in the academy.",
-    lesson: "Learning gave me the freedom to decide who I get to become.", link: { href: "/blog/first-gen-and-figuring-it-out", label: "how it shaped my story" }, why: "" },
+    lesson: "Learning gave me the freedom to decide who I get to become.", why: "" },
   { title: "As a Man Thinketh", author: "James Allen", kind: "book", cover: "/images/books/as-a-man-thinketh.jpg", color: "#210F10",
     quote: "A man's mind may be likened to a garden…",
     lesson: "Pull the weeds early. What I let grow in my head ends up in my work.", why: "" },
-  { title: "Good Will Hunting", author: "film, 1997", kind: "film", cover: "/images/screen/good-will-hunting.jpg", color: "#210F10",
-    quote: "Your move, chief.", quoteBy: "Sean",
-    lesson: "Someone believing in you opens the door. Walking through it is still your move.", why: "" },
-  { title: "Howl's Moving Castle", author: "film, 2004", kind: "film", cover: "/images/screen/howls-moving-castle.jpg", color: "#210F10",
-    quote: "A heart's a heavy burden.", quoteBy: "Sophie",
-    lesson: "Caring costs something. I'd still rather care.", why: "" },
-  { title: "Interstellar", author: "film, 2014", kind: "film", cover: "/images/screen/interstellar.jpg", color: "#210F10",
-    quote: "We used to look up at the sky and wonder at our place in the stars.", quoteBy: "Cooper",
-    lesson: "Stay curious. Wonder is where every good idea starts.", why: "" },
 ];

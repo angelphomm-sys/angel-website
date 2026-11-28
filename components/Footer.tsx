@@ -28,7 +28,6 @@ export function Footer() {
           <BrandMark variant="stacked" label={site.name} className="h-12 sm:h-14 md:h-16 self-start text-cream" />
           <div className="text-[13px] font-medium flex flex-col gap-1 md:items-end text-cream">
             <span>© {new Date().getFullYear()} {site.name} · {site.location}</span>
-            <span>First-gen · Lao-American · UVU &apos;27</span>
           </div>
         </div>
       </div>

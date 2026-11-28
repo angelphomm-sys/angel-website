@@ -16,7 +16,6 @@ export const stack: { group: string; tools: Tool[] }[] = [
   ] },
   { group: "advertising & social", tools: [
     { name: "YouTube", icon: I("siYoutube") },
-    { name: "Meta Business Suite", icon: I("siMeta") },
     { name: "LinkedIn", tile: { text: "in", bg: "#0A66C2" } },
     { name: "Instagram", icon: I("siInstagram") },
     { name: "TikTok", icon: I("siTiktok") },
@@ -29,7 +28,6 @@ export const stack: { group: string; tools: Tool[] }[] = [
     { name: "Premiere Pro", tile: { text: "Pr", bg: "#00005B", fg: "#9999FF" } },
     { name: "CapCut", tile: { text: "CC", bg: "#000000" } },
     { name: "Canva", tile: { text: "C", bg: "#00C4CC" } },
-    { name: "Figma", icon: I("siFigma") },
     { name: "Claude", icon: I("siClaude") },
     { name: "WordPress", icon: I("siWordpress") },
     { name: "ClickUp", icon: I("siClickup") },

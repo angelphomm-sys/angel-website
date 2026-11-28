@@ -8,7 +8,6 @@ import { ResumePreview } from "@/components/ResumePreview";
 import { TrackLink } from "@/components/Track";
 import { ContactForm } from "@/components/ContactForm";
 import { Shelf } from "@/components/Shelf";
-import { Screen } from "@/components/Screen";
 import { shelf } from "@/lib/shelf";
 import { testimonials } from "@/lib/testimonials";
 import { BrandMark } from "@/components/Logo";
@@ -78,14 +77,9 @@ export default function About() {
         <Stack />
       </Section>
 
-      {/* What shapes how I think: the books and films behind how I see people and stories, each opening to a
-          favorite quote and the lesson I took for my work. Tap or hover to open. */}
+      {/* What shapes how I think: the books on my shelf, each opening to a favorite quote and what it taught me. */}
       <Section title="What shapes how I think" id="shelf">
-        <p className="text-[17px] leading-relaxed max-w-[60ch] -mt-1">The books and films I keep coming back to, and what each one taught me. Hover or tap to open one.</p>
-        <h3 className="text-[13px] font-semibold uppercase tracking-[0.08em] mt-2">On my shelf</h3>
         <Shelf books={shelf.filter((b) => b.kind === "book")} />
-        <h3 id="screen" className="text-[13px] font-semibold uppercase tracking-[0.08em] mt-6 scroll-mt-24">On my screen</h3>
-        <Screen picks={shelf.filter((b) => b.kind === "film" || b.kind === "show")} />
       </Section>
 
       <Section title="Say hi" id="contact">
