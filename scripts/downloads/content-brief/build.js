@@ -53,10 +53,12 @@ function callout(title, body, fill) {
     margins: { top: 140, bottom: 140, left: 200, right: 200 }, children: [p([run(title + "  ", { bold: true }), run(body)])] })] })]);
 }
 function titleBlock(title, sub) {
-  return [
-    p(run(F.kicker, { bold: true, color: RED, size: 18 }), { spacing: { after: 60 } }),
+  const rule = { bottom: { style: BorderStyle.SINGLE, size: 12, color: RED, space: 8 } };
+  const out = [p(run(F.kicker, { bold: true, color: RED, size: 18 }), { spacing: { after: 60 } })];
+  if (!sub) return [...out, p(run(title, { bold: true, size: 44 }), { spacing: { after: 200 }, border: rule })];
+  return [...out,
     p(run(title, { bold: true, size: 44 }), { spacing: { after: 80 } }),
-    p(run(sub, { size: 21 }), { spacing: { after: 200 }, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: RED, space: 8 } } }),
+    p(run(sub, { size: 21 }), { spacing: { after: 200 }, border: rule }),
   ];
 }
 const check = (text) => p([run("☐  ", { size: 22 }), run(text)], { spacing: { before: 60, after: 60 } });

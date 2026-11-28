@@ -1,7 +1,6 @@
 {
   "title": "SEO content brief",
   "kicker": "SEO CONTENT BRIEF TEMPLATE",
-  "subtitle": "Plan one blog post before you write it. Fill it in order; most briefs take about 20 minutes.",
   "sections": [
     { "num": "01", "title": "Reader and goal", "fields": [
       ["Reader", "Who is this for? One sentence, specific enough to picture."],

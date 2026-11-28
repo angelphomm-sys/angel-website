@@ -29,7 +29,7 @@ css = f"""
 body {{ font-family:'Instrument Sans', Arial, sans-serif; color:{INK}; font-size:10pt; margin:0; }}
 .page {{ page-break-after:always; }} .page:last-child {{ page-break-after:auto; }}
 .kicker {{ color:{RED}; font-weight:700; font-size:8.5pt; letter-spacing:.06em; }}
-h1 {{ font-size:24pt; margin:4px 0; }}
+h1 {{ font-size:24pt; margin:4px 0; }} h1.ruled {{ margin-bottom:10px; padding-bottom:8px; border-bottom:2px solid {RED}; }}
 .sub {{ font-size:10.5pt; margin:0 0 10px; padding-bottom:8px; border-bottom:2px solid {RED}; }}
 h2 {{ font-size:12pt; margin:9px 0 4px; }} h2 em {{ font-style:normal; color:{RED}; margin-right:8px; }}
 .hint {{ font-size:9pt; margin:0 0 6px; }}
@@ -45,7 +45,7 @@ table {{ width:100%; border-collapse:collapse; }}
 .gap {{ height:8px; }}
 """
 
-p1 = f'<div class="page"><div class="kicker">{e(F["kicker"])}</div><h1>{e(F["title"])}</h1><p class="sub">{e(F["subtitle"])}</p>'
+p1 = f'<div class="page"><div class="kicker">{e(F["kicker"])}</div><h1 class="ruled">{e(F["title"])}</h1>'
 p1 += '<table class="meta"><tr><td style="width:50%">Working title</td><td style="width:25%">Writer</td><td>Publish date</td></tr></table>'
 for s in F["sections"]:
     p1 += sec(s["num"], s["title"]) + '<table class="f">' + "".join(field(l, pr) for l, pr in s["fields"]) + "</table>"
